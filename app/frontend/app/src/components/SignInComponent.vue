@@ -239,7 +239,7 @@ form input:focus + label, form input:valid + label {
   outline: none;
   border: none;
   color: var(--white);
-  margin-top: 3rem;
+  margin-top: 2rem;
   cursor: pointer;
   transition: 0.2s ease-in-out;
 }
@@ -256,12 +256,11 @@ form input:focus + label, form input:valid + label {
   border-radius: 5px;
   border: 2px solid red;
   padding: 0.5rem 1rem;
-  margin-top: 1rem;
 }
 
 .errorMessage {
   font-size: 12px;
-  font-weight: 400;
+  font-weight: 500;
 }
 
 .wrapper {

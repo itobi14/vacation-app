@@ -30,12 +30,17 @@
             <label for="password">Password</label>
           </div>
 
-        </div>
+          <div class="inputWrapper">
+            <input type="password" name="confirmPassword" v-model="confirmPassword" required>
+            <label for="confirmPassword">Confirm Password</label>
+          </div>
 
-<!--        <div class="errorMessageWrapper" v-show="errorMessage">-->
-<!--          <p class="errorMessage"> {{ errorMessage }} </p>-->
-<!--          <span class="material-symbols-outlined report-icon">report</span>-->
-<!--        </div>-->
+          <div class="errorMessageWrapper" v-show="errorMessage">
+            <p class="errorMessage"> {{ errorMessage }} </p>
+            <span class="material-symbols-outlined report-icon">report</span>
+          </div>
+
+        </div>
 
         <button class="loginButton">Sign Up</button>
 
@@ -65,6 +70,8 @@ export default {
       lastName: null,
       email: null,
       password: null,
+      confirmPassword: null,
+      errorMessage: null,
     }
   },
 
@@ -72,23 +79,35 @@ export default {
 
     async onSignUp() {
 
-      try {
+      if (!this.confirmPasswordIsValid) {
+        this.errorMessage = "Passwords do not match!"
+      } else {
 
-        let newAccount = await this.accountsService.createAccount(this.firstName, this.lastName, this.email, this.password);
-        console.log("Account created successfully: ", newAccount);
+        try {
 
-        if (newAccount) {
-          let account = await this.sessionService.asyncSignIn(this.email, this.password);
-          if (account) {
-            this.$router.push({ path: '/' })
+          let newAccount = await this.accountsService.createAccount(this.firstName, this.lastName, this.email, this.password);
+          console.log("Account created successfully: ", newAccount);
+
+          if (newAccount) {
+            let account = await this.sessionService.asyncSignIn(this.email, this.password);
+            if (account) {
+              this.$router.push({ path: '/' })
+            }
           }
+
+        } catch (error) {
+          console.error("Error creating account: ", error);
         }
 
-      } catch (error) {
-        console.error("Error creating account: ", error);
       }
     },
 
+  },
+
+  computed: {
+    confirmPasswordIsValid() {
+      return this.password === this.confirmPassword;
+    }
   },
 
 }
@@ -261,7 +280,7 @@ form input:focus + label, form input:valid + label {
   outline: none;
   border: none;
   color: var(--white);
-  margin-top: 3rem;
+  margin-top: 2rem;
   cursor: pointer;
   transition: 0.2s ease-in-out;
 }
@@ -278,7 +297,6 @@ form input:focus + label, form input:valid + label {
   border-radius: 5px;
   border: 2px solid red;
   padding: 0.5rem 1rem;
-  margin-top: 1rem;
 }
 
 .errorMessage {
@@ -296,6 +314,30 @@ form input:focus + label, form input:valid + label {
 .info-text {
   font-size: 12px;
   font-weight: 400;
+}
+
+.errorMessageWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  border-radius: 5px;
+  border: 2px solid red;
+  padding: 0.5rem 1rem;
+}
+
+.errorMessage {
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.material-symbols-outlined.report-icon {
+  color: red;
+  font-variation-settings:
+      'FILL' 0,
+      'wght' 400,
+      'GRAD' 0,
+      'opsz' 24
 }
 
 </style>
