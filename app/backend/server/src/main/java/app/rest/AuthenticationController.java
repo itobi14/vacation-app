@@ -52,7 +52,7 @@ public class AuthenticationController {
         }
 
         // Issue a token for the account, valid for some time
-        JWToken jwToken = new JWToken(account.getName(), account.getId(), account.getRole(), ipAddress);
+        JWToken jwToken = new JWToken(account.getFullName(), account.getId(), account.getRole(), ipAddress);
         String tokenString = jwToken.encode(this.apiConfig.getIssuer(),
                 this.apiConfig.getPassphrase(),
                 this.apiConfig.getTokenDurationOfValidity());

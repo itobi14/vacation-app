@@ -26,18 +26,31 @@ public class AccountController {
     }
 
     @GetMapping(path = "{id}", produces = "application/json")
-    public ResponseEntity<Account> getOneAccount(@PathVariable() long id) {
+    public ResponseEntity<Account> getAccount(@PathVariable() long id) {
+
         Account account = this.accountsRepo.findById(id);
 
         if (account == null) {
-            throw new ResourceNotFoundException("Cannot provide a account with id="+id);
+            throw new ResourceNotFoundException("Cannot provide an account with id="+id);
         }
 
         return ResponseEntity.ok().body(account);
     }
 
+    @PostMapping(path = "", consumes = "application/json", produces = "application/json")
+    public ResponseEntity<Account> createAccount(@RequestBody Account newAccount) {
+
+        if (newAccount == null) {
+            throw new NotAcceptableException(
+                    "New account can not be empty");
+        }
+
+        Account savedAccount = this.accountsRepo.save(newAccount);
+        return ResponseEntity.ok().body(savedAccount);
+    }
+
     @DeleteMapping(path = "{id}")
-    public Account deleteOneAccount(@PathVariable() long id,
+    public Account deleteAccount(@PathVariable() long id,
                                     @RequestAttribute(name = JWToken.JWT_ATTRIBUTE_NAME) JWToken jwtInfo) {
 
         if (jwtInfo == null || !jwtInfo.isAdmin()) {
