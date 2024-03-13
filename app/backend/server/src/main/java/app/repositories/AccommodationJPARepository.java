@@ -19,7 +19,7 @@ public class AccommodationJPARepository implements EntityRepository<Accommodatio
 
     @Override
     public List<Accommodation> findAll() {
-        TypedQuery<Accommodation> query = this.entityManager.createQuery("select a from Account a", Accommodation.class);
+        TypedQuery<Accommodation> query = this.entityManager.createQuery("select a from Accommodation a", Accommodation.class);
         return query.getResultList();
     }
 

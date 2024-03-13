@@ -15,16 +15,18 @@ import java.util.*;
 public class Account {
 
     @JsonView(ViewClasses.Shallow.class)
-    @SequenceGenerator(name="Account_ids", initialValue=101)
+    @SequenceGenerator(name="Account_ids")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="Accounts_ids")
     @Id
     private long id = 0L;
 
-
+    @JsonView(ViewClasses.Summary.class)
     private String firstName;
 
+    @JsonView(ViewClasses.Summary.class)
     private String lastName;
 
+    @JsonView(ViewClasses.Summary.class)
     private String email;
 
     private String role = "Regular User";

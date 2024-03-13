@@ -19,6 +19,7 @@ public class DataLoader implements CommandLineRunner {
     @Transactional
     public void run(String... args)  {
 
+        System.out.println();
         System.out.println("Running CommandLine Startup");
 
         System.out.println();
@@ -57,6 +58,7 @@ public class DataLoader implements CommandLineRunner {
         if (!accommodations.isEmpty()) return;
 
         System.out.println("Configuring some initial accommodations in the repository");
+
         List<Accommodation> dummyAccommodations = getDummyAccommodations();
         for (Accommodation accommodation : dummyAccommodations) {
             accommodations.add(this.accommodationsRepo.save(accommodation));
@@ -68,20 +70,18 @@ public class DataLoader implements CommandLineRunner {
 
         List<Accommodation> dummyAccommodations = new ArrayList<>();
 
-        dummyAccommodations.add(new Accommodation("Hotel A", 100.0, "Hotel", "Luxurious hotel with a beautiful view", "hotelA.jpg"));
-        dummyAccommodations.add(new Accommodation("Resort B", 150.0, "Resort", "Seaside resort with amazing amenities", "resortB.jpg"));
-        dummyAccommodations.add(new Accommodation("Cabin C", 80.0, "Cabin", "Cozy cabin in the woods for a peaceful retreat", "cabinC.jpg"));
-        dummyAccommodations.add(new Accommodation("Motel D", 60.0, "Motel", "Budget-friendly motel for short stays", "motelD.jpg"));
-        dummyAccommodations.add(new Accommodation("Villa E", 200.0, "Villa", "Luxury villa with private pool and garden", "villaE.jpg"));
-        dummyAccommodations.add(new Accommodation("Hostel F", 30.0, "Hostel", "Social hostel perfect for backpackers", "hostelF.jpg"));
-        dummyAccommodations.add(new Accommodation("Chalet G", 120.0, "Chalet", "Rustic chalet nestled in the mountains", "chaletG.jpg"));
-        dummyAccommodations.add(new Accommodation("Inn H", 90.0, "Inn", "Charming inn with cozy rooms and fireplace", "innH.jpg"));
-        dummyAccommodations.add(new Accommodation("B&B I", 70.0, "Bed & Breakfast", "Quaint bed and breakfast with homemade breakfast", "bnbI.jpg"));
-        dummyAccommodations.add(new Accommodation("Apartment J", 110.0, "Apartment", "Modern apartment in the city center", "apartmentJ.jpg"));
+        dummyAccommodations.add(new Accommodation("Hotel A", "France", "Paris", "Street 5", "1089AA", 100.0, "Hotel", "Luxurious hotel with a beautiful view", "hotelA.jpg"));
+        dummyAccommodations.add(new Accommodation("Resort B", "France", "Nice", "Beach Avenue", "06200", 150.0, "Resort", "Seaside resort with amazing amenities", "resortB.jpg"));
+        dummyAccommodations.add(new Accommodation("Cabin C", "Netherlands", "Rotterdam", "Forest Lane", "V8E 0L7", 80.0, "Cabin", "Cozy cabin in the woods for a peaceful retreat", "cabinC.jpg"));
+        dummyAccommodations.add(new Accommodation("Motel D", "USA", "Miami", "Ocean Drive", "33109", 60.0, "Motel", "Budget-friendly motel for short stays", "motelD.jpg"));
+        dummyAccommodations.add(new Accommodation("Villa E", "Italy", "Tuscany", "Vineyard Street", "50125", 200.0, "Villa", "Luxury villa with private pool and garden", "villaE.jpg"));
+        dummyAccommodations.add(new Accommodation("Hostel F", "Germany", "Berlin", "Backpacker Alley", "10178", 30.0, "Hostel", "Social hostel perfect for backpackers", "hostelF.jpg"));
+        dummyAccommodations.add(new Accommodation("Chalet G", "Switzerland", "Zermatt", "Alpine Road", "3920", 120.0, "Chalet", "Rustic chalet nestled in the mountains", "chaletG.jpg"));
+        dummyAccommodations.add(new Accommodation("Inn H", "UK", "Cotswolds", "Main Street", "GL54 1HN", 90.0, "Inn", "Charming inn with cozy rooms and fireplace", "innH.jpg"));
+        dummyAccommodations.add(new Accommodation("B&B I", "Netherlands", "Amsterdam", "Canal Street", "1012 TM", 70.0, "Bed & Breakfast", "Quaint bed and breakfast with homemade breakfast", "bnbI.jpg"));
+        dummyAccommodations.add(new Accommodation("Apartment J", "Italy", "Rome", "Broadway", "10001", 110.0, "Apartment", "Modern apartment in the city center", "apartmentJ.jpg"));
 
         return dummyAccommodations;
     }
-
-
 
 }
