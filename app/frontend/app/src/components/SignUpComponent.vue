@@ -4,33 +4,45 @@
 
     <div class="loginContainer">
 
-      <form v-on:submit.prevent="onSignIn">
+      <form v-on:submit.prevent="onSignUp">
 
-        <h1 class="title">Login</h1>
+        <h1 class="title">Sign Up</h1>
 
         <div class="inputContainer">
+
           <div class="inputWrapper">
-            <input type="email" name="email" v-model.trim="accountEmail" v-on:keydown.enter="$event.preventDefault()" required>
-            <label for="email">Email</label>
+            <input type="firstName" name="firstName" v-model.trim="firstName" v-on:keydown.enter="$event.preventDefault()" required>
+            <label for="firstName">First name</label>
           </div>
 
           <div class="inputWrapper">
-            <input type="password" name="password" v-model="accountPassword" required>
+            <input type="lastName" name="lastName" v-model="lastName" required>
+            <label for="password">Last name</label>
+          </div>
+
+          <div class="inputWrapper">
+            <input type="email" name="email" v-model="email" required>
+            <label for="email">E-mail</label>
+          </div>
+
+          <div class="inputWrapper">
+            <input type="password" name="password" v-model="password" required>
             <label for="password">Password</label>
           </div>
+
         </div>
 
-        <div class="errorMessageWrapper" v-show="errorMessage">
-          <p class="errorMessage"> {{ errorMessage }} </p>
-          <span class="material-symbols-outlined report-icon">report</span>
-        </div>
+<!--        <div class="errorMessageWrapper" v-show="errorMessage">-->
+<!--          <p class="errorMessage"> {{ errorMessage }} </p>-->
+<!--          <span class="material-symbols-outlined report-icon">report</span>-->
+<!--        </div>-->
 
-        <button class="loginButton">Login</button>
+        <button class="loginButton">Sign Up</button>
 
         <div class="wrapper">
-          <p class="info-text">Don't have an account yet? Click
-            <router-link to="/sign-up">here</router-link>
-            to sign up</p>
+          <p class="info-text">If you already have an account, click
+            <router-link to="/sign-in">here</router-link>
+            to login</p>
         </div>
 
       </form>
@@ -44,26 +56,36 @@
 <script>
 export default {
 
-  name: "SignInComponent",
-  inject: ['sessionService'],
+  name: "SignUpComponent",
+  inject: ['accountsService', 'sessionService'],
 
   data() {
     return {
-      accountEmail: null,
-      accountPassword: null,
-      errorMessage: null,
+      firstName: null,
+      lastName: null,
+      email: null,
+      password: null,
     }
   },
 
   methods: {
 
-    async onSignIn() {
-      this.errorMessage = null;
-      let account = await this.sessionService.asyncSignIn(this.accountEmail, this.accountPassword);
-      if (account === null) {
-        this.errorMessage = "Could not authenticate with provided credentials. Please try again";
-      } else {
-        this.$router.push({ path: '/' })
+    async onSignUp() {
+
+      try {
+
+        let newAccount = await this.accountsService.createAccount(this.firstName, this.lastName, this.email, this.password);
+        console.log("Account created successfully: ", newAccount);
+
+        if (newAccount) {
+          let account = await this.sessionService.asyncSignIn(this.email, this.password);
+          if (account) {
+            this.$router.push({ path: '/' })
+          }
+        }
+
+      } catch (error) {
+        console.error("Error creating account: ", error);
       }
     },
 
@@ -119,7 +141,7 @@ form {
   position: relative;
   font-size: 35px;
   font-weight: 700;
-  width: 35%;
+  width: 50%;
   margin-bottom: 5rem;
   color: var(--black);
 }
@@ -252,7 +274,7 @@ form input:focus + label, form input:valid + label {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 100%;
+  width: 300px;
   border-radius: 5px;
   border: 2px solid red;
   padding: 0.5rem 1rem;
@@ -274,16 +296,6 @@ form input:focus + label, form input:valid + label {
 .info-text {
   font-size: 12px;
   font-weight: 400;
-}
-
-
-.material-symbols-outlined.report-icon {
-  color: red;
-  font-variation-settings:
-       'FILL' 0,
-       'wght' 400,
-       'GRAD' 0,
-       'opsz' 24
 }
 
 </style>

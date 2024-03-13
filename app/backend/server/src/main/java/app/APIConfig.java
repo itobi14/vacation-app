@@ -20,7 +20,7 @@ public class APIConfig implements WebMvcConfigurer {
 
     // path prefixes that will be unprotected by the authentication filter
     public Set<String> UNSECURED_PATHS =
-            Set.of("/authentication/login", "/h2-console", "/favicon.ico");
+            Set.of("/authentication/login", "/accounts", "/h2-console", "/favicon.ico");
 
     // a variable reboot signature can be used as an additional security layer in authentication tokens.
     private static final double REBOOT_CODE = 63.0427; // Math.random();
@@ -38,21 +38,13 @@ public class APIConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOriginPatterns("http://localhost:*", getHostIPAddressPattern())
+                .allowedOriginPatterns("http://localhost:*")
                 .allowedMethods("GET", "POST", "PUT", "DELETE")
                 .allowedHeaders(HttpHeaders.AUTHORIZATION, HttpHeaders.CONTENT_TYPE, IP_FORWARDED_FOR)
                 .exposedHeaders(HttpHeaders.AUTHORIZATION, HttpHeaders.CONTENT_TYPE, IP_FORWARDED_FOR)
                 .allowCredentials(true)
 //                .allowedOrigins("*")
         ;
-    }
-
-    private String getHostIPAddressPattern() {
-        try {
-            return "http://" + Inet4Address.getLocalHost().getHostAddress() + ":*";
-        } catch (UnknownHostException ignored) {
-        }
-        return "http://192.168.*.*:*";
     }
 
     public String getIssuer() {

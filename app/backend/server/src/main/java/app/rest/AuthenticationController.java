@@ -48,7 +48,7 @@ public class AuthenticationController {
         System.out.println(accounts);
 
         if (account == null || !account.verifyPassword(password)) {
-            throw new NotAcceptableException("Cannot authenticate account with email=" + email);
+            throw new NotAcceptableException("Cannot authenticate account with email = " + email);
         }
 
         // Issue a token for the account, valid for some time

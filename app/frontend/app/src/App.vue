@@ -24,7 +24,7 @@ export default {
   },
 
   created() {
-    console.log('Configured routerGuard');
+    // console.log('Configured routerGuard');
     this.$router.beforeEach(this.routerGuard);
   },
 

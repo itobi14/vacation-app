@@ -29,6 +29,9 @@ public class Account {
     @JsonView(ViewClasses.Summary.class)
     private String email;
 
+    @JsonView(ViewClasses.Summary.class)
+    private String password;
+
     private String role = "Regular User";
 
     @OneToMany
@@ -39,6 +42,7 @@ public class Account {
     @JoinColumn(name = "order_id")
     private List<Accommodation> orderHistory;
 
+    @Transient
     private String hashedPassword = null;
 
     public Account() {
@@ -48,25 +52,30 @@ public class Account {
         this.id = id;
     }
 
-    public Account(String firstName, String lastName, String email) {
+    public Account(String firstName, String lastName, String email, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+        this.password = password;
     }
 
     public String getFullName() {
         return this.firstName + " " + this.lastName;
     }
 
-    public String hashPassword(String password) {
-        return SecureHasher.secureHash("Id-" + this.getId() + ":" + password);
-    }
-    public void setPassword(String newPassword) {
-        this.setHashedPassword(this.hashPassword(newPassword));
-    }
+//    public String hashPassword(String password) {
+//        return SecureHasher.secureHash("Id-" + this.getId() + ":" + password);
+//    }
+//    public void setPassword(String newPassword) {
+//        this.setHashedPassword(this.hashPassword(newPassword));
+//    }
+
+//    public boolean verifyPassword(String password) {
+//        return this.hashPassword(password).equals(this.getHashedPassword());
+//    }
 
     public boolean verifyPassword(String password) {
-        return this.hashPassword(password).equals(this.getHashedPassword());
+        return this.password.equals(this.password);
     }
 
     public long getId() {

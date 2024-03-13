@@ -2,7 +2,6 @@ package app.rest;
 
 import app.models.Account;
 import app.repositories.EntityRepository;
-import app.security.JWToken;
 import app.serialization.ViewClasses;
 import app.exceptions.*;
 import com.fasterxml.jackson.annotation.JsonView;
@@ -31,7 +30,7 @@ public class AccountController {
         Account account = this.accountsRepo.findById(id);
 
         if (account == null) {
-            throw new ResourceNotFoundException("Cannot provide an account with id="+id);
+            throw new ResourceNotFoundException("Cannot provide an account with id = " + id);
         }
 
         return ResponseEntity.ok().body(account);
@@ -42,27 +41,11 @@ public class AccountController {
 
         if (newAccount == null) {
             throw new NotAcceptableException(
-                    "New account can not be empty");
+                    "New account can not be null");
         }
 
         Account savedAccount = this.accountsRepo.save(newAccount);
         return ResponseEntity.ok().body(savedAccount);
     }
 
-    @DeleteMapping(path = "{id}")
-    public Account deleteAccount(@PathVariable() long id,
-                                    @RequestAttribute(name = JWToken.JWT_ATTRIBUTE_NAME) JWToken jwtInfo) {
-
-        if (jwtInfo == null || !jwtInfo.isAdmin()) {
-            throw new UnauthorizedException(
-                    "Admin role is required to remove an account");
-        }
-        Account account = this.accountsRepo.deleteById(id);
-
-        if (account == null) {
-            throw new ResourceNotFoundException("Cannot delete an account with id="+id);
-        }
-
-        return account;
-    }
 }

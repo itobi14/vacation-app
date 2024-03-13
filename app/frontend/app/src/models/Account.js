@@ -12,6 +12,7 @@ export class Account {
     equalsById(other) {
         return other != null && this.id === other.id;
     }
+
     equals(other) {
         return other != null &&
             this.id === other.id &&
@@ -25,10 +26,4 @@ export class Account {
         return Object.assign(new Account(0), account);
     }
 
-    static createSample(id) {
-        let newAccount = new Account(id, `account${id}`);
-        newAccount.email = `account${id}@hva.nl`;
-        newAccount.role = Math.random() < 0.3 ? "administrator" : "registered user";
-        return newAccount;
-    }
 }

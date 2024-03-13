@@ -8,15 +8,15 @@
 
 <script>
 
-import BannerComponent from "@/components/Hero/components/BannerComponent.vue";
-import DealsComponent from "@/components/Hero/components/DealsComponent.vue";
-import ReviewsComponent from "@/components/Hero/components/ReviewsComponent.vue";
+import BannerComponent from "@/components/hero/components/BannerComponent.vue";
+import ReviewsComponent from "@/components/hero/components/ReviewsComponent.vue";
+import InfoComponent from "@/components/hero/components/InfoComponent.vue";
 
 export default {
   name: "HeroComponent",
   components: {
     'banner-component': BannerComponent,
-    'deals-component': DealsComponent,
+    'deals-component': InfoComponent,
     'reviews-component': ReviewsComponent,
   },
 

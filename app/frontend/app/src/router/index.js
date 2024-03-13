@@ -1,11 +1,13 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import HomeComponent from "@/components/Hero/HeroComponent.vue";
+import HeroComponent from "@/components/hero/HeroComponent.vue";
 import SignInComponent from "@/components/SignInComponent.vue";
+import SignUpComponent from "@/components/SignUpComponent.vue";
 import AccommodationsComponent from "@/components/AccommodationsComponent.vue";
 
 const routes = [
-    { path: '/', name: 'HOME', component: HomeComponent },
+    { path: '/', name: 'HOME', component: HeroComponent },
     { path: '/sign-in', name: 'SIGN-IN', component: SignInComponent, props: true },
+    { path: '/sign-up', name: 'SIGN-UP', component: SignUpComponent, props: true },
     { path: '/accommodations', name: 'ACCOMMODATIONS', component: AccommodationsComponent },
     { path: '/unauthorised', redirect: '/' }  // TODO make a page that informs about lack of authorisation
 ]

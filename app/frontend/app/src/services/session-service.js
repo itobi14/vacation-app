@@ -7,7 +7,7 @@ export class SessionService {
 
     constructor(resourcesUrl, browserStorageItemName) {
 
-        console.log("Created SessionService...");
+        // console.log("Created SessionService...");
         this.BROWSER_STORAGE_ITEM_NAME = browserStorageItemName;
         this.RESOURCES_URL = resourcesUrl;
         this._currentAccount = null;

@@ -42,13 +42,8 @@ public class DataLoader implements CommandLineRunner {
         if (!accounts.isEmpty()) return;
 
         System.out.println("Configuring some initial accounts in the repository");
-        accounts.add(this.accountsRepo.save(new Account("Tobi", "Kok", "tobi@example.com")));
+        accounts.add(this.accountsRepo.save(new Account("Tobi", "Kok", "tobi@example.com", "tobi")));
 
-        // updates will be persisted by the transaction
-        for (Account a : accounts) {
-            a.setPassword("test");
-            System.out.println("Added account: " + a + " (initial password = 'test')");
-        }
         accounts.get(0).setRole("Administrator");
     }
 
