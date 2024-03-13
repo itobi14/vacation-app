@@ -1,8 +1,10 @@
 <template>
 
-  <banner-component></banner-component>
-  <deals-component></deals-component>
-  <reviews-component></reviews-component>
+  <div class="hero-component">
+    <banner-component></banner-component>
+    <info-component></info-component>
+    <reviews-component></reviews-component>
+  </div>
 
 </template>
 
@@ -16,7 +18,7 @@ export default {
   name: "HeroComponent",
   components: {
     'banner-component': BannerComponent,
-    'deals-component': InfoComponent,
+    'info-component': InfoComponent,
     'reviews-component': ReviewsComponent,
   },
 
@@ -38,5 +40,10 @@ export default {
 </script>
 
 <style scoped>
+
+.hero-component {
+  display: flex;
+  flex-direction: column;
+}
 
 </style>

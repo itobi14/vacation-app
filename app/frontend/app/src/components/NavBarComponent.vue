@@ -159,6 +159,10 @@ export default {
   transition: 0.1s ease-out;
 }
 
+.isSelected {
+  //background: #b43e3c;
+}
+
 .isSelected::before {
   content: '';
   position: absolute;
