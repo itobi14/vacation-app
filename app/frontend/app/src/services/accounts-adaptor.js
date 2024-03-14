@@ -1,4 +1,4 @@
-export class AccountsAdaptor /* implements RESTAdaptor<Account> */ {
+export class AccountsAdaptor {
 
     RESOURCES_URL;
 

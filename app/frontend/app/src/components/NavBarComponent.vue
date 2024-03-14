@@ -5,7 +5,7 @@
     <div class="navBarContent">
 
       <router-link class="logoContainer" to="/">
-        <img src="../../../../../../vacation-app/app/frontend/app/src/assets/logo.png" alt="Logo" class="logo">
+        <img src="../../../../../../vacation-app/app/frontend/app/src/assets/logo.svg" alt="Logo" class="logo">
       </router-link>
 
       <div class="navItemsWrapper">
@@ -168,8 +168,8 @@ export default {
   position: absolute;
   bottom: 0;
   right: 0;
-  width: 15px;
-  height: 5px;
+  height: 6px;
+  width: 10px;
   background: #5daab5;
 }
 

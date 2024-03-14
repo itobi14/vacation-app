@@ -9,11 +9,12 @@
 <script>
 
 import NavBarComponent from "@/components/NavBarComponent.vue";
+import FooterComponent from "@/components/FooterComponent.vue";
 import {AccountsAdaptor} from "@/services/accounts-adaptor";
+import {AccommodationsAdaptor} from "@/services/accommodations-adaptor";
+import {SessionService} from "@/services/session-service";
 import CONFIG from '@/app-config.js'
 import {shallowReactive} from "vue";
-import {SessionService} from "@/services/session-service";
-import FooterComponent from "@/components/FooterComponent.vue";
 
 export default {
 
@@ -29,16 +30,13 @@ export default {
   },
 
   provide() {
-    // TODO Use a dynamic (hashed) JWT_STORAGE_ITEM name for greater security
     this.theSessionService = shallowReactive(
         new SessionService(CONFIG.BACKEND_URL + "/authentication", CONFIG.JWT_STORAGE_ITEM));
     // this.theFetchInterceptor =
     //     new FetchInterceptor(this.theSessionService, this.$router);
     return {
-      // stateless data services adaptor singletons
       accountsService: new AccountsAdaptor(CONFIG.BACKEND_URL+"/accounts"),
-
-      // reactive, state-full services
+      accommodationsService: new AccommodationsAdaptor(CONFIG.BACKEND_URL+"/accommodations"),
       sessionService: this.theSessionService
     }
   },
