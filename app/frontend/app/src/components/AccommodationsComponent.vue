@@ -358,8 +358,8 @@ span {
   position: absolute;
   bottom: 0;
   right: 0;
-  height: 6px;
-  width: 10px;
+  height: 7px;
+  width: 7px;
   background: #5daab5;
 }
 

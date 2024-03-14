@@ -87,10 +87,6 @@ export default {
       return this.sessionService.isAuthenticated();
     },
 
-    isAdmin() {
-      return this.sessionService.isAdmin();
-    },
-
     userName() {
       return this.sessionService.currentAccount.name;
     },
@@ -168,8 +164,8 @@ export default {
   position: absolute;
   bottom: 0;
   right: 0;
-  height: 6px;
-  width: 10px;
+  height: 7px;
+  width: 7px;
   background: #5daab5;
 }
 
