@@ -39,8 +39,8 @@ export class SessionService {
         if (jsonAccount != null) {
             this._currentAccount = JSON.parse(jsonAccount);
         }
-        console.log("SessionService recovered token: ", this._currentToken);
-        console.log("Current Account:", this._currentAccount);
+        // console.log("SessionService recovered token: ", this._currentToken);
+        // console.log("Current Account:", this._currentAccount);
         return this._currentToken;
     }
 
@@ -57,7 +57,7 @@ export class SessionService {
             window.localStorage.removeItem(this.BROWSER_STORAGE_ITEM_NAME+"_ACC");
 
         } else {
-            console.log("New token for " + account.name + ": " + token);
+            // console.log("New token for " + account.name + ": " + token);
             window.localStorage.setItem(this.BROWSER_STORAGE_ITEM_NAME, token);
             window.localStorage.setItem(this.BROWSER_STORAGE_ITEM_NAME+"_ACC", JSON.stringify(account));
         }

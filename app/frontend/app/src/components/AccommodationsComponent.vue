@@ -105,7 +105,7 @@
                :key="accommodation.id"
                :class="accommodationItem"
                @click="goToDetailView(accommodation.id)">
-            <img :src="getImgUrl(accommodation.imgUrl)" class="accommodation-img" alt="Accommodation Image">
+            <img :src="getImgUrl(accommodation.imgUrl)" :class="accommodationImg" alt="Accommodation Image">
             <div :class="wrapper">
               <h2 :class="accommodationName">{{ accommodation.name }}</h2>
               <div class="info-wrapper">
@@ -168,7 +168,7 @@ export default {
 
   async created() {
     this.allAccommodations = await this.accommodationsService.findAll();
-    console.log("Fetched accommodations: ", this.allAccommodations);
+    // console.log("Fetched accommodations: ", this.allAccommodations);
 
     // Sort accommodations into arrays based on type
     this.allAccommodations.forEach(accommodation => {
@@ -221,6 +221,9 @@ export default {
     },
     wrapper() {
       return `wrapper-${this.gridLayout}`;
+    },
+    accommodationImg() {
+      return `accommodation-img-${this.gridLayout}`;
     },
     accommodationName() {
       return `accommodation-name-${this.gridLayout}`;
@@ -312,8 +315,7 @@ export default {
 .side-bar {
   height: auto;
   width: 15svw;
-  border-left: 2px solid var(--black);
-  border-right: 2px solid var(--black);
+  border-right: 1px solid #eee;
 }
 
 .container {
@@ -326,10 +328,12 @@ export default {
 .accommodation-filter-bar {
   display: flex;
   align-items: center;
+  justify-content: center;
   height: auto;
   width: 100%;
+  margin-top: 1rem;
   padding: 1rem;
-  border-bottom: 2px solid var(--black);
+  //border-bottom: 2px solid var(--black);
   //background: lightcoral;
 }
 
@@ -348,7 +352,7 @@ export default {
   gap: 1rem;
   width: 100px;
   padding: 0.5rem;
-  opacity: 0.6;
+  opacity: 0.5;
   transition: 0.2s ease-in-out;
   cursor: pointer;
 }
@@ -380,15 +384,16 @@ span {
   right: 0;
   height: 7px;
   width: 7px;
-  background: #5daab5;
+  background: var(--black);
 }
 
 /* ------------------------------------------------------------------------------------------------------------------ */
 
 .search-container {
+  position: relative;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   margin-top: 1rem;
   padding: 1rem 2rem;
   //background: lightsalmon;
@@ -432,8 +437,11 @@ input[type="search"]::-webkit-search-cancel-button {
 }
 
 .grid-filter-options {
+  position: absolute;
+  right: 0;
   display: flex;
   gap: 1rem;
+  //background: #b43e3c;
 }
 
 .grid-large,
@@ -474,7 +482,7 @@ input[type="search"]::-webkit-search-cancel-button {
 .accommodations {
   height: auto;
   width: 100%;
-  padding: 2rem;
+  padding: 2rem 0 2rem 2rem;
 }
 
 .accommodations-wrapper-large {
@@ -518,7 +526,7 @@ input[type="search"]::-webkit-search-cancel-button {
   display: grid;
   column-gap: 2rem;
   row-gap: 2rem;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(1, 1fr);
 }
 
 .accommodation-rows {
@@ -547,8 +555,16 @@ input[type="search"]::-webkit-search-cancel-button {
   transform: translateY(-5px);
 }
 
-.accommodation-img {
+.accommodation-img-large,
+.accommodation-img-small {
   height: 150px;
+  width: 100%;
+  border-radius: 10px 10px 0 0;
+  object-fit: cover;
+}
+
+.accommodation-img-rows {
+  height: 350px;
   width: 100%;
   border-radius: 10px 10px 0 0;
   object-fit: cover;

@@ -215,18 +215,17 @@ export default {
 }
 
 .text-trip-normal {
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 400;
   color: var(--black);
   width: 100px;
 }
 
 .text-trip-bold {
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 500;
   color: var(--black);
 }
-
 
 .wrapper {
   display: flex;

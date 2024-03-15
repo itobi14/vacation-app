@@ -114,7 +114,7 @@ export default {
     if (id !== undefined) {
       // Fetch accommodation details using the id
       this.accommodation = await this.accommodationsService.findById(id);
-      console.log("Selected accommodation:", this.accommodation);
+      // console.log("Selected accommodation:", this.accommodation);
     } else {
       console.error("ID is undefined");
       // Handle the case where id is not defined

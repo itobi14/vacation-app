@@ -5,7 +5,7 @@
     <div class="navBarContent">
 
       <router-link class="logoContainer" to="/">
-        <img src="../../../../../../vacation-app/app/frontend/app/src/assets/logo.svg" alt="Logo" class="logo">
+        <img src="../assets/logo.svg" alt="Logo" class="logo">
       </router-link>
 
       <div class="navItemsWrapper">
@@ -83,7 +83,7 @@ export default {
   computed: {
 
     isAuthenticated() {
-      console.log("isAuthenticated=",this.sessionService.isAuthenticated());
+      // console.log("isAuthenticated=",this.sessionService.isAuthenticated());
       return this.sessionService.isAuthenticated();
     },
 
@@ -107,7 +107,7 @@ export default {
   height: 8svh;
   z-index: 99;
   background: #fff;
-  border-bottom: 2px solid var(--black);
+  border-bottom: 1px solid #eee;
   transition: height 0.5s ease;
 }
 
@@ -167,7 +167,7 @@ export default {
   right: 0;
   height: 7px;
   width: 7px;
-  background: #5daab5;
+  background: var(--black);
 }
 
 /* PROFILE NAVBAR ------------------------------------------------------------------ */

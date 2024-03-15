@@ -11,12 +11,12 @@
         <div class="inputContainer">
 
           <div class="inputWrapper">
-            <input type="firstName" name="firstName" v-model.trim="firstName" v-on:keydown.enter="$event.preventDefault()" required>
+            <input type="text" name="firstName" v-model.trim="firstName" v-on:keydown.enter="$event.preventDefault()" required>
             <label for="firstName">First name</label>
           </div>
 
           <div class="inputWrapper">
-            <input type="lastName" name="lastName" v-model="lastName" required>
+            <input type="text" name="lastName" v-model="lastName" required>
             <label for="password">Last name</label>
           </div>
 
@@ -128,7 +128,7 @@ export default {
 
 .content::before {
   content: "";
-  background-image: url("../../../../../../vacation-app/app/frontend/app/src/assets/background.jpg");
+  background-image: url("../assets/background.jpg");
   background-size: cover;
   position: absolute;
   top: 0;

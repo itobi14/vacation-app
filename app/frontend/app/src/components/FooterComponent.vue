@@ -131,7 +131,7 @@ li {
 }
 
 .copyright {
-  margin-top: 3rem;
+  margin-top: 2rem;
   text-align: center;
   font-size: 14px;
   color: #777;
