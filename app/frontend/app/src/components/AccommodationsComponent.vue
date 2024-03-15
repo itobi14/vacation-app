@@ -101,7 +101,10 @@
 
       <div class="accommodations">
         <div class="accommodations-wrapper" :class="accommodationWrapper">
-          <div :class="accommodationItem" v-for="accommodation in filteredAccommodations" :key="accommodation.id">
+          <div v-for="accommodation in filteredAccommodations"
+               :key="accommodation.id"
+               :class="accommodationItem"
+               @click="goToDetailView(accommodation.id)">
             <img :src="accommodation.imgUrl" class="accommodation-img" alt="Accommodation Image">
             <h2 :class="accommodationName">{{ accommodation.name }}</h2>
             <div class="info-wrapper">
@@ -111,9 +114,9 @@
               </div>
               <p :class="accommodationPrice">${{ accommodation.price }}</p>
             </div>
-            <div v-if="isAuthenticated" class="favorite" @click="toggleFavorite">
-              <span class="material-symbols-outlined favorite" v-if="isFavorite" :class="{ filled: isFavorite }">star</span>
-            </div>
+<!--            <div v-if="isAuthenticated" class="favorite" @click="toggleFavorite">-->
+<!--              <span class="material-symbols-outlined favorite" v-if="isFavorite" :class="{ filled: isFavorite }">star</span>-->
+<!--            </div>-->
           </div>
         </div>
       </div>
@@ -144,6 +147,7 @@ export default {
       allAccommodations: [],
       selectedAccommodations: [],
       selectedAccommodationType: "hotel",
+      selectedAccommodation: null,
 
       hotels: [],
       cabins: [],
@@ -273,7 +277,11 @@ export default {
       } else {
         // Remove the accommodation from favorites list (e.g., in localStorage or database)
       }
-    }
+    },
+
+    goToDetailView(id) {
+      this.$router.push('/accommodations/' + id)
+    },
 
   },
 

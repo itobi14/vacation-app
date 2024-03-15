@@ -9,7 +9,7 @@ public class SecureHasher {
     // Configure a password hasher
     // See https://www.baeldung.com/java-password-hashing
     private static MessageDigest saltedMessageDigest = getMessageDigest("SHA-512");
-    private static String secretSalt = "ANIME-APP-2023";
+    private static String secretSalt = "VACATION-APP-2023";
     private static MessageDigest getMessageDigest(String algorithm) {
         //System.out.println("GetMD-" + algorithm);
         MessageDigest md;

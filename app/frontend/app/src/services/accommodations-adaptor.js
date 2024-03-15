@@ -43,15 +43,16 @@ export class AccommodationsAdaptor {
         }
     }
 
-    // async asyncFindById(id) /* :Promise<Account> */ {
-    //     console.log('AccommodationAdaptor.asyncFindById(' + id + ')...');
-    //     const accommodationsData = await this.fetchJson(this.resourcesUrl + "/" + id);
-    //     return Accommodation.copyConstructor(accommodationsData);
-    // }
-    //
-    // async asyncSave(anime) /* :Promise<Account> */ {
-    //     console.log('TODO AnimeAdaptor.asyncSave(anime)...');
-    //     return "TODO AccountsAdaptor.asyncSave";
-    // }
+    async findById(id){
+
+        if (id === undefined) {
+            console.error("ID is undefined");
+            return null; // or throw an error or handle it as appropriate
+        }
+
+        // console.log('AccommodationAdaptor.asyncFindById(' + id + ')...');
+        const accommodationData = await this.fetchJson(this.resourcesUrl + "/" + id);
+        return Accommodation.copyConstructor(accommodationData);
+    }
 
 }

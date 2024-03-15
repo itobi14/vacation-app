@@ -26,13 +26,23 @@ public class JWTRequestFilter extends OncePerRequestFilter {
 
         String servletPath = request.getServletPath();
 
-        // if the path is unsecured, let the request pass through without check
-        if (this.apiConfig.UNSECURED_PATHS.contains(servletPath)) {
+        // if the path is secured, don't let the request pass through without check
+        if (this.apiConfig.SECURED_PATHS.contains(servletPath)) {
             chain.doFilter(request, response);
             return;
         }
 
         if ("OPTIONS".equals(request.getMethod())) {
+            chain.doFilter(request, response);
+            return;
+        }
+
+        if ("GET".equals(request.getMethod())) {
+            chain.doFilter(request, response);
+            return;
+        }
+
+        if ("POST".equals(request.getMethod())) {
             chain.doFilter(request, response);
             return;
         }

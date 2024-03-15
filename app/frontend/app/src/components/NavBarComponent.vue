@@ -11,7 +11,7 @@
       <div class="navItemsWrapper">
 
         <div class="navItemsContainer">
-          <router-link class="navItem" :to="{ path: '/accommodations' }" exact :class="{ 'isSelected': $route.path === '/accommodations' }">Accommodations</router-link>
+          <router-link class="navItem" :to="{ path: '/accommodations' }" exact :class="{ 'isSelected': /^\/accommodations/.test($route.path) }">Accommodations</router-link>
           <router-link v-if="!isAuthenticated" class="navItem" to="/sign-in" exact :class="{ 'isSelected': $route.path === '/sign-in' }">Login</router-link>
         </div>
 
