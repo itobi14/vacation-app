@@ -44,7 +44,7 @@
                @click="displayAccommodations('resort')"
                :class="{ isSelected: selectedAccommodationType === 'resort' }">
             <img src="../assets/icons/resort.png" class="accommodation-icon" alt="Resort">
-            <span> {{ bungalow }} </span>
+            <span> {{ resort }} </span>
           </div>
 
           <div class="accommodation-wrapper"
@@ -105,14 +105,16 @@
                :key="accommodation.id"
                :class="accommodationItem"
                @click="goToDetailView(accommodation.id)">
-            <img :src="accommodation.imgUrl" class="accommodation-img" alt="Accommodation Image">
-            <h2 :class="accommodationName">{{ accommodation.name }}</h2>
-            <div class="info-wrapper">
-              <div class="country-city-wrapper">
-                <p :class="accommodationCountryCity">{{ accommodation.country }},&nbsp;&nbsp;</p>
-                <p :class="accommodationCountryCity">{{ accommodation.city }}</p>
+            <img :src="getImgUrl(accommodation.imgUrl)" class="accommodation-img" alt="Accommodation Image">
+            <div :class="wrapper">
+              <h2 :class="accommodationName">{{ accommodation.name }}</h2>
+              <div class="info-wrapper">
+                <div class="country-city-wrapper">
+                  <p :class="accommodationCountryCity">{{ accommodation.country }},&nbsp;&nbsp;</p>
+                  <p :class="accommodationCountryCity">{{ accommodation.city }}</p>
+                </div>
+                <p :class="accommodationPrice">${{ accommodation.price }}</p>
               </div>
-              <p :class="accommodationPrice">${{ accommodation.price }}</p>
             </div>
 <!--            <div v-if="isAuthenticated" class="favorite" @click="toggleFavorite">-->
 <!--              <span class="material-symbols-outlined favorite" v-if="isFavorite" :class="{ filled: isFavorite }">star</span>-->
@@ -217,6 +219,9 @@ export default {
     accommodationItem() {
       return `accommodation-${this.gridLayout}`;
     },
+    wrapper() {
+      return `wrapper-${this.gridLayout}`;
+    },
     accommodationName() {
       return `accommodation-name-${this.gridLayout}`;
     },
@@ -276,6 +281,14 @@ export default {
         // Add the accommodation to favorites list (e.g., in localStorage or database)
       } else {
         // Remove the accommodation from favorites list (e.g., in localStorage or database)
+      }
+    },
+
+    getImgUrl(url) {
+      if (url) {
+        return (`static/${url}`);
+      } else {
+        return ('static/placeholder.svg');
       }
     },
 
@@ -377,6 +390,7 @@ span {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-top: 1rem;
   padding: 1rem 2rem;
   //background: lightsalmon;
 }
@@ -476,7 +490,6 @@ input[type="search"]::-webkit-search-cancel-button {
   display: flex;
   flex-direction: column;
   width: 100%;
-  padding: 2rem;
   border-radius: 10px;
   background: var(--white);
   box-shadow: rgba(0, 0, 0, 0.16) 0 1px 4px;
@@ -495,7 +508,6 @@ input[type="search"]::-webkit-search-cancel-button {
   display: flex;
   flex-direction: column;
   width: 100%;
-  padding: 1.2rem;
   border-radius: 10px;
   background: var(--white);
   box-shadow: rgba(0, 0, 0, 0.16) 0 1px 4px;
@@ -514,12 +526,20 @@ input[type="search"]::-webkit-search-cancel-button {
   display: flex;
   flex-direction: column;
   width: 100%;
-  padding: 2rem;
   border-radius: 10px;
   background: var(--white);
   box-shadow: rgba(0, 0, 0, 0.16) 0 1px 4px;
   transition: 0.2s ease-in-out;
   cursor: pointer;
+}
+
+.wrapper-large,
+.wrapper-rows {
+  padding: 1rem 2rem;
+}
+
+.wrapper-small {
+  padding: 0.5rem 1rem;
 }
 
 .accommodation-large:hover,
@@ -529,8 +549,10 @@ input[type="search"]::-webkit-search-cancel-button {
 }
 
 .accommodation-img {
-  height: 100px;
+  height: 150px;
   width: 100%;
+  border-radius: 10px 10px 0 0;
+  object-fit: cover;
 }
 
 .accommodation-name-large {

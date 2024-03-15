@@ -4,11 +4,15 @@ import app.models.Accommodation;
 import app.models.Account;
 import app.repositories.AccommodationJPARepository;
 import app.repositories.AccountJPARepository;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import jakarta.transaction.Transactional;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,16 +21,13 @@ public class DataLoader implements CommandLineRunner {
 
     @Override
     @Transactional
-    public void run(String... args)  {
+    public void run(String... args) throws IOException {
 
         System.out.println();
         System.out.println("Running CommandLine Startup");
 
         System.out.println();
-        this.createInitialAccounts();
-
-        System.out.println();
-        this.createInitialAccommodations();
+        this.loadDatabase();
 
         System.out.println("Done!");
     }
@@ -36,48 +37,65 @@ public class DataLoader implements CommandLineRunner {
     @Autowired
     private AccommodationJPARepository accommodationsRepo;
 
-    private void createInitialAccounts() {
+    private void loadDatabase() throws IOException {
 
-        List<Account> accounts = this.accountsRepo.findAll();
-        if (!accounts.isEmpty()) return;
+        ObjectMapper mapper = new ObjectMapper();
+        JsonNode rootNode = mapper.readValue(getClass().getClassLoader().getResourceAsStream("db/mock-db.json"), JsonNode.class);
 
-        System.out.println("Configuring some initial accounts in the repository");
-        accounts.add(this.accountsRepo.save(new Account("Tobi", "Kok", "tobi@example.com", "tobi")));
+        List<Account> accounts = parseAccounts(rootNode);
+        List<Accommodation> accommodations = parseAccommodations(rootNode);
 
-        accounts.get(0).setRole("Administrator");
+        saveAccounts(accounts);
+        saveAccommodations(accommodations);
     }
 
-    private void createInitialAccommodations() {
-
-        List<Accommodation> accommodations = this.accommodationsRepo.findAll();
-        if (!accommodations.isEmpty()) return;
-
-        System.out.println("Configuring some initial accommodations in the repository");
-
-        List<Accommodation> dummyAccommodations = getDummyAccommodations();
-        for (Accommodation accommodation : dummyAccommodations) {
-            accommodations.add(this.accommodationsRepo.save(accommodation));
+    private List<Account> parseAccounts(JsonNode rootNode) {
+        List<Account> accounts = new ArrayList<>();
+        JsonNode accountsNode = rootNode.path("accounts");
+        for (JsonNode accountNode : accountsNode) {
+            String firstName = accountNode.path("firstName").asText();
+            String lastName = accountNode.path("lastName").asText();
+            String email = accountNode.path("email").asText();
+            String password = accountNode.path("password").asText();
+            Account account = new Account(firstName, lastName, email, password);
+            accounts.add(account);
         }
-
+        return accounts;
     }
 
-    private List<Accommodation> getDummyAccommodations() {
+    private List<Accommodation> parseAccommodations(JsonNode rootNode) {
+        List<Accommodation> accommodations = new ArrayList<>();
+        JsonNode accommodationsNode = rootNode.path("accommodations");
+        for (JsonNode accommodationNode : accommodationsNode) {
+            int id = accommodationNode.path("id").asInt();
+            String name = accommodationNode.path("name").asText();
+            String country = accommodationNode.path("country").asText();
+            String city = accommodationNode.path("city").asText();
+            String address = accommodationNode.path("address").asText();
+            String postalCode = accommodationNode.path("postalCode").asText();
+            double price = accommodationNode.path("price").asDouble();
+            String type = accommodationNode.path("type").asText();
+            String description = accommodationNode.path("description").asText();
+            String image = accommodationNode.path("image").asText();
 
-        List<Accommodation> dummyAccommodations = new ArrayList<>();
+            Accommodation accommodation = new Accommodation(
+                    id, name, country, city, address,
+                    postalCode, price, type, description, image);
+            accommodations.add(accommodation);
+        }
+        return accommodations;
+    }
 
-        dummyAccommodations.add(new Accommodation(1,"Hotel A", "France", "Paris", "Street 5", "1089AA", 100.0, "Hotel", "Luxurious hotel with a beautiful view", "hotelA.jpg"));
-        dummyAccommodations.add(new Accommodation(2,"Resort B", "France", "Nice", "Beach Avenue 10", "06200", 150.0, "Hotel", "Seaside resort with amazing amenities", "resortB.jpg"));
-        dummyAccommodations.add(new Accommodation(3,"Cabin C", "Netherlands", "Rotterdam", "Forest Lane 15", "V8E 0L7", 80.0, "Hotel", "Cozy cabin in the woods for a peaceful retreat", "cabinC.jpg"));
-        dummyAccommodations.add(new Accommodation(4,"Motel D", "USA", "Miami", "Ocean Drive 5", "33109", 60.0, "Hotel", "Budget-friendly motel for short stays", "motelD.jpg"));
-        dummyAccommodations.add(new Accommodation(5,"Villa E", "Italy", "Tuscany", "Vineyard Street 4", "50125", 200.0, "Hotel", "Luxury villa with private pool and garden", "villaE.jpg"));
-        dummyAccommodations.add(new Accommodation(6,"Hostel F", "Germany", "Berlin", "Backpacker Alley 18", "10178", 30.0, "Hotel", "Social hostel perfect for backpackers", "hostelF.jpg"));
-        dummyAccommodations.add(new Accommodation(7,"Chalet G", "Switzerland", "Zermatt", "Alpine Road 20", "3920", 120.0, "Hotel", "Rustic chalet nestled in the mountains", "chaletG.jpg"));
-        dummyAccommodations.add(new Accommodation(8,"Inn H", "UK", "Cotswolds", "Main Street 100", "GL54 1HN", 90.0, "Hotel", "Charming inn with cozy rooms and fireplace", "innH.jpg"));
-        dummyAccommodations.add(new Accommodation(9,"B&B I", "Netherlands", "Amsterdam", "Canal Street 16", "1012 TM", 70.0, "Hotel", "Quaint bed and breakfast with homemade breakfast", "bnbI.jpg"));
-        dummyAccommodations.add(new Accommodation(10,"Apartment J", "Italy", "Rome", "Broadway 25", "10001", 110.0, "Hotel", "Modern apartment in the city center", "apartmentJ.jpg"));
-        dummyAccommodations.add(new Accommodation(11,"Pepijn", "Italy", "Rome", "Broadway 25", "10001", 110.0, "Cottage", "Modern apartment in the city center", "cottage.jpg"));
+    private void saveAccounts(List<Account> accounts) {
+        for (Account account : accounts) {
+            accountsRepo.save(account);
+        }
+    }
 
-        return dummyAccommodations;
+    private void saveAccommodations(List<Accommodation> accommodations) {
+        for (Accommodation accommodation : accommodations) {
+            accommodationsRepo.save(accommodation);
+        }
     }
 
 }

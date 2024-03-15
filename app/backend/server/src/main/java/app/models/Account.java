@@ -1,6 +1,5 @@
 package app.models;
 
-import app.security.SecureHasher;
 import app.serialization.ViewClasses;
 import com.fasterxml.jackson.annotation.JsonView;
 import jakarta.persistence.*;

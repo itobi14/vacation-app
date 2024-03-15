@@ -25,11 +25,9 @@ public class Accommodation {
     private String city;
 
     @JsonView(ViewClasses.Summary.class)
-    @Transient
     private String streetNameNr;
 
     @JsonView(ViewClasses.Summary.class)
-    @Transient
     private String zipCode;
 
     @JsonView(ViewClasses.Summary.class)
@@ -42,7 +40,6 @@ public class Accommodation {
     private String type;
 
     @JsonView(ViewClasses.Summary.class)
-    @Transient
     private String description;
 
     @JsonView(ViewClasses.Summary.class)
@@ -76,4 +73,20 @@ public class Accommodation {
         return id == ((Accommodation) o).id;
     }
 
+    @Override
+    public String toString() {
+        return "Accommodation{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", country='" + country + '\'' +
+                ", city='" + city + '\'' +
+                ", streetNameNr='" + streetNameNr + '\'' +
+                ", zipCode='" + zipCode + '\'' +
+                ", address='" + address + '\'' +
+                ", price=" + price +
+                ", type='" + type + '\'' +
+                ", description='" + description + '\'' +
+                ", imgUrl='" + imgUrl + '\'' +
+                '}';
+    }
 }

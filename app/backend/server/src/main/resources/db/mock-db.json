@@ -1,0 +1,120 @@
+{
+  "accounts": [
+    {
+      "firstName": "Tobi",
+      "lastName": "Kok",
+      "email": "tobi@example.com",
+      "password": "tobi"
+    }
+  ],
+  "accommodations": [
+    {
+      "id": 1,
+      "name": "Hotel A",
+      "country": "France",
+      "city": "Paris",
+      "address": "Street 5",
+      "postalCode": "1089AA",
+      "price": 100.0,
+      "type": "Hotel",
+      "description": "Luxurious hotel with a beautiful view",
+      "image": "hotel-1.jpg"
+    },
+    {
+      "id": 2,
+      "name": "Hotel B",
+      "country": "France",
+      "city": "Nice",
+      "address": "Beach Avenue 10",
+      "postalCode": "06200",
+      "price": 150.0,
+      "type": "Hotel",
+      "description": "Seaside resort with amazing amenities",
+      "image": "hotel-2.jpg"
+    },
+    {
+      "id": 3,
+      "name": "Hotel C",
+      "country": "Netherlands",
+      "city": "Rotterdam",
+      "address": "Forest Lane 15",
+      "postalCode": "V8E 0L7",
+      "price": 80.0,
+      "type": "Hotel",
+      "description": "Cozy cabin in the woods for a peaceful retreat",
+      "image": "hotel-3.jpg"
+    },
+    {
+      "id": 4,
+      "name": "Hotel D",
+      "country": "USA",
+      "city": "Miami",
+      "address": "Ocean Drive 5",
+      "postalCode": "33109",
+      "price": 60.0,
+      "type": "Hotel",
+      "description": "Budget-friendly motel for short stays",
+      "image": "hotel-4.jpg"
+    },
+    {
+      "id": 5,
+      "name": "Hotel E",
+      "country": "Italy",
+      "city": "Tuscany",
+      "address": "Vineyard Street 4",
+      "postalCode": "50125",
+      "price": 200.0,
+      "type": "Hotel",
+      "description": "Luxury villa with private pool and garden",
+      "image": "hotel-5.jpg"
+    },
+    {
+      "id": 6,
+      "name": "Hotel F",
+      "country": "Germany",
+      "city": "Berlin",
+      "address": "Backpacker Alley 18",
+      "postalCode": "10178",
+      "price": 30.0,
+      "type": "Hotel",
+      "description": "Social hostel perfect for backpackers",
+      "image": "hotel-6.jpg"
+    },
+    {
+      "id": 7,
+      "name": "Resort A",
+      "country": "Switzerland",
+      "city": "Zermatt",
+      "address": "Alpine Road 20",
+      "postalCode": "3920",
+      "price": 120.0,
+      "type": "Resort",
+      "description": "Rustic chalet nestled in the mountains",
+      "image": "resort-1.jpg"
+    },
+    {
+      "id": 8,
+      "name": "Resort B",
+      "country": "UK",
+      "city": "Cotswolds",
+      "address": "Main Street 100",
+      "postalCode": "GL54 1HN",
+      "price": 90.0,
+      "type": "Resort",
+      "description": "Charming inn with cozy rooms and fireplace",
+      "image": "resort-2.jpg"
+    },
+    {
+      "id": 9,
+      "name": "Resort C",
+      "country": "Netherlands",
+      "city": "Amsterdam",
+      "address": "Canal Street 16",
+      "postalCode": "1012 TM",
+      "price": 70.0,
+      "type": "Resort",
+      "description": "Quaint bed and breakfast with homemade breakfast",
+      "image": "resort-3.jpg"
+    }
+  ]
+}

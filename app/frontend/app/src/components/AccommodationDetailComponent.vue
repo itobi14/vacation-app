@@ -1,7 +1,7 @@
 <template>
 
   <div class="content" v-if="accommodation">
-    <img :src="accommodation.imgUrl" class="accommodation-img" alt="Accommodation Image">
+    <img :src="getImgUrl(accommodation.imgUrl)" class="accommodation-img" alt="Accommodation Image">
 
     <div class="main">
       <div class="main-info-container">
@@ -29,7 +29,7 @@
         <div class="book-container">
           <div class="title-container">
             <h2 class="title">Book your stay!</h2>
-            <img src=".././assets/logo.svg" class="logo-container" alt="Logo">
+            <img src=".././assets/ticket-1.svg" class="book-logo-container" alt="Logo">
           </div>
           <div v-if="!datesSelected" class="date-title-wrapper">
             <span class="material-symbols-outlined explore">travel_explore</span>
@@ -58,7 +58,9 @@
             <p class="total-price-text">Total</p>
             <p class="total-price">€&nbsp;{{ totalPrice }}</p>
           </div>
-          <button class="book-button" :disabled="isBookButtonDisabled">Book</button>
+          <button class="book-button"
+                  :disabled="isBookButtonDisabled"
+                  @click="openBookingConfirmModal">Book</button>
         </div>
 
     </div>
@@ -69,11 +71,26 @@
 
   </div>
 
+  <!-- Booking confirm modal -->
+  <BookingConfirmComponent
+      v-if="showBookingConfirmModal"
+      :accommodation="accommodation"
+      :startDate="startDate"
+      :endDate="endDate"
+      :totalPrice="totalPrice"
+      @close-modal="closeBookingConfirmModal"
+      @confirm-booking="confirmBooking">
+  </BookingConfirmComponent>
+
 </template>
 
 <script>
+
+import BookingConfirmComponent from "@/components/BookingConfirmComponent.vue";
+
 export default {
   name: "AccommodationDetailComponent",
+  components: { BookingConfirmComponent },
   inject: ['accommodationsService', 'sessionService'],
 
   data() {
@@ -85,6 +102,7 @@ export default {
       totalPrice: 0,
       datesSelected: false,
       minDate: this.getMinDate(),
+      showBookingConfirmModal: false
     };
   },
 
@@ -136,6 +154,29 @@ export default {
       return `${year}-${month}-${day}`;
     },
 
+    getImgUrl(url) {
+      if (url) {
+        return (`static/${url}`);
+      } else {
+        return ('static/placeholder.svg');
+      }
+    },
+
+    openBookingConfirmModal() {
+      this.showBookingConfirmModal = true;
+    },
+
+    closeBookingConfirmModal() {
+      this.showBookingConfirmModal = false;
+    },
+
+    confirmBooking() {
+      // Implement logic to confirm booking (e.g., send request to backend)
+      console.log("Booking confirmed!");
+      // Close the modal
+      this.closeBookingConfirmModal();
+    }
+
   },
 
 }
@@ -147,18 +188,16 @@ export default {
   display: flex;
   flex-direction: column;
   //background: #f5f5f5;
-  width: auto;
+  width: 65svw;
   height: auto;
   //background: lightskyblue;
 }
 
 .accommodation-img {
   height: 500px;
-  width: 1000px;
-  background-size: cover;
-  background: center;
-  border-radius: 15px;
-  background: lightseagreen;
+  width: 100%;
+  border-radius: 10px;
+  object-fit: cover;
 }
 
 .main {
@@ -229,6 +268,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding-bottom: 8px;
   border-bottom: 1px solid #eee;
 }
 
@@ -238,9 +278,9 @@ export default {
   color: var(--black);
 }
 
-.logo-container {
-  height: 50px;
-  width: 50px;
+.book-logo-container {
+  height: 40px;
+  width: 40px;
 }
 
 .date-title-wrapper {
