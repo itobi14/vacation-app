@@ -80,14 +80,14 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  //background: var(--black);
+  background: #aaa;
   height: 92svh;
   width: 100svw;
 }
 
 .content::before {
   content: "";
-  background-image: url("../../../../../../vacation-app/app/frontend/app/src/assets/img2.jpg");
+  background-image: url("../../../../../../vacation-app/app/frontend/app/src/assets/background.jpg");
   background-size: cover;
   position: absolute;
   top: 0;

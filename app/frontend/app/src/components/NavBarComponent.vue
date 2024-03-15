@@ -107,6 +107,7 @@ export default {
   height: 8svh;
   z-index: 99;
   background: #fff;
+  border-bottom: 2px solid var(--black);
   transition: height 0.5s ease;
 }
 

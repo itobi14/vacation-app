@@ -110,8 +110,15 @@ export default {
   methods: {
     confirmBooking() {
       // TODO Implement logic to confirm booking (e.g., send request to backend)
-      console.log("Booking confirmed!");
-      this.$emit('close-modal');
+
+      if (this.accommodation) {
+        console.log("Booking confirmed!");
+        this.$emit('close-modal');
+
+      } else {
+        console.error("No Accommodation object available for booking");
+      }
+
     },
 
     closeModal() {
@@ -174,6 +181,7 @@ export default {
   align-items: center;
   gap: 12px;
   padding: 1rem 2rem;
+  margin-bottom: 1rem;
   background: #e2eeef;
   border: 2px solid #5daab5;
   border-radius: 5px;

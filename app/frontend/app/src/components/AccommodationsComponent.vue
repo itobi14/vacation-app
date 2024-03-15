@@ -305,8 +305,6 @@ export default {
 
 .content {
   display: flex;
-  //background: #f5f5f5;
-  border-top: 2px solid var(--black);
   width: 85svw;
   height: auto;
 }
@@ -314,7 +312,8 @@ export default {
 .side-bar {
   height: auto;
   width: 15svw;
-  background: #f5f5f5;
+  border-left: 2px solid var(--black);
+  border-right: 2px solid var(--black);
 }
 
 .container {
