@@ -38,7 +38,7 @@ export class AccommodationsAdaptor {
             return accommodationsData?.map(Accommodation.copyConstructor);
 
         } catch (error) {
-            console.error('Error fetching anime data:', error);
+            console.error('Error fetching accommodations data:', error);
             return [];
         }
     }

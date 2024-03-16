@@ -5,6 +5,7 @@
 
     <div class="main">
       <div class="main-info-container">
+
         <h2 class="accommodation-name">{{ accommodation.name }}</h2>
         <div class="accommodation-country-city-wrapper">
           <span class="material-symbols-outlined map">map</span>
@@ -22,6 +23,15 @@
           <span class="accommodation-price-bold">€ {{ accommodation.price }}
             <span class="accommodation-price-regular">per night</span>
           </span>
+        </div>
+
+        <div v-if="isAuthenticated" class="favorite-container" @click="toggleFavorite(accommodation, accommodation.id)">
+          <div v-if="isFavorite">
+            <span class="material-symbols-outlined favorite filled">favorite</span>
+          </div>
+          <div v-if="!isFavorite">
+            <span class="material-symbols-outlined favorite">favorite</span>
+          </div>
         </div>
 
       </div>
@@ -91,11 +101,12 @@ import BookingConfirmComponent from "@/components/BookingConfirmComponent.vue";
 export default {
   name: "AccommodationDetailComponent",
   components: { BookingConfirmComponent },
-  inject: ['accommodationsService', 'sessionService'],
+  inject: ['accountsService', 'accommodationsService', 'sessionService'],
 
   data() {
     return {
       accommodation: null,
+      isFavorite: false,
       startDate: null,
       endDate: null,
       selectedNights: 0,
@@ -107,27 +118,65 @@ export default {
   },
 
   async created() {
-    // Access the id from $route.params
-    const id = this.$route.params.id;
 
-    // Check if id is defined
-    if (id !== undefined) {
-      // Fetch accommodation details using the id
-      this.accommodation = await this.accommodationsService.findById(id);
-      // console.log("Selected accommodation:", this.accommodation);
-    } else {
-      console.error("ID is undefined");
-      // Handle the case where id is not defined
-    }
+    await this.fetchAccommodation()
+    await this.fetchFavorite()
+
   },
 
   computed: {
     isBookButtonDisabled() {
       return !this.startDate || !this.endDate;
-    }
+    },
+    isAuthenticated() {
+      // console.log("isAuthenticated=",this.sessionService.isAuthenticated());
+      return this.sessionService.isAuthenticated();
+    },
   },
 
   methods: {
+
+    async fetchAccommodation() {
+
+      const accommodationId = this.$route.params.id;
+
+      if (accommodationId !== undefined) {
+        this.accommodation = await this.accommodationsService.findById(accommodationId);
+        // console.log("Selected accommodation:", this.accommodation);
+      } else {
+        console.error("ID is undefined");
+      }
+    },
+
+    async fetchFavorite() {
+
+      const accountId = this.sessionService.currentAccount.id;
+      const accommodationId = this.accommodation.id
+
+      if (accountId !== undefined) {
+         const isFavorite = await this.accountsService.findFavorite(accountId, accommodationId);
+         if (isFavorite) {
+           this.isFavorite = true;
+         }
+      }
+    },
+
+    async toggleFavorite(accommodation, accommodationId) {
+      try {
+        const accountId = this.sessionService.currentAccount.id;
+
+        if (this.isFavorite) {
+          await this.accountsService.removeFavorite(accountId, accommodationId);
+          this.isFavorite = false;
+        } else {
+          await this.accountsService.addFavorite(accountId, accommodationId);
+          this.isFavorite = true;
+        }
+      } catch (error) {
+        console.error('Error toggling favorite:', error);
+      }
+    },
+
     calculatePrice() {
       if (this.startDate && this.endDate) {
 
@@ -175,7 +224,7 @@ export default {
       console.log("Booking confirmed!");
       // Close the modal
       this.closeBookingConfirmModal();
-    }
+    },
 
   },
 
@@ -419,5 +468,36 @@ export default {
 .description-container {
   padding: 1rem 0;
 }
+
+.favorite-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  width: 40px;
+  margin-top: 2rem;
+  cursor: pointer;
+}
+
+.material-symbols-outlined.favorite {
+  color: var(--black);
+  transform: scale(1.4);
+  font-variation-settings:
+      'FILL' 0,
+      'wght' 400,
+      'GRAD' 0,
+      'opsz' 0
+}
+
+.material-symbols-outlined.favorite.filled {
+  color: var(--black);
+  transform: scale(1.4);
+  font-variation-settings:
+      'FILL' 1,
+      'wght' 400,
+      'GRAD' 0,
+      'opsz' 0
+}
+
 
 </style>

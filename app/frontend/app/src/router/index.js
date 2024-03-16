@@ -13,7 +13,7 @@ const routes = [
     { path: '/sign-up', name: 'SIGN-UP', component: SignUpComponent, props: true },
     { path: '/accommodations', name: 'ACCOMMODATIONS', component: AccommodationsComponent },
     { path: '/accommodations/:id', name: 'ACCOMMODATION-DETAIL', component: AccommodationDetailComponent },
-    { path: '/profile/:id', name: 'PROFILE', component: ProfileComponent },
+    { path: '/profile', name: 'PROFILE', component: ProfileComponent },
     { path: '/unauthorised', name: 'UNAUTHORIZED', redirect: '/', component: UnauthorizedComponent }
 ]
 

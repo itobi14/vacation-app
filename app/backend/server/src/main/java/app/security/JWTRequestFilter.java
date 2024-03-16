@@ -47,6 +47,11 @@ public class JWTRequestFilter extends OncePerRequestFilter {
             return;
         }
 
+        if ("DELETE".equals(request.getMethod())) {
+            chain.doFilter(request, response);
+            return;
+        }
+
         // get the encrypted token string from the authorization request header
         String encryptedToken = request.getHeader(HttpHeaders.AUTHORIZATION);
 

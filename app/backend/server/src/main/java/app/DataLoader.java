@@ -4,6 +4,7 @@ import app.models.Accommodation;
 import app.models.Account;
 import app.repositories.AccommodationJPARepository;
 import app.repositories.AccountJPARepository;
+import ch.qos.logback.core.net.SyslogOutputStream;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,18 +48,24 @@ public class DataLoader implements CommandLineRunner {
 
         saveAccounts(accounts);
         saveAccommodations(accommodations);
+
+        addFavoriteAccommodations(rootNode, accounts, accommodations);
     }
 
     private List<Account> parseAccounts(JsonNode rootNode) {
         List<Account> accounts = new ArrayList<>();
         JsonNode accountsNode = rootNode.path("accounts");
         for (JsonNode accountNode : accountsNode) {
+            int id = accountNode.path("id").asInt();
             String firstName = accountNode.path("firstName").asText();
             String lastName = accountNode.path("lastName").asText();
             String email = accountNode.path("email").asText();
             String password = accountNode.path("password").asText();
+            Account account = new Account(id, firstName, lastName, email, password);
+
             String profileImg = accountNode.path("profileImg").asText();
-            Account account = new Account(firstName, lastName, email, password, profileImg);
+            account.setProfileImg(profileImg);
+
             accounts.add(account);
         }
         return accounts;
@@ -97,6 +104,43 @@ public class DataLoader implements CommandLineRunner {
         for (Accommodation accommodation : accommodations) {
             accommodationsRepo.save(accommodation);
         }
+    }
+
+    private void addFavoriteAccommodations(JsonNode rootNode, List<Account> accounts, List<Accommodation> accommodations) {
+        for (JsonNode accountNode : rootNode.path("accounts")) {
+            String email = accountNode.path("email").asText();
+            Account account = findAccountByEmail(accounts, email);
+
+            if (account != null) {
+                for (JsonNode favoriteNode : accountNode.path("favorites")) {
+                    long accommodationId = favoriteNode.path("id").asLong();
+                    Accommodation accommodation = findAccommodationById(accommodations, accommodationId);
+
+                    if (accommodation != null) {
+                        account.addFavorite(accommodation);
+                    }
+                }
+                accountsRepo.save(account);
+            }
+        }
+    }
+
+    private Account findAccountByEmail(List<Account> accounts, String email) {
+        for (Account account : accounts) {
+            if (account.getEmail().equals(email)) {
+                return account;
+            }
+        }
+        return null;
+    }
+
+    private Accommodation findAccommodationById(List<Accommodation> accommodations, long id) {
+        for (Accommodation accommodation : accommodations) {
+            if (accommodation.getId() == id) {
+                return accommodation;
+            }
+        }
+        return null;
     }
 
 }

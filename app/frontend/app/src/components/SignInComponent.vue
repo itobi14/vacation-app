@@ -63,7 +63,7 @@ export default {
       if (account === null) {
         this.errorMessage = "Could not authenticate with provided credentials. Please try again";
       } else {
-        this.$router.push({ path: '/' })
+        this.$router.push({ name: 'HOME' })
       }
     },
 

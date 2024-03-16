@@ -17,7 +17,7 @@ public class Account {
     @SequenceGenerator(name="Account_ids")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="Accounts_ids")
     @Id
-    private long id = 0L;
+    private long id;
 
     @JsonView(ViewClasses.Summary.class)
     private String firstName;
@@ -37,9 +37,13 @@ public class Account {
     @JsonView(ViewClasses.Summary.class)
     private String profileImg;
 
-    @OneToMany
-    @JoinColumn(name = "favorite_id")
-    private List<Accommodation> favorites;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JsonView(ViewClasses.Summary.class)
+    @JoinTable(
+            name = "ACCOUNT_FAVORITES",
+            joinColumns = @JoinColumn(name = "account_id"),
+            inverseJoinColumns = @JoinColumn(name = "accommodation_id"))
+    private List<Accommodation> favorites = new ArrayList<>();
 
     @OneToMany
     @JoinColumn(name = "order_id")
@@ -55,16 +59,24 @@ public class Account {
         this.id = id;
     }
 
-    public Account(String firstName, String lastName, String email, String password, String profileImg) {
+    public Account(int id, String firstName, String lastName, String email, String password) {
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
-        this.profileImg = profileImg;
+        this.profileImg = null;
     }
 
     public String getFullName() {
         return this.firstName + " " + this.lastName;
+    }
+
+    public void addFavorite(Accommodation accommodation) {
+        if (favorites == null) {
+            favorites = new ArrayList<>();
+        }
+        favorites.add(accommodation);
     }
 
 //    public String hashPassword(String password) {
@@ -126,16 +138,16 @@ public class Account {
         return role;
     }
 
-    public void setRole(String role) {
-        this.role = role;
-    }
-
     public String getHashedPassword() {
         return hashedPassword;
     }
 
     public void setHashedPassword(String hashedPassword) {
         this.hashedPassword = hashedPassword;
+    }
+
+    public List<Accommodation> getFavorites() {
+        return favorites;
     }
 
     @Override
@@ -152,6 +164,14 @@ public class Account {
 
     @Override
     public String toString() {
-        return String.format("{ ID = %d, Full Name = %s, Email = %s }", this.id, getFullName(), this.email);
+        return "Account{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", role='" + role + '\'' +
+                ", profileImg='" + profileImg + '\'' +
+                '}';
     }
 }

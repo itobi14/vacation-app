@@ -10,56 +10,56 @@
 
           <div class="accommodation-wrapper"
                @click="displayAccommodations('hotel')"
-               :class="{ isSelected: selectedAccommodationType === 'hotel' }">
+               :class="{ isSelected: this.selectedAccommodationType === 'hotel' }">
             <img src="../assets/icons/building.png" class="accommodation-icon" alt="Hotel">
             <span> {{ hotel }} </span>
           </div>
 
           <div class="accommodation-wrapper"
                @click="displayAccommodations('cabin')"
-               :class="{ isSelected: selectedAccommodationType === 'cabin' }">
+               :class="{ isSelected: this.selectedAccommodationType === 'cabin' }">
             <img src="../assets/icons/cabin.png" class="accommodation-icon" alt="Cabin">
             <span> {{ cabin }} </span>
           </div>
 
           <div class="accommodation-wrapper"
                @click="displayAccommodations('bungalow')"
-               :class="{ isSelected: selectedAccommodationType === 'bungalow' }">
+               :class="{ isSelected: this.selectedAccommodationType === 'bungalow' }">
             <img src="../assets/icons/bungalow.png" class="accommodation-icon" alt="Bungalow">
             <span> {{ bungalow }} </span>
           </div>
 
           <div class="accommodation-wrapper"
                @click="displayAccommodations('cottage')"
-               :class="{ isSelected: selectedAccommodationType === 'cottage' }">
+               :class="{ isSelected: this.selectedAccommodationType === 'cottage' }">
             <img src="../assets/icons/cottage.png" class="accommodation-icon" alt="Cottage">
             <span> {{ cottage }} </span>
           </div>
 
           <div class="accommodation-wrapper"
                @click="displayAccommodations('resort')"
-               :class="{ isSelected: selectedAccommodationType === 'resort' }">
+               :class="{ isSelected: this.selectedAccommodationType === 'resort' }">
             <img src="../assets/icons/resort.png" class="accommodation-icon" alt="Resort">
             <span> {{ resort }} </span>
           </div>
 
           <div class="accommodation-wrapper"
                @click="displayAccommodations('camping')"
-               :class="{ isSelected: selectedAccommodationType === 'camping' }">
+               :class="{ isSelected: this.selectedAccommodationType === 'camping' }">
             <img src="../assets/icons/camping.png" class="accommodation-icon" alt="Camping">
             <span> {{ camping }} </span>
           </div>
 
           <div class="accommodation-wrapper"
                @click="displayAccommodations('cruise')"
-               :class="{ isSelected: selectedAccommodationType === 'cruise' }">
+               :class="{ isSelected: this.selectedAccommodationType === 'cruise' }">
             <img src="../assets/icons/cruise.png" class="accommodation-icon" alt="Cruise">
             <span> {{ cruise }} </span>
           </div>
 
           <div class="accommodation-wrapper"
                @click="displayAccommodations('all')"
-               :class="{ isSelected: selectedAccommodationType === 'all' }">
+               :class="{ isSelected: this.selectedAccommodationType === 'all' }">
             <img src="../assets/icons/landmark.png" class="accommodation-icon" alt="All">
             <span> {{ all }} </span>
           </div>
@@ -78,17 +78,17 @@
         <div class="grid-filter-options">
           <div class="grid-large"
                @click="switchToGrid('large')"
-               :class="{ isGridSelected: selectedGrid === 'large' }">
+               :class="{ isGridSelected: this.selectedGrid === 'large' }">
             <img src="../assets/grid-large.svg" class="grid-large-icon" alt="Grid Large Icon">
           </div>
           <div class="grid-small"
                @click="switchToGrid('small')"
-               :class="{ isGridSelected: selectedGrid === 'small' }">
+               :class="{ isGridSelected: this.selectedGrid === 'small' }">
             <img src="../assets/grid-small.svg" class="grid-small-icon" alt="Grid Small Icon">
           </div>
           <div class="grid-rows"
                @click="switchToGrid('rows')"
-               :class="{ isGridSelected: selectedGrid === 'rows' }">
+               :class="{ isGridSelected: this.selectedGrid === 'rows' }">
             <img src="../../src/assets/rows.svg" class="rows-icon" alt="Rows Icon">
           </div>
         </div>
@@ -112,9 +112,6 @@
                 <p :class="accommodationPrice">${{ accommodation.price }}</p>
               </div>
             </div>
-<!--            <div v-if="isAuthenticated" class="favorite" @click="toggleFavorite">-->
-<!--              <span class="material-symbols-outlined favorite" v-if="isFavorite" :class="{ filled: isFavorite }">star</span>-->
-<!--            </div>-->
           </div>
         </div>
       </div>
@@ -129,7 +126,7 @@
 
 export default {
   name: "AccommodationsComponent",
-  inject: ['accommodationsService', 'sessionService'],
+  inject: ['accountsService', 'accommodationsService', 'sessionService'],
 
   data() {
     return {
@@ -159,6 +156,8 @@ export default {
       searchQuery: '',
       selectedGrid: "large",
       gridLayout: 'large',
+
+      isFavorite: false,
     }
   },
 
@@ -230,11 +229,6 @@ export default {
     accommodationPrice() {
       return `accommodation-price-${this.gridLayout}`;
     },
-
-    isAuthenticated() {
-      // console.log("isAuthenticated=",this.sessionService.isAuthenticated());
-      return this.sessionService.isAuthenticated();
-    },
   },
 
   methods: {
@@ -272,15 +266,6 @@ export default {
     switchToGrid(layout) {
       this.gridLayout = layout;
       this.selectedGrid = layout;
-    },
-
-    toggleFavorite() {
-      this.isFavorite = !this.isFavorite;
-      if (this.isFavorite) {
-        // Add the accommodation to favorites list (e.g., in localStorage or database)
-      } else {
-        // Remove the accommodation from favorites list (e.g., in localStorage or database)
-      }
     },
 
     getImgUrl(url) {
@@ -616,32 +601,6 @@ input[type="search"]::-webkit-search-cancel-button {
   font-size: 20px;
   font-weight: 500;
   color: var(--black);
-}
-
-.favorite {
-  position: absolute;
-  top: 7%;
-  right: 4%;
-}
-
-.material-symbols-outlined.favorite {
-  color: var(--black);
-  transform: scale(2);
-  font-variation-settings:
-      'FILL' 0,
-      'wght' 400,
-      'GRAD' 0,
-      'opsz' 0
-}
-
-.material-symbols-outlined.favorite.filled {
-  color: var(--black);
-  transform: scale(2);
-  font-variation-settings:
-      'FILL' 1,
-      'wght' 400,
-      'GRAD' 0,
-      'opsz' 0
 }
 
 </style>

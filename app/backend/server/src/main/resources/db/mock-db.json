@@ -1,11 +1,50 @@
 {
   "accounts": [
     {
+      "id": "1",
       "firstName": "Tobi",
       "lastName": "Kok",
       "email": "tobi@example.com",
       "password": "tobi",
-      "profileImg": "profile-img.jpg"
+      "profileImg": "profile-img.jpg",
+      "favorites": [
+        {
+          "id": 1,
+          "name": "Hotel A",
+          "country": "France",
+          "city": "Paris",
+          "address": "Street 5",
+          "postalCode": "1089AA",
+          "price": 100.0,
+          "type": "Hotel",
+          "description": "Luxurious hotel with a beautiful view",
+          "image": "hotel-1.jpg"
+        },
+        {
+          "id": 2,
+          "name": "Hotel B",
+          "country": "France",
+          "city": "Nice",
+          "address": "Beach Avenue 10",
+          "postalCode": "06200",
+          "price": 150.0,
+          "type": "Hotel",
+          "description": "Seaside resort with amazing amenities",
+          "image": "hotel-2.jpg"
+        },
+        {
+          "id": 3,
+          "name": "Hotel C",
+          "country": "Netherlands",
+          "city": "Rotterdam",
+          "address": "Forest Lane 15",
+          "postalCode": "V8E 0L7",
+          "price": 80.0,
+          "type": "Hotel",
+          "description": "Cozy cabin in the woods for a peaceful retreat",
+          "image": "hotel-3.jpg"
+        }
+      ]
     }
   ],
   "accommodations": [

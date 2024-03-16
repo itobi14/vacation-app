@@ -15,18 +15,18 @@
           <router-link v-if="!isAuthenticated" class="nav-item" to="/sign-in" exact :class="{ 'isSelected': $route.path === '/sign-in' }">Login</router-link>
 
           <div v-if="isAuthenticated" @click="toggleDropdown" class="profile-container">
-            <img :src="getImgUrl(profileImg)" class="profile-img" alt="Profile Image">
+            <img :src="this.profileImgUrl" class="profile-img" alt="Profile Image">
 
             <!-- Dropdown menu -->
             <div class="dropdown-menu-container open" v-if="isDropdownOpen">
               <div class="dropdown-profile-container">
                 <div class="profile-container">
-                  <img :src="getImgUrl(profileImg)" class="profile-img" alt="Profile Image">
+                  <img :src="this.profileImgUrl" class="profile-img" alt="Profile Image">
                 </div>
                 <div class="user-name">{{ userName }}</div>
               </div>
               <div class="dropdown-menu">
-                <router-link :to=" { name: 'PROFILE', params: { id: this.id } }" class="dropdown-menu-item">
+                <router-link :to=" { name: 'PROFILE' }" class="dropdown-menu-item">
                   <span class="material-symbols-outlined">person</span>
                   <p class="dropdown-menu-item-text">Profile</p>
                 </router-link>
@@ -56,13 +56,9 @@ export default {
   data() {
     return {
       isDropdownOpen: false,
-      id: this.sessionService.currentAccount.id,
-      profileImg: null,
+      defaultProfileImgUrl: 'static/placeholder.svg',
+      userProfileImgUrl: 'static/profile-img.jpg',
     }
-  },
-
-  async created() {
-    await this.fetchProfileImg();
   },
 
   methods: {
@@ -76,21 +72,6 @@ export default {
       this.$router.push({ name: 'HOME' });
     },
 
-    async fetchProfileImg() {
-      const account = await this.accountsService.findById(this.id);
-      if (account) {
-        this.profileImg = account.profileImg;
-      }
-    },
-
-    getImgUrl(url) {
-      if (url) {
-        return (`static/${url}`);
-      } else {
-        return ('static/placeholder.svg');
-      }
-    },
-
   },
 
   computed: {
@@ -102,6 +83,10 @@ export default {
 
     userName() {
       return this.sessionService.currentAccount.firstName + " " + this.sessionService.currentAccount.lastName;
+    },
+
+    profileImgUrl() {
+      return this.isAuthenticated ? this.userProfileImgUrl : this.defaultProfileImgUrl;
     },
 
   },

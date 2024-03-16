@@ -73,6 +73,10 @@ public class Accommodation {
         return id == ((Accommodation) o).id;
     }
 
+    public int getId() {
+        return id;
+    }
+
     @Override
     public String toString() {
         return "Accommodation{" +
