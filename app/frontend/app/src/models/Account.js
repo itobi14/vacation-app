@@ -1,12 +1,22 @@
 export class Account {
     id;
-    name;
+    firstName;
+    lastName;
     email;
+    password;
+    fullName;
     role;
+    profileImg;
 
-    constructor(id, name = null) {
+    constructor(id, firstName, lastName, email, password, fullName, role, profileImg) {
         this.id = id;
-        this.name = name;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.fullName = fullName;
+        this.role = role;
+        this.profileImg = profileImg;
     }
 
     equalsById(other) {
@@ -16,9 +26,13 @@ export class Account {
     equals(other) {
         return other != null &&
             this.id === other.id &&
-            this.name === other.name &&
+            this.firstName === other.firstName &&
+            this.lastName === other.lastName &&
             this.email === other.email &&
-            this.role === other.role
+            this.password === other.password &&
+            this.fullName === other.fullName &&
+            this.role === other.role &&
+            this.profileImg === other.profileImg
     }
 
     static copyConstructor(account) {

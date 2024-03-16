@@ -120,7 +120,7 @@ form {
   font-size: 35px;
   font-weight: 700;
   width: 35%;
-  margin-bottom: 5rem;
+  margin-bottom: 4rem;
   color: var(--black);
 }
 

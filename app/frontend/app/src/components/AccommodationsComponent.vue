@@ -2,10 +2,6 @@
 
   <div class="content">
 
-    <div class="side-bar">
-
-    </div>
-
     <div class="container">
 
       <div class="accommodation-filter-bar">
@@ -310,12 +306,6 @@ export default {
   display: flex;
   width: 85svw;
   height: auto;
-}
-
-.side-bar {
-  height: auto;
-  width: 15svw;
-  border-right: 1px solid #eee;
 }
 
 .container {

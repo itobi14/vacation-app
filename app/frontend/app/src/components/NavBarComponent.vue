@@ -1,53 +1,46 @@
 <template>
 
-  <nav class="navBar">
+  <nav class="nav-bar">
 
-    <div class="navBarContent">
+    <div class="nav-bar-content">
 
-      <router-link class="logoContainer" to="/">
+      <router-link class="logo-container" to="/">
         <img src="../assets/logo.svg" alt="Logo" class="logo">
       </router-link>
 
-      <div class="navItemsWrapper">
+      <div class="nav-items-wrapper">
 
-        <div class="navItemsContainer">
-          <router-link class="navItem" :to="{ path: '/accommodations' }" exact :class="{ 'isSelected': /^\/accommodations/.test($route.path) }">Accommodations</router-link>
-          <router-link v-if="!isAuthenticated" class="navItem" to="/sign-in" exact :class="{ 'isSelected': $route.path === '/sign-in' }">Login</router-link>
-        </div>
+        <div class="nav-items-container">
+          <router-link class="nav-item" :to="{ path: '/accommodations' }" exact :class="{ 'isSelected': /^\/accommodations/.test($route.path) }">Accommodations</router-link>
+          <router-link v-if="!isAuthenticated" class="nav-item" to="/sign-in" exact :class="{ 'isSelected': $route.path === '/sign-in' }">Login</router-link>
 
-        <div v-if="isAuthenticated" class="profileInfoContainer">
-          <div class="usernameContainer" @click="toggleDropdown">
-            <span class="material-symbols-outlined face">face</span>
-            <div class="username">{{ userName }}</div>
+          <div v-if="isAuthenticated" @click="toggleDropdown" class="profile-container">
+            <img :src="getImgUrl(profileImg)" class="profile-img" alt="Profile Image">
 
             <!-- Dropdown menu -->
-            <div class="dropdownMenuContainer open" v-if="isDropdownOpen">
-              <div class="dropdownProfileContainer">
-                <div class="dropdownProfilePic"></div>
-                <div class="dropdownProfileName">{{ userName }}</div>
+            <div class="dropdown-menu-container open" v-if="isDropdownOpen">
+              <div class="dropdown-profile-container">
+                <div class="profile-container">
+                  <img :src="getImgUrl(profileImg)" class="profile-img" alt="Profile Image">
+                </div>
+                <div class="user-name">{{ userName }}</div>
               </div>
-              <ul class="dropdownMenu">
-                <li class="dropdownMenuItem">
+              <div class="dropdown-menu">
+                <router-link :to=" { name: 'PROFILE', params: { id: this.id } }" class="dropdown-menu-item">
                   <span class="material-symbols-outlined">person</span>
-                  <span class="dropdownMenuItemText">Profile</span>
-                </li>
-                <li class="dropdownMenuItem">
-                  <span class="material-symbols-outlined">settings_applications</span>
-                  <span class="dropdownMenuItemText">Settings</span>
-                </li>
-                <li class="dropdownMenuItem" @click="onSignOut">
+                  <p class="dropdown-menu-item-text">Profile</p>
+                </router-link>
+                <router-link :to=" { name: 'HOME' }" class="dropdown-menu-item" @click="onSignOut">
                   <span class="material-symbols-outlined">logout</span>
-                  <span class="dropdownMenuItemText">Logout</span>
-                </li>
-              </ul>
+                  <p class="dropdown-menu-item-text">Logout</p>
+                </router-link>
+              </div>
             </div>
-
           </div>
-          <div class="profilePic">{{ profilePic }}</div>
+
         </div>
 
       </div>
-
     </div>
 
   </nav>
@@ -58,13 +51,18 @@
 
 export default {
   name: "NavBarComponent",
-  inject: ['sessionService'],
+  inject: ['sessionService', 'accountsService'],
 
   data() {
     return {
       isDropdownOpen: false,
-      profilePic: null,
+      id: this.sessionService.currentAccount.id,
+      profileImg: null,
     }
+  },
+
+  async created() {
+    await this.fetchProfileImg();
   },
 
   methods: {
@@ -75,7 +73,22 @@ export default {
 
     onSignOut() {
       this.sessionService.signOut();
-      this.$router.push({ path: '/' });
+      this.$router.push({ name: 'HOME' });
+    },
+
+    async fetchProfileImg() {
+      const account = await this.accountsService.findById(this.id);
+      if (account) {
+        this.profileImg = account.profileImg;
+      }
+    },
+
+    getImgUrl(url) {
+      if (url) {
+        return (`static/${url}`);
+      } else {
+        return ('static/placeholder.svg');
+      }
     },
 
   },
@@ -88,7 +101,7 @@ export default {
     },
 
     userName() {
-      return this.sessionService.currentAccount.name;
+      return this.sessionService.currentAccount.firstName + " " + this.sessionService.currentAccount.lastName;
     },
 
   },
@@ -101,17 +114,17 @@ export default {
 
 /* NAVBAR ------------------------------------------------------------------------ */
 
-.navBar {
+.nav-bar {
   display: flex;
   justify-content: center;
-  height: 8svh;
+  height: auto;
   z-index: 99;
   background: #fff;
   border-bottom: 1px solid #eee;
   transition: height 0.5s ease;
 }
 
-.navBarContent {
+.nav-bar-content {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -119,7 +132,7 @@ export default {
   padding: 1rem 0;
 }
 
-.logoContainer {
+.logo-container {
   height: 50px;
   width: 50px;
   transition: all 0.3s ease-out;
@@ -131,18 +144,18 @@ export default {
 
 }
 
-.navItemsWrapper {
+.nav-items-wrapper {
   display: flex;
 }
 
-.navItemsContainer {
+.nav-items-container {
   display: flex;
   align-items: center;
   gap: 1rem;
   transition: all 0.3s ease-out;
 }
 
-.navItem {
+.nav-item {
   position: relative;
   display: flex;
   align-items: center;
@@ -172,57 +185,27 @@ export default {
 
 /* PROFILE NAVBAR ------------------------------------------------------------------ */
 
-.profileInfoContainer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  margin-left: 2rem;
-}
-
-.usernameContainer {
+.profile-container {
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: left;
-  gap: 1rem;
-  height: 100%;
-  width: auto;
-  max-width: 200px;
-  padding: 0.5rem 2rem 0.5rem 1rem;
-  outline: none;
-  background: #fff;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.usernameContainer:hover {
-  outline: 3px solid var(--black);
-}
-
-.username {
-  width: 100%;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
-  font-size: 0.8em;
-  font-weight: 600;
-  color: #222;
-}
-
-.profilePic {
   height: 50px;
   width: 50px;
-  border-radius: 50%;
-  background: #222;
+  //background: #f5f5f5;
+  cursor: pointer;
   transition: all 0.3s ease-out;
+}
+
+.profile-img {
+  height: 100%;
+  width: 100%;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 /* DROPDOWN MENU ------------------------------------------------------------------ */
 
-.dropdownMenuContainer {
+.dropdown-menu-container {
   position: absolute;
-  top: 125%;
+  top: 150%;
   right: 0;
   width: 250px;
   background: #fff;
@@ -235,12 +218,18 @@ export default {
   transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
-.dropdownMenuContainer.open {
+.dropdown-menu-container.open {
   opacity: 1;
   transform: translateY(0);
 }
 
-.dropdownProfileContainer {
+.user-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--black);
+}
+
+.dropdown-profile-container {
   display: flex;
   align-items: center;
   gap: 1rem;
@@ -248,15 +237,15 @@ export default {
   border-bottom: 2px solid #e5e5e5;
 }
 
-.dropdownProfilePic {
+.profile-img {
   height: 50px;
   width: 50px;
   background: #222222;
   border-radius: 50%;
 }
 
-.dropdownProfileName {
-  font-size: 1.2em;
+.user-name {
+  font-size: 14px;
   font-weight: 500;
   text-overflow: ellipsis;
   overflow: hidden;
@@ -265,12 +254,12 @@ export default {
   color: #222;
 }
 
-.dropdownMenu {
+.dropdown-menu {
   margin-top: 1rem;
   list-style: none;
 }
 
-.dropdownMenuItem {
+.dropdown-menu-item {
   display: flex;
   align-items: center;
   justify-content: left;
@@ -278,39 +267,29 @@ export default {
   padding: 1rem;
   background: none;
   border-radius: 5px;
+  text-decoration: none;
 }
 
-.dropdownMenuItem:hover {
+.dropdown-menu-item:hover {
   background: #f5f5f5;
 }
 
-.dropdownMenuItemText {
+.dropdown-menu-item-text {
   font-size: 1rem;
   font-weight: 500;
+  color: var(--black);
 }
 
 /* ICONS ------------------------------------------------------------------------ */
 
-.material-symbols-outlined.face {
-  color: #222;
+.material-symbols-outlined {
+  color: var(--black);
+  transform: scale(1.1);
   font-variation-settings:
       'FILL' 0,
-      'wght' 400,
+      'wght' 500,
       'GRAD' 0,
-      'opsz' 40
-}
-
-.material-symbols-outlined.face.onScroll {
-  display: none;
-}
-
-.material-symbols-outlined.dropdown {
-  color: #222;
-  font-variation-settings:
-      'FILL' 0,
-      'wght' 400,
-      'GRAD' 0,
-      'opsz' 40
+      'opsz' 0
 }
 
 </style>

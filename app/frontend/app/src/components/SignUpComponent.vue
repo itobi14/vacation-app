@@ -161,7 +161,7 @@ form {
   font-size: 35px;
   font-weight: 700;
   width: 50%;
-  margin-bottom: 5rem;
+  margin-bottom: 4rem;
   color: var(--black);
 }
 

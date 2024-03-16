@@ -4,7 +4,8 @@
       "firstName": "Tobi",
       "lastName": "Kok",
       "email": "tobi@example.com",
-      "password": "tobi"
+      "password": "tobi",
+      "profileImg": "profile-img.jpg"
     }
   ],
   "accommodations": [

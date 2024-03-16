@@ -31,7 +31,11 @@ public class Account {
     @JsonView(ViewClasses.Summary.class)
     private String password;
 
+    @JsonView(ViewClasses.Summary.class)
     private String role = "Regular User";
+
+    @JsonView(ViewClasses.Summary.class)
+    private String profileImg;
 
     @OneToMany
     @JoinColumn(name = "favorite_id")
@@ -51,11 +55,12 @@ public class Account {
         this.id = id;
     }
 
-    public Account(String firstName, String lastName, String email, String password) {
+    public Account(String firstName, String lastName, String email, String password, String profileImg) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
+        this.profileImg = profileImg;
     }
 
     public String getFullName() {
@@ -107,6 +112,14 @@ public class Account {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getProfileImg() {
+        return profileImg;
+    }
+
+    public void setProfileImg(String profileImg) {
+        this.profileImg = profileImg;
     }
 
     public String getRole() {

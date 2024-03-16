@@ -57,7 +57,8 @@ public class DataLoader implements CommandLineRunner {
             String lastName = accountNode.path("lastName").asText();
             String email = accountNode.path("email").asText();
             String password = accountNode.path("password").asText();
-            Account account = new Account(firstName, lastName, email, password);
+            String profileImg = accountNode.path("profileImg").asText();
+            Account account = new Account(firstName, lastName, email, password, profileImg);
             accounts.add(account);
         }
         return accounts;

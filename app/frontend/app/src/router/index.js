@@ -4,6 +4,8 @@ import SignInComponent from "@/components/SignInComponent.vue";
 import SignUpComponent from "@/components/SignUpComponent.vue";
 import AccommodationsComponent from "@/components/AccommodationsComponent.vue";
 import AccommodationDetailComponent from "@/components/AccommodationDetailComponent.vue";
+import ProfileComponent from "@/components/ProfileComponent.vue";
+import UnauthorizedComponent from "@/components/UnauthorizedComponent.vue";
 
 const routes = [
     { path: '/', name: 'HOME', component: HeroComponent },
@@ -11,7 +13,8 @@ const routes = [
     { path: '/sign-up', name: 'SIGN-UP', component: SignUpComponent, props: true },
     { path: '/accommodations', name: 'ACCOMMODATIONS', component: AccommodationsComponent },
     { path: '/accommodations/:id', name: 'ACCOMMODATION-DETAIL', component: AccommodationDetailComponent },
-    { path: '/unauthorised', redirect: '/' }  // TODO make a page that informs about lack of authorisation
+    { path: '/profile/:id', name: 'PROFILE', component: ProfileComponent },
+    { path: '/unauthorised', name: 'UNAUTHORIZED', redirect: '/', component: UnauthorizedComponent }
 ]
 
 const router = createRouter({

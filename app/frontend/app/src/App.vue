@@ -47,16 +47,10 @@ export default {
 
   methods: {
     routerGuard(to,from) {
-      // global routing guards set up in order to be able to query theSessionService status
-      if (to.name === 'ADMIN') {
-        if (!this.theSessionService.isAdmin()) {
-          console.log("Intercepted route from '" + from.name + "' to '" + to.name + "'");
-          return '/unauthorised';
-        }
-      } else if (to.name === 'ORDERS') {
+      if (to.name === 'PROFILE') {
         if (!this.theSessionService.isAuthenticated()) {
           console.log("Intercepted route from '" + from.name + "' to '" + to.name + "'");
-          return { name: 'SIGN-IN', query: { targetRoute: to.name, cancelRoute: 'HOME' }};
+          return '/unauthorised';
         }
       }
     }
