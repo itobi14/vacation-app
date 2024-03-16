@@ -150,30 +150,37 @@ export default {
 
     async fetchFavorite() {
 
-      const accountId = this.sessionService.currentAccount.id;
-      const accommodationId = this.accommodation.id
+      if (this.isAuthenticated) {
 
-      if (accountId !== undefined) {
-         const isFavorite = await this.accountsService.findFavorite(accountId, accommodationId);
-         if (isFavorite) {
-           this.isFavorite = true;
-         }
+        const accountId = this.sessionService.currentAccount.id;
+        const accommodationId = this.accommodation.id
+
+        if (accountId !== undefined) {
+          const isFavorite = await this.accountsService.findFavorite(accountId, accommodationId);
+          if (isFavorite) {
+            this.isFavorite = true;
+          }
+        }
       }
+
     },
 
     async toggleFavorite(accommodation, accommodationId) {
-      try {
-        const accountId = this.sessionService.currentAccount.id;
 
-        if (this.isFavorite) {
-          await this.accountsService.removeFavorite(accountId, accommodationId);
-          this.isFavorite = false;
-        } else {
-          await this.accountsService.addFavorite(accountId, accommodationId);
-          this.isFavorite = true;
+      if (this.isAuthenticated) {
+        try {
+          const accountId = this.sessionService.currentAccount.id;
+
+          if (this.isFavorite) {
+            await this.accountsService.removeFavorite(accountId, accommodationId);
+            this.isFavorite = false;
+          } else {
+            await this.accountsService.addFavorite(accountId, accommodationId);
+            this.isFavorite = true;
+          }
+        } catch (error) {
+          console.error('Error toggling favorite:', error);
         }
-      } catch (error) {
-        console.error('Error toggling favorite:', error);
       }
     },
 
@@ -470,6 +477,7 @@ export default {
 }
 
 .favorite-container {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;

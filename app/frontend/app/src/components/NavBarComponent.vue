@@ -11,8 +11,9 @@
       <div class="nav-items-wrapper">
 
         <div class="nav-items-container">
-          <router-link class="nav-item" :to="{ path: '/accommodations' }" exact :class="{ 'isSelected': /^\/accommodations/.test($route.path) }">Accommodations</router-link>
-          <router-link v-if="!isAuthenticated" class="nav-item" to="/sign-in" exact :class="{ 'isSelected': $route.path === '/sign-in' }">Login</router-link>
+          <router-link class="nav-item" :to="{ name: 'ACCOMMODATIONS' }" exact :class="{ 'isSelected': isAccommodationsRoute }">Accommodations</router-link>
+          <router-link class="nav-item" :to="{ name: 'ABOUT-US' }" exact :class="{ 'isSelected': isAboutUsRoute }">About Us</router-link>
+          <router-link v-if="!isAuthenticated" class="nav-item" :to="{ name: 'SIGN-IN' }" exact :class="{ 'isSelected': isSignInOrSignUpRoute }">Login</router-link>
 
           <div v-if="isAuthenticated" @click="toggleDropdown" class="profile-container">
             <img :src="this.profileImgUrl" class="profile-img" alt="Profile Image">
@@ -87,6 +88,20 @@ export default {
 
     profileImgUrl() {
       return this.isAuthenticated ? this.userProfileImgUrl : this.defaultProfileImgUrl;
+    },
+
+    /* ROUTES ---------------------------------------------------------------------------------------------------- */
+
+    isAccommodationsRoute() {
+      return /^\/accommodations/.test(this.$route.path);
+    },
+
+    isAboutUsRoute() {
+      return this.$route.path === '/about-us';
+    },
+
+    isSignInOrSignUpRoute() {
+      return this.$route.path === '/sign-in' || this.$route.path === '/sign-up';
     },
 
   },
@@ -174,7 +189,7 @@ export default {
   position: relative;
   height: 50px;
   width: 50px;
-  //background: #f5f5f5;
+  margin-left: 1rem;
   cursor: pointer;
   transition: all 0.3s ease-out;
 }
