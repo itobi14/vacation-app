@@ -81,17 +81,9 @@ export default {
 <style scoped>
 
 .content {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: auto;
-}
-
-.hero-container {
   position: relative;
   display: flex;
-  flex-direction: column;
+  align-items: center;
   justify-content: center;
   height: 90svh;
   width: 100%;
@@ -99,7 +91,7 @@ export default {
   background: var(--black);
 }
 
-.hero-container::before {
+.content:before {
   content: "";
   background-image: url("../../../../../../../../vacation-app/app/frontend/app/src/assets/hero-img.jpg");
   background-size: cover;
@@ -112,14 +104,23 @@ export default {
   opacity: 0.25;
 }
 
+.hero-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  width: 85svw;
+  //background: var(--black);
+}
+
 .description-container {
   position: relative;
   display: flex;
   justify-content: center;
   flex-direction: column;
   //background: lightgreen;
-  width: 50%;
-  padding: 0 140px;
+  width: 40%;
 }
 
 .hero-title {
