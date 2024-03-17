@@ -6,7 +6,7 @@
 
       <div class="description-container">
         <h1 class="hero-title">Find Your Perfect European Getaway</h1>
-        <p class="hero-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Abconsectetur consequatur exercitationem nemo quo repellendus bedellus.</p>
+        <p class="hero-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Abconsectetur consequatur exercitationem nemo quo.</p>
         <ul>
           <li>Hotel</li>
           <li>Lodge</li>
@@ -81,7 +81,10 @@ export default {
 <style scoped>
 
 .content {
-  width: 85svw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
   height: auto;
 }
 
@@ -90,9 +93,9 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  height: 750px;
+  height: 90svh;
   width: 100%;
-  border-radius: 0 50px 0 50px;
+  //border-radius: 0 50px 0 50px;
   background: var(--black);
 }
 
@@ -105,8 +108,8 @@ export default {
   right: 0;
   bottom: 0;
   left: 0;
-  border-radius: 0 50px 0 50px;
-  opacity: 0.3;
+  //border-radius: 0 50px 0 50px;
+  opacity: 0.25;
 }
 
 .description-container {
@@ -116,7 +119,7 @@ export default {
   flex-direction: column;
   //background: lightgreen;
   width: 50%;
-  padding: 0 200px;
+  padding: 0 140px;
 }
 
 .hero-title {
@@ -124,7 +127,7 @@ export default {
   font-size: 40px;
   font-weight: 700;
   line-height: 110%;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
   color: var(--white);
 }
 
@@ -176,7 +179,7 @@ li {
   border-radius: 10px;
   font-size: 20px;
   font-weight: 600;
-  margin-top: 4rem;
+  margin-top: 5rem;
   color: var(--white);
   backdrop-filter: blur(1px);
   transition: backdrop-filter 0.3s ease;
@@ -185,6 +188,14 @@ li {
 
 .go-to-assortment:hover {
   backdrop-filter: blur(10px);
+}
+
+@media only screen and (min-width: 1400px) {
+
+
+
+
+
 }
 
 </style>

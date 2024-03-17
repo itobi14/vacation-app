@@ -244,7 +244,7 @@ export default {
   display: flex;
   flex-direction: column;
   //background: #f5f5f5;
-  width: 65svw;
+  width: 85svw;
   height: auto;
   //background: lightskyblue;
 }

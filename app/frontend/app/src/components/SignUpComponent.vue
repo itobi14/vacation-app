@@ -122,8 +122,9 @@ export default {
   align-items: center;
   justify-content: center;
   background: #aaa;
-  height: 92svh;
+  height: auto;
   width: 100svw;
+  padding: 2rem 0;
 }
 
 .content::before {

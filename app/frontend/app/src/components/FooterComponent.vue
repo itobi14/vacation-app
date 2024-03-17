@@ -62,11 +62,13 @@ export default {
 <style scoped>
 
 .footer {
-  background: #f5f5f5;
-  padding: 50px 250px 30px 250px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  height: auto;
+  padding: 4rem 2rem 2rem 2rem;
+  background: #f5f5f5;
 }
 
 .footer-container {
@@ -82,7 +84,7 @@ export default {
 .footer-section {
   flex: 1;
   width: 225px;
-  margin-bottom: 2rem;
+  margin-bottom: 4rem;
 }
 
 .section-title {
@@ -131,7 +133,6 @@ li {
 }
 
 .copyright {
-  margin-top: 2rem;
   text-align: center;
   font-size: 14px;
   color: #777;

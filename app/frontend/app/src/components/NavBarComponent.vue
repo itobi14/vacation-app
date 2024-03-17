@@ -118,6 +118,7 @@ export default {
   display: flex;
   justify-content: center;
   height: auto;
+  width: 100svw;
   z-index: 99;
   background: #fff;
   border-bottom: 1px solid #eee;

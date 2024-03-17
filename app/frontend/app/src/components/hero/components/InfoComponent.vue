@@ -86,7 +86,7 @@ export default {
 
 .info-content {
   //background: lightblue;
-  width: 100%;
+  width: 85svw;
   height: auto;
   padding: 5rem;
 }
