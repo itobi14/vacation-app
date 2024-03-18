@@ -6,16 +6,19 @@
       <img :src="getImgUrl(profileImg)" class="profile-img" alt="Profile Image">
     </div>
 
-    <div class="favorites-history-container">
+    <div class="favorites-container">
       <h2 class="section-title">Favorites</h2>
-      <div v-for="accommodation in this.favorites"
-           :key="accommodation.id"
-           class="item">
-        <img :src="getImgUrl(accommodation.imgUrl)"
-             class="accommodation-img"
-             alt="Accommodation Image">
-        <h3>{{ accommodation.name }}</h3>
-        <p>{{ accommodation.description }}</p>
+      <div class="favorites-wrapper">
+        <div v-for="accommodation in this.favorites"
+             :key="accommodation.id"
+             class="accommodation"
+             @click="goToDetailView(accommodation.id)">
+          <img :src="getImgUrl(accommodation.imgUrl)"
+               class="accommodation-img"
+               alt="Accommodation Image">
+          <h3 class="accommodation-name">{{ accommodation.name }}</h3>
+          <p class="country-city">{{ accommodation.country }}, &nbsp; {{ accommodation.city}} </p>
+        </div>
       </div>
     </div>
 
@@ -89,6 +92,10 @@ export default {
       }
     },
 
+    goToDetailView(id) {
+      this.$router.push('/accommodations/' + id)
+    },
+
   },
 
   computed: {
@@ -117,8 +124,48 @@ export default {
   object-fit: cover;
 }
 
+.favorites-container {
+  padding: 1rem;
+  width: 750px;
+  overflow-x: scroll;
+}
+
+.section-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--black);
+}
+
+.favorites-wrapper {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.accommodation {
+  background: var(--white);
+  border-radius: 5px;
+  border: 1px solid #e5e5e5;
+  padding: 10px;
+  cursor: pointer;
+}
+
 .accommodation-img {
-  height: 100px;
+  height: 85px;
+  width: 100%;
+  object-fit: cover;
+}
+
+.accommodation-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--black);
+}
+
+.country-city {
+  font-size: 12px;
+  font-weight: 400;
+  color: #555
 }
 
 </style>
