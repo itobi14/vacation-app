@@ -30,10 +30,10 @@
           </div>
 
           <div class="accommodation-wrapper"
-               @click="displayAccommodations('cottage')"
-               :class="{ isSelected: this.selectedAccommodationType === 'cottage' }">
-            <img src="../assets/icons/cottage.png" class="accommodation-icon" alt="Cottage">
-            <span> {{ cottage }} </span>
+               @click="displayAccommodations('chalet')"
+               :class="{ isSelected: this.selectedAccommodationType === 'chalet' }">
+            <img src="../assets/icons/chalet.png" class="accommodation-icon" alt="Chalet">
+            <span> {{ chalet }} </span>
           </div>
 
           <div class="accommodation-wrapper"
@@ -133,7 +133,7 @@ export default {
       hotel: "Hotel",
       cabin: "Cabin",
       bungalow: "Bungalow",
-      cottage: "Cottage",
+      chalet: "Chalet",
       resort: "Resort",
       camping: "Camping",
       cruise: "Cruise",
@@ -148,7 +148,7 @@ export default {
       cabins: [],
       bungalows: [],
       apartments: [],
-      cottages: [],
+      chalets: [],
       resorts: [],
       campings: [],
       cruises: [],
@@ -178,8 +178,8 @@ export default {
         case 'bungalow':
           this.bungalows.push(accommodation);
           break;
-        case 'cottage':
-          this.cottages.push(accommodation);
+        case 'chalet':
+          this.chalets.push(accommodation);
           break;
         case 'resort':
           this.resorts.push(accommodation);
@@ -245,8 +245,8 @@ export default {
         case 'bungalow':
           this.selectedAccommodations = this.bungalows;
           break;
-        case 'cottage':
-          this.selectedAccommodations = this.cottages;
+        case 'chalet':
+          this.selectedAccommodations = this.chalets;
           break;
         case 'resort':
           this.selectedAccommodations = this.resorts;

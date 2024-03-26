@@ -11,8 +11,8 @@
           <li>Hotel</li>
           <li>Lodge</li>
           <li>Cabin</li>
-          <li>Safari</li>
-          <li>Inns</li>
+          <li>Chalet</li>
+          <li>Resort</li>
         </ul>
       </div>
 
@@ -128,6 +128,7 @@ export default {
   font-size: 40px;
   font-weight: 700;
   line-height: 110%;
+  width: 80%;
   margin-bottom: 10px;
   color: var(--white);
 }

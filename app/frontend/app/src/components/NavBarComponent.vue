@@ -119,6 +119,7 @@ export default {
   justify-content: center;
   z-index: 99;
   background: #fff;
+  height: 10svh;
   border-bottom: 1px solid #eee;
   transition: height 0.5s ease;
 }
@@ -128,7 +129,7 @@ export default {
   align-items: center;
   justify-content: space-between;
   width: 85svw;
-  padding: 1rem 0;
+  //padding: 1rem 0;
 }
 
 .logo-container {
@@ -215,6 +216,7 @@ export default {
   transform: translateY(-10px);
   z-index: 999;
   transition: opacity 0.3s ease, transform 0.3s ease;
+  cursor: auto;
 }
 
 .dropdown-menu-container.open {
@@ -234,13 +236,14 @@ export default {
   gap: 1rem;
   padding-bottom: 1rem;
   border-bottom: 2px solid #e5e5e5;
+  cursor: auto;
 }
 
 .profile-img {
   height: 50px;
   width: 50px;
-  background: #222222;
   border-radius: 50%;
+  cursor: auto;
 }
 
 .user-name {
