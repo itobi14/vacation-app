@@ -118,10 +118,8 @@ export default {
   },
 
   async created() {
-
     await this.fetchAccommodation()
     await this.fetchFavorite()
-
   },
 
   computed: {
@@ -244,12 +242,13 @@ export default {
   display: flex;
   flex-direction: column;
   //background: #f5f5f5;
-  width: 85svw;
+  width: 80svw;
   height: auto;
   //background: lightskyblue;
 }
 
 .accommodation-img {
+  margin-top: 1rem;
   height: 500px;
   width: 100%;
   border-radius: 10px;

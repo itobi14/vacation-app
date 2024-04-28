@@ -61,7 +61,7 @@ export default {
       this.errorMessage = null;
       let account = await this.sessionService.asyncSignIn(this.accountEmail, this.accountPassword);
       if (account === null) {
-        this.errorMessage = "Could not authenticate with provided credentials. Please try again";
+        this.errorMessage = "Could not authenticate with provided credentials. Please try again.";
       } else {
         this.$router.push({ name: 'HOME' })
       }
@@ -256,6 +256,7 @@ form input:focus + label, form input:valid + label {
   width: 100%;
   border-radius: 5px;
   border: 2px solid red;
+  margin-top: 2rem;
   padding: 0.5rem 1rem;
 }
 

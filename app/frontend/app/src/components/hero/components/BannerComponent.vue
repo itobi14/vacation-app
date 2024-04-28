@@ -120,7 +120,7 @@ export default {
   justify-content: center;
   flex-direction: column;
   //background: lightgreen;
-  width: 40%;
+  width: 30%;
 }
 
 .hero-title {

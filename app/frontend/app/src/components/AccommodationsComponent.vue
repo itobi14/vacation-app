@@ -76,20 +76,15 @@
         </div>
 
         <div class="grid-filter-options">
-          <div class="grid-large"
-               @click="switchToGrid('large')"
-               :class="{ isGridSelected: this.selectedGrid === 'large' }">
-            <img src="../assets/grid-large.svg" class="grid-large-icon" alt="Grid Large Icon">
-          </div>
-          <div class="grid-small"
-               @click="switchToGrid('small')"
-               :class="{ isGridSelected: this.selectedGrid === 'small' }">
-            <img src="../assets/grid-small.svg" class="grid-small-icon" alt="Grid Small Icon">
+          <div class="grid-square"
+               @click="switchToGrid('square')"
+               :class="{ isGridSelected: this.selectedGrid === 'square' }">
+            <img src="../assets/grid-large.svg" class="grid-square-icon" alt="Grid Large Icon">
           </div>
           <div class="grid-rows"
                @click="switchToGrid('rows')"
                :class="{ isGridSelected: this.selectedGrid === 'rows' }">
-            <img src="../../src/assets/rows.svg" class="rows-icon" alt="Rows Icon">
+            <img src="../../src/assets/rows.svg" class="grid-rows-icon" alt="Rows Icon">
           </div>
         </div>
 
@@ -103,14 +98,23 @@
                @click="goToDetailView(accommodation.id)">
             <img :src="getImgUrl(accommodation.imgUrl)" :class="accommodationImg" alt="Accommodation Image">
             <div :class="wrapper">
-              <h2 :class="accommodationName">{{ accommodation.name }}</h2>
-              <div class="info-wrapper">
-                <div class="country-city-wrapper">
-                  <p :class="accommodationCountryCity">{{ accommodation.country }},&nbsp;&nbsp;</p>
-                  <p :class="accommodationCountryCity">{{ accommodation.city }}</p>
+              <div class="header">
+                <h2 :class="accommodationName">{{ accommodation.name }}</h2>
+                <div v-if="isAuthenticated" class="favorite-container">
+                  <div v-if="isFavorite">
+                    <span class="material-symbols-outlined favorite filled">favorite</span>
+                  </div>
+                  <div v-if="!isFavorite">
+                    <span class="material-symbols-outlined favorite">favorite</span>
+                  </div>
                 </div>
-                <p :class="accommodationPrice">${{ accommodation.price }}</p>
               </div>
+              <div class="country-city-wrapper">
+                <p :class="accommodationCountryCity">{{ accommodation.country }},&nbsp;&nbsp;</p>
+                <p :class="accommodationCountryCity">{{ accommodation.city }}</p>
+              </div>
+              <p :class="accommodationDescription">{{ accommodation.description }}</p>
+              <p :class="accommodationPrice">&euro; {{ accommodation.price }} per night</p>
             </div>
           </div>
         </div>
@@ -154,47 +158,15 @@ export default {
       cruises: [],
 
       searchQuery: '',
-      selectedGrid: "large",
-      gridLayout: 'large',
+      selectedGrid: "square",
+      gridLayout: 'square',
 
       isFavorite: false,
     }
   },
 
   async created() {
-    this.allAccommodations = await this.accommodationsService.findAll();
-    // console.log("Fetched accommodations: ", this.allAccommodations);
-
-    // Sort accommodations into arrays based on type
-    this.allAccommodations.forEach(accommodation => {
-      const type = accommodation.type.toLowerCase();
-      switch (type) {
-        case 'hotel':
-          this.hotels.push(accommodation);
-          break;
-        case 'cabin':
-          this.cabins.push(accommodation);
-          break;
-        case 'bungalow':
-          this.bungalows.push(accommodation);
-          break;
-        case 'chalet':
-          this.chalets.push(accommodation);
-          break;
-        case 'resort':
-          this.resorts.push(accommodation);
-          break;
-        case 'camping':
-          this.campings.push(accommodation);
-          break;
-        case 'cruise':
-          this.cruises.push(accommodation);
-          break;
-      }
-    });
-
-    this.selectedAccommodations = this.hotels;
-
+    await this.fetchAccommodations()
   },
 
   computed: {
@@ -226,12 +198,55 @@ export default {
     accommodationCountryCity() {
       return `accommodation-country-city-${this.gridLayout}`;
     },
+    accommodationDescription() {
+      return `accommodation-description-${this.gridLayout}`;
+    },
     accommodationPrice() {
       return `accommodation-price-${this.gridLayout}`;
+    },
+    isAuthenticated() {
+      // console.log("isAuthenticated=",this.sessionService.isAuthenticated());
+      return this.sessionService.isAuthenticated();
     },
   },
 
   methods: {
+
+    async fetchAccommodations() {
+      this.allAccommodations = await this.accommodationsService.findAll();
+      // console.log("Fetched accommodations: ", this.allAccommodations);
+
+      // Sort accommodations into arrays based on type
+      this.allAccommodations.forEach(accommodation => {
+        const type = accommodation.type.toLowerCase();
+        switch (type) {
+          case 'hotel':
+            this.hotels.push(accommodation);
+            break;
+          case 'cabin':
+            this.cabins.push(accommodation);
+            break;
+          case 'bungalow':
+            this.bungalows.push(accommodation);
+            break;
+          case 'chalet':
+            this.chalets.push(accommodation);
+            break;
+          case 'resort':
+            this.resorts.push(accommodation);
+            break;
+          case 'camping':
+            this.campings.push(accommodation);
+            break;
+          case 'cruise':
+            this.cruises.push(accommodation);
+            break;
+        }
+      });
+
+      this.selectedAccommodations = this.hotels;
+
+    },
 
     displayAccommodations(type) {
       this.selectedAccommodationType = type;
@@ -289,7 +304,7 @@ export default {
 
 .content {
   display: flex;
-  width: 85svw;
+  width: 80svw;
   height: auto;
 }
 
@@ -298,6 +313,7 @@ export default {
   flex-direction: column;
   height: 100%;
   width: 100%;
+  //background-color: #5daab5;
 }
 
 .accommodation-filter-bar {
@@ -306,9 +322,7 @@ export default {
   justify-content: center;
   height: auto;
   width: 100%;
-  margin-top: 1rem;
   padding: 1rem;
-  //border-bottom: 2px solid var(--black);
   //background: lightcoral;
 }
 
@@ -338,13 +352,13 @@ export default {
 }
 
 .accommodation-icon {
-  height: 50px;
-  width: 50px;
+  height: 40px;
+  width: 40px;
 }
 
 span {
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 600;
   color: var(--black)
 }
 
@@ -352,6 +366,7 @@ span {
   opacity: 1;
 }
 
+/*
 .isSelected:before {
   content: '';
   position: absolute;
@@ -359,8 +374,9 @@ span {
   right: 0;
   height: 7px;
   width: 7px;
-  background: var(--black);
+  background: #5daab5;
 }
+ */
 
 /* ------------------------------------------------------------------------------------------------------------------ */
 
@@ -369,9 +385,8 @@ span {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 1rem;
   padding: 1rem 2rem;
-  //background: lightsalmon;
+  //background: #7c5242;
 }
 
 .searchbarWrapper {
@@ -419,8 +434,7 @@ input[type="search"]::-webkit-search-cancel-button {
   //background: #b43e3c;
 }
 
-.grid-large,
-.grid-small,
+.grid-square,
 .grid-rows {
   display: flex;
   align-items: center;
@@ -433,8 +447,7 @@ input[type="search"]::-webkit-search-cancel-button {
   cursor: pointer;
 }
 
-.grid-large:not(.isGridSelected):hover,
-.grid-small:not(.isGridSelected):hover,
+.grid-square:not(.isGridSelected):hover,
 .grid-rows:not(.isGridSelected):hover {
   background: #f5f5f5;
   opacity: 1;
@@ -445,9 +458,8 @@ input[type="search"]::-webkit-search-cancel-button {
   opacity: 1;
 }
 
-.grid-large-icon,
-.grid-small-icon,
-.rows-icon {
+.grid-square-icon,
+.grid-rows-icon {
   height: 100%;
   width: 100%;
 }
@@ -458,149 +470,189 @@ input[type="search"]::-webkit-search-cancel-button {
   height: auto;
   width: 100%;
   padding: 2rem 0 2rem 2rem;
+  //background-color: lightblue;
 }
 
-.accommodations-wrapper-large {
+.accommodations-wrapper-square {
   display: grid;
-  column-gap: 2rem;
-  row-gap: 2rem;
-  grid-template-columns: repeat(3, 1fr);
-}
-
-.accommodation-large {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  border-radius: 10px;
-  background: var(--white);
-  box-shadow: rgba(0, 0, 0, 0.16) 0 1px 4px;
-  transition: 0.2s ease-in-out;
-  cursor: pointer;
-}
-
-.accommodations-wrapper-small {
-  display: grid;
-  column-gap: 1.2rem;
-  row-gap: 1.2rem;
+  column-gap: 1rem;
+  row-gap: 1rem;
   grid-template-columns: repeat(5, 1fr);
 }
 
-.accommodation-small {
+.accommodation-square {
   display: flex;
   flex-direction: column;
+  height: auto;
   width: 100%;
-  border-radius: 10px;
-  background: var(--white);
-  box-shadow: rgba(0, 0, 0, 0.16) 0 1px 4px;
+  padding: 1rem;
+  border-top: 2px solid #f5f5f5;
   transition: 0.2s ease-in-out;
   cursor: pointer;
+  //background-color: #7c5242;
 }
 
-.accommodations-wrapper-rows {
-  display: grid;
-  column-gap: 2rem;
-  row-gap: 2rem;
-  grid-template-columns: repeat(1, 1fr);
+.accommodation-square:hover {
+  background-color: #F5F5F5;
+  border-top: 2px solid var(--white);
+  border-radius: 10px;
 }
 
-.accommodation-rows {
-  display: flex;
-  flex-direction: column;
+.accommodation-img-square {
+  height: 200px;
   width: 100%;
   border-radius: 10px;
-  background: var(--white);
-  box-shadow: rgba(0, 0, 0, 0.16) 0 1px 4px;
-  transition: 0.2s ease-in-out;
-  cursor: pointer;
-}
-
-.wrapper-large,
-.wrapper-rows {
-  padding: 1rem 2rem;
-}
-
-.wrapper-small {
-  padding: 0.5rem 1rem;
-}
-
-.accommodation-large:hover,
-.accommodation-small:hover,
-.accommodation-rows:hover {
-  transform: translateY(-5px);
-}
-
-.accommodation-img-large,
-.accommodation-img-small {
-  height: 150px;
-  width: 100%;
-  border-radius: 10px 10px 0 0;
   object-fit: cover;
 }
 
-.accommodation-img-rows {
-  height: 350px;
+.wrapper-square {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  height: auto;
   width: 100%;
-  border-radius: 10px 10px 0 0;
-  object-fit: cover;
+  margin-top: 1rem;
+  //background-color: #5daab5;
 }
 
-.accommodation-name-large {
+.accommodation-name-square {
   font-size: 18px;
-  font-weight: 700;
-  color: var(--black)
-}
-
-.accommodation-name-small {
-  font-size: 14px;
   font-weight: 600;
   color: var(--black)
 }
 
 .country-city-wrapper {
   display: flex;
+  align-items: center;
 }
 
-.accommodation-country-city-large {
+.accommodation-country-city-square {
   font-size: 14px;
   font-weight: 400;
-  color: #555;
+  color: var(--black);
 }
 
-.accommodation-country-city-small {
-  font-size: 12px;
+.accommodation-description-square {
+  margin-top: 1rem;
+  font-size: 14px;
   font-weight: 400;
-  color: #555;
+  color: #888888;
+  height: auto;
+  width: 100%;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-height: 20px;
 }
 
-.accommodation-country-city-rows {
-  font-size: 16px;
+.accommodation-price-square {
+  margin-top: 1rem;
+  font-size: 14px;
   font-weight: 400;
-  color: #555;
+  color: var(--black);
 }
 
-.info-wrapper {
+/* ------------------------------------------------------------------------------------------------------------------ */
+
+.accommodations-wrapper-rows {
+  display: grid;
+  column-gap: 2rem;
+  row-gap: 1rem;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.accommodation-rows {
   display: flex;
-  align-items: center;
+  width: 100%;
+  background: none;
+  border-top: 2px solid #f5f5f5;
+  padding: 1rem;
+  transition: 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+.accommodation-rows:hover {
+  background-color: #F5F5F5;
+  border-top: 2px solid var(--white);
+  border-radius: 10px;
+}
+
+.wrapper-rows {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 2rem;
+  height: 100%;
+  width: 65%;
+  //background-color: #b43e3c;
+}
+
+.accommodation-img-rows {
+  height: 175px;
+  width: 35%;
+  border-radius: 15px;
+  object-fit: cover;
+}
+
+.header {
+  display: flex;
   justify-content: space-between;
 }
 
-.accommodation-price-large {
-  font-size: 16px;
+.accommodation-name-rows {
+  font-size: 18px;
   font-weight: 600;
+  color: var(--black)
+}
+
+.favorite-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 30px;
+  width: 30px;
+}
+
+.accommodation-country-city-rows {
+  font-size: 14px;
+  font-weight: 400;
   color: var(--black);
 }
 
-.accommodation-price-small {
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--black);
+.accommodation-description-rows {
+  margin-top: 1rem;
+  font-size: 14px;
+  font-weight: 400;
+  color: #888888;
 }
 
 .accommodation-price-rows {
-  font-size: 20px;
+  margin-top: 1rem;
+  font-size: 14px;
   font-weight: 500;
   color: var(--black);
+  //background-color: #5daab5;
+}
+
+.material-symbols-outlined.favorite {
+  color: var(--black);
+  transform: scale(1.5);
+  font-variation-settings:
+      'FILL' 0,
+      'wght' 400,
+      'GRAD' 0,
+      'opsz' 0
+}
+
+.material-symbols-outlined.favorite.filled {
+  color: var(--black);
+  transform: scale(1.5);
+  font-variation-settings:
+      'FILL' 1,
+      'wght' 400,
+      'GRAD' 0,
+      'opsz' 0
 }
 
 </style>

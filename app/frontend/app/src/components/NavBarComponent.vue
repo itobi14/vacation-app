@@ -128,7 +128,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 85svw;
+  width: 80svw;
   //padding: 1rem 0;
 }
 
@@ -163,7 +163,7 @@ export default {
   padding: 0.4rem 1rem;
   color: var(--black);
   text-decoration: none;
-  font-size: 1em;
+  font-size: 15px;
   font-weight: 500;
   cursor: pointer;
   transition: 0.1s ease-out;
@@ -180,7 +180,7 @@ export default {
   right: 0;
   height: 7px;
   width: 7px;
-  background: var(--black);
+  background: #5daab5;
 }
 
 /* PROFILE NAVBAR ------------------------------------------------------------------ */

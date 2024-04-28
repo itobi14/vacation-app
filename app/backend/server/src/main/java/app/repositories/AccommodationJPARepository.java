@@ -23,17 +23,17 @@ public class AccommodationJPARepository implements EntityRepository<Accommodatio
         return query.getResultList();
     }
 
-    public List<Accommodation> findByQuery(String jpqlName, Object ...params) {
-        TypedQuery<Accommodation> query =
-                this.entityManager.createNamedQuery(jpqlName, Accommodation.class);
-
-        // TODO resolve all parameter values into the query
-        for (int i = 0; i < params.length; i++) {
-            query.setParameter(i+1, params[i]);
-        }
-        // execute the query and return the result
-        return query.getResultList();
-    }
+//    public List<Accommodation> findByQuery(String jpqlName, Object ...params) {
+//        TypedQuery<Accommodation> query =
+//                this.entityManager.createNamedQuery(jpqlName, Accommodation.class);
+//
+//        // TODO resolve all parameter values into the query
+//        for (int i = 0; i < params.length; i++) {
+//            query.setParameter(i+1, params[i]);
+//        }
+//        // execute the query and return the result
+//        return query.getResultList();
+//    }
 
     @Override
     public Accommodation findById(long id) {

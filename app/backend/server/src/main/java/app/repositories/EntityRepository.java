@@ -8,5 +8,5 @@ public interface EntityRepository<E> {
     E findById(long id);
     E save(E entity);
     E deleteById(long id);
-    List<E> findByQuery(String jpqlName, Object... params);
+//    List<E> findByQuery(String jpqlName, Object... params);
 }
