@@ -9,36 +9,44 @@
       </router-link>
 
       <div class="nav-items-wrapper">
+        <router-link
+            class="nav-item"
+            :to="{ name: 'ACCOMMODATIONS' }"
+            :class="{ 'isSelected': isAccommodationsRoute }">Accommodations
+        </router-link>
+        <router-link
+            class="nav-item"
+            :to="{ name: 'ABOUT-US' }"
+            :class="{ 'isSelected': isAboutUsRoute }">About Us
+        </router-link>
+        <router-link
+            v-if="!isAuthenticated"
+            class="nav-item" :to="{ name: 'SIGN-IN' }"
+            :class="{ 'isSelected': isSignInOrSignUpRoute }">Login
+        </router-link>
 
-        <div class="nav-items-container">
-          <router-link class="nav-item" :to="{ name: 'ACCOMMODATIONS' }" exact :class="{ 'isSelected': isAccommodationsRoute }">Accommodations</router-link>
-          <router-link class="nav-item" :to="{ name: 'ABOUT-US' }" exact :class="{ 'isSelected': isAboutUsRoute }">About Us</router-link>
-          <router-link v-if="!isAuthenticated" class="nav-item" :to="{ name: 'SIGN-IN' }" exact :class="{ 'isSelected': isSignInOrSignUpRoute }">Login</router-link>
+        <div v-if="isAuthenticated" @click="toggleDropdown" class="profile-container">
+          <img :src="this.profileImgUrl" class="profile-img" alt="Profile Image">
 
-          <div v-if="isAuthenticated" @click="toggleDropdown" class="profile-container">
-            <img :src="this.profileImgUrl" class="profile-img" alt="Profile Image">
-
-            <!-- Dropdown menu -->
-            <div class="dropdown-menu-container open" v-if="isDropdownOpen">
-              <div class="dropdown-profile-container">
-                <div class="profile-container">
-                  <img :src="this.profileImgUrl" class="profile-img" alt="Profile Image">
-                </div>
-                <div class="user-name">{{ userName }}</div>
-              </div>
-              <div class="dropdown-menu">
-                <router-link :to=" { name: 'PROFILE' }" class="dropdown-menu-item">
-                  <span class="material-symbols-outlined">person</span>
-                  <p class="dropdown-menu-item-text">Profile</p>
-                </router-link>
-                <router-link :to=" { name: 'HOME' }" class="dropdown-menu-item" @click="onSignOut">
-                  <span class="material-symbols-outlined">logout</span>
-                  <p class="dropdown-menu-item-text">Logout</p>
-                </router-link>
-              </div>
+          <!-- Dropdown menu -->
+          <div class="dropdown-menu-container open" v-if="isDropdownOpen">
+<!--            <div class="dropdown-profile-container">-->
+<!--              <div class="profile-container">-->
+<!--                <img :src="this.profileImgUrl" class="profile-img" alt="Profile Image">-->
+<!--              </div>-->
+<!--              <div class="user-name">{{ userName }}</div>-->
+<!--            </div>-->
+            <div class="dropdown-menu">
+              <router-link :to=" { name: 'PROFILE' }" class="dropdown-menu-item">
+                <span class="material-symbols-outlined">person</span>
+                <p class="dropdown-menu-item-text">Profile</p>
+              </router-link>
+              <router-link :to=" { name: 'HOME' }" class="dropdown-menu-item" @click="onSignOut">
+                <span class="material-symbols-outlined">logout</span>
+                <p class="dropdown-menu-item-text">Logout</p>
+              </router-link>
             </div>
           </div>
-
         </div>
 
       </div>
@@ -146,10 +154,6 @@ export default {
 
 .nav-items-wrapper {
   display: flex;
-}
-
-.nav-items-container {
-  display: flex;
   align-items: center;
   gap: 1rem;
   transition: all 0.3s ease-out;
@@ -165,14 +169,20 @@ export default {
   text-decoration: none;
   font-size: 15px;
   font-weight: 500;
-  cursor: pointer;
+  opacity: 0.5;
   transition: 0.1s ease-out;
+  cursor: pointer;
+}
+
+.nav-item:not(.isSelected):hover {
+  opacity: 1;
 }
 
 .isSelected {
-  //background: #b43e3c;
+  opacity: 1;
 }
 
+/*
 .isSelected::before {
   content: '';
   position: absolute;
@@ -182,6 +192,7 @@ export default {
   width: 7px;
   background: #5daab5;
 }
+*/
 
 /* PROFILE NAVBAR ------------------------------------------------------------------ */
 
@@ -190,8 +201,8 @@ export default {
   height: 50px;
   width: 50px;
   margin-left: 1rem;
-  cursor: pointer;
   transition: all 0.3s ease-out;
+  cursor: pointer;
 }
 
 .profile-img {
@@ -199,24 +210,26 @@ export default {
   width: 100%;
   border-radius: 50%;
   object-fit: cover;
+  cursor: pointer;
 }
 
 /* DROPDOWN MENU ------------------------------------------------------------------ */
 
 .dropdown-menu-container {
   position: absolute;
-  top: 150%;
+  top: 125%;
   right: 0;
-  width: 250px;
+  height: auto;
+  width: auto;
   background: #fff;
-  border: 2px solid #e5e5e5;
+  border: 2px solid #f5f5f5;
   padding: 1rem;
   border-radius: 5px;
   opacity: 1;
   transform: translateY(-10px);
   z-index: 999;
   transition: opacity 0.3s ease, transform 0.3s ease;
-  cursor: auto;
+  cursor: pointer;
 }
 
 .dropdown-menu-container.open {
@@ -257,14 +270,13 @@ export default {
 }
 
 .dropdown-menu {
-  margin-top: 1rem;
   list-style: none;
 }
 
 .dropdown-menu-item {
   display: flex;
   align-items: center;
-  justify-content: left;
+  width: 150px;
   gap: 1rem;
   padding: 1rem;
   background: none;
@@ -277,7 +289,7 @@ export default {
 }
 
 .dropdown-menu-item-text {
-  font-size: 1rem;
+  font-size: 14px;
   font-weight: 500;
   color: var(--black);
 }
@@ -286,7 +298,6 @@ export default {
 
 .material-symbols-outlined {
   color: var(--black);
-  transform: scale(1.1);
   font-variation-settings:
       'FILL' 0,
       'wght' 500,

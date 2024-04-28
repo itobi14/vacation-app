@@ -99,7 +99,7 @@
             <img :src="getImgUrl(accommodation.imgUrl)" :class="accommodationImg" alt="Accommodation Image">
             <div :class="wrapper">
               <div class="header">
-                <h2 :class="accommodationName">{{ accommodation.name }}</h2>
+                <h2 class="accommodation-name">{{ accommodation.name }}</h2>
                 <div v-if="isAuthenticated" class="favorite-container">
                   <div v-if="isFavorite">
                     <span class="material-symbols-outlined favorite filled">favorite</span>
@@ -110,11 +110,11 @@
                 </div>
               </div>
               <div class="country-city-wrapper">
-                <p :class="accommodationCountryCity">{{ accommodation.country }},&nbsp;&nbsp;</p>
-                <p :class="accommodationCountryCity">{{ accommodation.city }}</p>
+                <p class="accommodation-country-city">{{ accommodation.country }},&nbsp;&nbsp;</p>
+                <p class="accommodation-country-city">{{ accommodation.city }}</p>
               </div>
               <p :class="accommodationDescription">{{ accommodation.description }}</p>
-              <p :class="accommodationPrice">&euro; {{ accommodation.price }} per night</p>
+              <p class="accommodation-price">&euro; {{ accommodation.price }} per night</p>
             </div>
           </div>
         </div>
@@ -192,17 +192,8 @@ export default {
     accommodationImg() {
       return `accommodation-img-${this.gridLayout}`;
     },
-    accommodationName() {
-      return `accommodation-name-${this.gridLayout}`;
-    },
-    accommodationCountryCity() {
-      return `accommodation-country-city-${this.gridLayout}`;
-    },
     accommodationDescription() {
       return `accommodation-description-${this.gridLayout}`;
-    },
-    accommodationPrice() {
-      return `accommodation-price-${this.gridLayout}`;
     },
     isAuthenticated() {
       // console.log("isAuthenticated=",this.sessionService.isAuthenticated());
@@ -346,11 +337,6 @@ export default {
   cursor: pointer;
 }
 
-.accommodation-wrapper:not(.isSelected):hover {
-  transform: translateY(-2px);
-  opacity: 1;
-}
-
 .accommodation-icon {
   height: 40px;
   width: 40px;
@@ -366,19 +352,12 @@ span {
   opacity: 1;
 }
 
-/*
-.isSelected:before {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  height: 7px;
-  width: 7px;
-  background: #5daab5;
+.accommodation-wrapper:not(.isSelected):hover {
+  transform: translateY(-2px);
+  opacity: 1;
 }
- */
 
-/* ------------------------------------------------------------------------------------------------------------------ */
+/* SEARCHBAR ------------------------------------------------------------------------------------------------------------------ */
 
 .search-container {
   position: relative;
@@ -386,7 +365,6 @@ span {
   align-items: center;
   justify-content: center;
   padding: 1rem 2rem;
-  //background: #7c5242;
 }
 
 .searchbarWrapper {
@@ -396,35 +374,39 @@ span {
   gap: 20px;
   height: 50px;
   width: 500px;
-  background: var(--white);
+  background: #F5F5F5;
   padding: 0 15px;
   border-radius: 500px;
-  border: 2px solid #eee;
 }
 
 .searchbar {
   width: 100%;
   border: none;
   outline: none;
+  background: #F5F5F5;
 }
 
 input[type="search"]::-webkit-search-cancel-button {
   -webkit-appearance: none;
 }
 
-.searchbar:focus .searchbarWrapper {
-  outline: 2px solid var(--black);
+input[type="search"] {
+  color: var(--black);
+  font-weight: 500;
 }
 
 .material-symbols-outlined {
   color: #aaa;
-  transform: scale(1.2);
+  margin-left: .5rem;
+  transform: scale(1.5);
   font-variation-settings:
       'FILL' 0,
       'wght' 600,
       'GRAD' 0,
       'opsz' 0
 }
+
+/* GRID FILTER ------------------------------------------------------------------------------------------------------------------ */
 
 .grid-filter-options {
   position: absolute;
@@ -464,14 +446,68 @@ input[type="search"]::-webkit-search-cancel-button {
   width: 100%;
 }
 
-/* ------------------------------------------------------------------------------------------------------------------ */
+/* ALL ------------------------------------------------------------------------------------------------------------------ */
 
 .accommodations {
   height: auto;
   width: 100%;
-  padding: 2rem 0 2rem 2rem;
+  padding: 2rem 0;
   //background-color: lightblue;
 }
+
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.favorite-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 30px;
+  width: 30px;
+}
+
+.accommodation-name {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--black)
+}
+
+.accommodation-country-city {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--black);
+}
+
+.accommodation-price {
+  margin-top: 1rem;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--black);
+}
+
+.material-symbols-outlined.favorite {
+  color: var(--black);
+  transform: scale(1.5);
+  font-variation-settings:
+      'FILL' 0,
+      'wght' 400,
+      'GRAD' 0,
+      'opsz' 0
+}
+
+.material-symbols-outlined.favorite.filled {
+  color: var(--black);
+  transform: scale(1.5);
+  font-variation-settings:
+      'FILL' 1,
+      'wght' 400,
+      'GRAD' 0,
+      'opsz' 0
+}
+
+/* SQUARE ------------------------------------------------------------------------------------------------------------------ */
 
 .accommodations-wrapper-square {
   display: grid;
@@ -493,7 +529,7 @@ input[type="search"]::-webkit-search-cancel-button {
 }
 
 .accommodation-square:hover {
-  background-color: #F5F5F5;
+  background-color: #F1F5F5;
   border-top: 2px solid var(--white);
   border-radius: 10px;
 }
@@ -515,21 +551,9 @@ input[type="search"]::-webkit-search-cancel-button {
   //background-color: #5daab5;
 }
 
-.accommodation-name-square {
-  font-size: 18px;
-  font-weight: 600;
-  color: var(--black)
-}
-
 .country-city-wrapper {
   display: flex;
   align-items: center;
-}
-
-.accommodation-country-city-square {
-  font-size: 14px;
-  font-weight: 400;
-  color: var(--black);
 }
 
 .accommodation-description-square {
@@ -546,14 +570,7 @@ input[type="search"]::-webkit-search-cancel-button {
   line-height: 20px;
 }
 
-.accommodation-price-square {
-  margin-top: 1rem;
-  font-size: 14px;
-  font-weight: 400;
-  color: var(--black);
-}
-
-/* ------------------------------------------------------------------------------------------------------------------ */
+/* ROWS ------------------------------------------------------------------------------------------------------------------ */
 
 .accommodations-wrapper-rows {
   display: grid;
@@ -573,7 +590,7 @@ input[type="search"]::-webkit-search-cancel-button {
 }
 
 .accommodation-rows:hover {
-  background-color: #F5F5F5;
+  background-color: #F1F5F5;
   border-top: 2px solid var(--white);
   border-radius: 10px;
 }
@@ -591,33 +608,8 @@ input[type="search"]::-webkit-search-cancel-button {
 .accommodation-img-rows {
   height: 175px;
   width: 35%;
-  border-radius: 15px;
+  border-radius: 10px;
   object-fit: cover;
-}
-
-.header {
-  display: flex;
-  justify-content: space-between;
-}
-
-.accommodation-name-rows {
-  font-size: 18px;
-  font-weight: 600;
-  color: var(--black)
-}
-
-.favorite-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 30px;
-  width: 30px;
-}
-
-.accommodation-country-city-rows {
-  font-size: 14px;
-  font-weight: 400;
-  color: var(--black);
 }
 
 .accommodation-description-rows {
@@ -625,34 +617,6 @@ input[type="search"]::-webkit-search-cancel-button {
   font-size: 14px;
   font-weight: 400;
   color: #888888;
-}
-
-.accommodation-price-rows {
-  margin-top: 1rem;
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--black);
-  //background-color: #5daab5;
-}
-
-.material-symbols-outlined.favorite {
-  color: var(--black);
-  transform: scale(1.5);
-  font-variation-settings:
-      'FILL' 0,
-      'wght' 400,
-      'GRAD' 0,
-      'opsz' 0
-}
-
-.material-symbols-outlined.favorite.filled {
-  color: var(--black);
-  transform: scale(1.5);
-  font-variation-settings:
-      'FILL' 1,
-      'wght' 400,
-      'GRAD' 0,
-      'opsz' 0
 }
 
 </style>
