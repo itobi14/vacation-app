@@ -16,14 +16,10 @@
 }
 
 :root {
-    --primary-color: #c84543;
-    --primary-color-10-darker: #b43e3c;
     --black: #222222;
-    --white: #ffffff;
-    --lightgray: #f5f5f5;
-    --section-divider: #eeeeee;
-    --sub-text: #c5c5c5;
-    --sub-symbols: #999999;
+    --white: #FFFFFF;
+    --divider: #F5F5F5;
+    --heart: #FD385B;
 }
 
 .disabled {

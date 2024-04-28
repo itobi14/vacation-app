@@ -9,6 +9,13 @@
         <div class="accommodation-filter-container">
 
           <div class="accommodation-wrapper"
+               @click="displayAccommodations('all')"
+               :class="{ isSelected: this.selectedAccommodationType === 'all' }">
+            <img src="../assets/icons/landmark.png" class="accommodation-icon" alt="All">
+            <span> {{ all }} </span>
+          </div>
+
+          <div class="accommodation-wrapper"
                @click="displayAccommodations('hotel')"
                :class="{ isSelected: this.selectedAccommodationType === 'hotel' }">
             <img src="../assets/icons/building.png" class="accommodation-icon" alt="Hotel">
@@ -55,13 +62,6 @@
                :class="{ isSelected: this.selectedAccommodationType === 'cruise' }">
             <img src="../assets/icons/cruise.png" class="accommodation-icon" alt="Cruise">
             <span> {{ cruise }} </span>
-          </div>
-
-          <div class="accommodation-wrapper"
-               @click="displayAccommodations('all')"
-               :class="{ isSelected: this.selectedAccommodationType === 'all' }">
-            <img src="../assets/icons/landmark.png" class="accommodation-icon" alt="All">
-            <span> {{ all }} </span>
           </div>
 
         </div>
@@ -145,7 +145,7 @@ export default {
 
       allAccommodations: [],
       selectedAccommodations: [],
-      selectedAccommodationType: "hotel",
+      selectedAccommodationType: "all",
       selectedAccommodation: null,
 
       hotels: [],
@@ -159,7 +159,6 @@ export default {
 
       searchQuery: '',
       selectedGrid: "square",
-      gridLayout: 'square',
 
       isFavorite: false,
     }
@@ -173,6 +172,7 @@ export default {
     filteredAccommodations() {
       const accommodations = Object.values(this.selectedAccommodations);
       const searchQuery = this.searchQuery.toLowerCase();
+
       return accommodations.filter(accommodation => {
         const nameMatch = accommodation.name.toLowerCase().includes(searchQuery);
         const countryMatch = accommodation.country.toLowerCase().includes(searchQuery);
@@ -181,19 +181,19 @@ export default {
       });
     },
     accommodationWrapper() {
-      return `accommodations-wrapper-${this.gridLayout}`;
+      return `accommodations-wrapper-${this.selectedGrid}`;
     },
     accommodationItem() {
-      return `accommodation-${this.gridLayout}`;
+      return `accommodation-${this.selectedGrid}`;
     },
     wrapper() {
-      return `wrapper-${this.gridLayout}`;
+      return `wrapper-${this.selectedGrid}`;
     },
     accommodationImg() {
-      return `accommodation-img-${this.gridLayout}`;
+      return `accommodation-img-${this.selectedGrid}`;
     },
     accommodationDescription() {
-      return `accommodation-description-${this.gridLayout}`;
+      return `accommodation-description-${this.selectedGrid}`;
     },
     isAuthenticated() {
       // console.log("isAuthenticated=",this.sessionService.isAuthenticated());
@@ -235,7 +235,7 @@ export default {
         }
       });
 
-      this.selectedAccommodations = this.hotels;
+      this.selectedAccommodations = this.allAccommodations;
 
     },
 
@@ -270,7 +270,6 @@ export default {
     },
 
     switchToGrid(layout) {
-      this.gridLayout = layout;
       this.selectedGrid = layout;
     },
 
@@ -457,6 +456,7 @@ input[type="search"] {
 
 .header {
   display: flex;
+  align-items: center;
   justify-content: space-between;
 }
 

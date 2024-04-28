@@ -6,32 +6,35 @@
     <div class="main">
       <div class="main-info-container">
 
-        <h2 class="accommodation-name">{{ accommodation.name }}</h2>
-        <div class="accommodation-country-city-wrapper">
-          <span class="material-symbols-outlined map">map</span>
-          <p class="accommodation-country-city">{{ accommodation.country }},&nbsp;</p>
-          <p class="accommodation-country-city">{{ accommodation.city }}</p>
+        <div class="header">
+          <h2 class="accommodation-name">{{ accommodation.name }}</h2>
+          <div v-if="isAuthenticated" class="favorite-container" @click="toggleFavorite(accommodation, accommodation.id)">
+            <div v-if="isFavorite">
+              <span class="material-symbols-outlined favorite filled">favorite</span>
+            </div>
+            <div v-if="!isFavorite">
+              <span class="material-symbols-outlined favorite">favorite</span>
+            </div>
+          </div>
         </div>
 
         <div class="info-wrapper">
+          <div class="accommodation-country-city-wrapper">
+            <span class="material-symbols-outlined map">map</span>
+            <p class="accommodation-country-city">{{ accommodation.country }},&nbsp;</p>
+            <p class="accommodation-country-city">{{ accommodation.city }}</p>
+          </div>
           <div class="accommodation-address-container">
             <span class="material-symbols-outlined location">location_on</span>
             <p class="accommodation-address">{{ accommodation.streetNameNr }},&nbsp;</p>
             <p class="accommodation-address">{{ accommodation.zipCode }}</p>
           </div>
 
-          <span class="accommodation-price-bold">€ {{ accommodation.price }}
-            <span class="accommodation-price-regular">per night</span>
-          </span>
+          <span class="accommodation-price-bold">&euro; {{ accommodation.price }} per night</span>
         </div>
 
-        <div v-if="isAuthenticated" class="favorite-container" @click="toggleFavorite(accommodation, accommodation.id)">
-          <div v-if="isFavorite">
-            <span class="material-symbols-outlined favorite filled">favorite</span>
-          </div>
-          <div v-if="!isFavorite">
-            <span class="material-symbols-outlined favorite">favorite</span>
-          </div>
+        <div class="description-container">
+          <p class="accommodation-description">{{ accommodation.description }}</p>
         </div>
 
       </div>
@@ -66,17 +69,13 @@
           </div>
           <div class="total-wrapper">
             <p class="total-price-text">Total</p>
-            <p class="total-price">€&nbsp;{{ totalPrice }}</p>
+            <p class="total-price">&euro; {{ totalPrice }}</p>
           </div>
           <button class="book-button"
                   :disabled="isBookButtonDisabled"
                   @click="openBookingConfirmModal">Book</button>
         </div>
 
-    </div>
-
-    <div class="description-container">
-      <p class="accommodation-description">{{ accommodation.description }}</p>
     </div>
 
   </div>
@@ -241,14 +240,12 @@ export default {
 .content {
   display: flex;
   flex-direction: column;
-  //background: #f5f5f5;
-  width: 80svw;
+  width: 60svw;
   height: auto;
   //background: lightskyblue;
 }
 
 .accommodation-img {
-  margin-top: 1rem;
   height: 500px;
   width: 100%;
   border-radius: 10px;
@@ -257,16 +254,36 @@ export default {
 
 .main {
   display: flex;
-  justify-content: space-between;
   //background: lightblue;
-  border-bottom: 2px solid #eee;
   padding: 1rem 0;
+}
+
+.main-info-container {
+  width: 60%;
+  padding: 0 5rem 0 0;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  //background: #5daab5;
 }
 
 .accommodation-name {
   font-size: 25px;
   font-weight: 700;
   color: var(--black);
+}
+
+.favorite-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 30px;
+  width: 30px;
+  //background: #35818a;
 }
 
 .accommodation-country-city-wrapper {
@@ -286,10 +303,11 @@ export default {
 }
 
 .info-wrapper {
+  margin-top: .5rem;
   display: flex;
   flex-direction: column;
-  margin-top: 2rem;
-  //background: #b43e3c;
+  gap: .3rem;
+  padding-bottom: 1rem;
 }
 
 .accommodation-country-city {
@@ -314,6 +332,7 @@ export default {
 .book-container {
   display: flex;
   flex-direction: column;
+  width: 40%;
   padding: 1rem;
   border-radius: 10px;
   border: 1px solid #eee;
@@ -366,8 +385,9 @@ export default {
 }
 
 .accommodation-price-bold {
+  margin-top: 1rem;
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 500;
   color: var(--black);
 }
 
@@ -472,23 +492,15 @@ export default {
 }
 
 .description-container {
+  border-top: 2px solid #F5F5F5;
   padding: 1rem 0;
-}
-
-.favorite-container {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 40px;
-  width: 40px;
-  margin-top: 2rem;
-  cursor: pointer;
 }
 
 .material-symbols-outlined.favorite {
   color: var(--black);
-  transform: scale(1.4);
+  margin-top: .4rem;
+  transform: scale(1.2);
+  cursor: pointer;
   font-variation-settings:
       'FILL' 0,
       'wght' 400,
@@ -498,13 +510,14 @@ export default {
 
 .material-symbols-outlined.favorite.filled {
   color: var(--black);
-  transform: scale(1.4);
+  margin-top: .4rem;
+  transform: scale(1.2);
+  cursor: pointer;
   font-variation-settings:
       'FILL' 1,
       'wght' 400,
       'GRAD' 0,
       'opsz' 0
 }
-
 
 </style>
