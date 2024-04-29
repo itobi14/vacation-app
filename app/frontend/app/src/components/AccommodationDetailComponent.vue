@@ -307,7 +307,7 @@ export default {
   display: flex;
   flex-direction: column;
   gap: .3rem;
-  padding-bottom: 1rem;
+  padding-bottom: 2rem;
 }
 
 .accommodation-country-city {
@@ -493,7 +493,13 @@ export default {
 
 .description-container {
   border-top: 2px solid #F5F5F5;
-  padding: 1rem 0;
+  padding: 2rem 0;
+}
+
+.accommodation-description {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--black);
 }
 
 .material-symbols-outlined.favorite {

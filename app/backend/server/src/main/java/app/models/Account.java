@@ -5,10 +5,10 @@ import com.fasterxml.jackson.annotation.JsonView;
 import jakarta.persistence.*;
 import java.util.*;
 
-//@NamedQueries({
-//        @NamedQuery(name="Accounts_find_by_email",
-//                query = "select a from Account a where a.email = ?1")
-//})
+@NamedQueries({
+        @NamedQuery(name="Accounts_find_by_email",
+                query = "select a from Account a where a.email = ?1")
+})
 @Entity
 @Table(name = "ACCOUNT")
 public class Account {

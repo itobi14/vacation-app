@@ -81,7 +81,7 @@ export default {
   align-items: center;
   justify-content: center;
   background: #aaa;
-  height: auto;
+  height: 90svh;
   width: 100svw;
   padding: 2rem 0;
 }

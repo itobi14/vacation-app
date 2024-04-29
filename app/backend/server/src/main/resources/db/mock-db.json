@@ -17,7 +17,7 @@
           "postalCode": "1089AA",
           "price": 100.0,
           "type": "Hotel",
-          "description": "Luxurious hotel with a beautiful view",
+          "description": "Luxurious hotel with a beautiful view.",
           "image": "hotel-1.jpg"
         },
         {
@@ -29,7 +29,7 @@
           "postalCode": "06200",
           "price": 150.0,
           "type": "Hotel",
-          "description": "Seaside resort with amazing amenities",
+          "description": "Seaside resort with amazing amenities.",
           "image": "hotel-2.jpg"
         },
         {
@@ -153,7 +153,7 @@
       "postalCode": "1012 TM",
       "price": 70.0,
       "type": "Hotel",
-      "description": "Quaint bed and breakfast with homemade breakfast",
+      "description": "Quaint bed and breakfast with homemade breakfast.",
       "image": "hotel-7.jpg"
     },
     {
