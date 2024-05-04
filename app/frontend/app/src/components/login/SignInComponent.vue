@@ -118,10 +118,10 @@ form {
 
 .title {
   position: relative;
-  font-size: 35px;
+  font-size: 1.8em;
   font-weight: 700;
-  width: 35%;
-  margin-bottom: 4rem;
+  width: 32%;
+  margin-bottom: 2rem;
   color: var(--black);
 }
 
@@ -146,7 +146,7 @@ form .inputWrapper {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 4em;
+  height: 3.5em;
   border-radius: 5px;
 }
 
@@ -158,12 +158,12 @@ form input {
   position: absolute;
   height: 100%;
   width: 100%;
-  padding: 1.5em 1em 0 1em;
+  padding: 1.5em 1.2em 0 1.2em;
   border: none;
   outline: none;
   background: #f5f5f5;
   border-radius: 3px;
-  font-size: 14px;
+  font-size: .75em;
   font-weight: 500;
   color: #222;
   z-index: 1;
@@ -171,11 +171,11 @@ form input {
 
 form label {
   position: absolute;
-  font-size: 0.75em;
-  font-weight: 600;
+  font-size: .6em;
+  font-weight: 500;
   color: #999;
   text-transform: uppercase;
-  width: 80%;
+  width: 85%;
   z-index: 2;
   pointer-events: none;
   animation: labelIn;
@@ -213,7 +213,7 @@ form input:focus + label, form input:valid + label {
 @keyframes labelOut {
 
   0% {
-    font-size: 10px;
+    font-size: .5em;
     top: 1em;
     width: 90%;
     transform: translateY(25%);
@@ -221,7 +221,7 @@ form input:focus + label, form input:valid + label {
   }
 
   100% {
-    font-size: 10px;
+    font-size: .5em;
     top: 1em;
     width: 92%;
     transform: translateY(0);
@@ -240,13 +240,14 @@ form input:focus + label, form input:valid + label {
   outline: none;
   border: none;
   color: var(--white);
+  opacity: 0.8;
   margin-top: 2rem;
   cursor: pointer;
   transition: 0.2s ease-in-out;
 }
 
 .loginButton:hover {
-
+  opacity: 1;
 }
 
 .errorMessageWrapper {
@@ -261,8 +262,8 @@ form input:focus + label, form input:valid + label {
 }
 
 .errorMessage {
-  font-size: 12px;
-  font-weight: 500;
+  font-size: .8em;
+  font-weight: 400;
 }
 
 .wrapper {
@@ -273,10 +274,9 @@ form input:focus + label, form input:valid + label {
 }
 
 .info-text {
-  font-size: 12px;
+  font-size: .75em;
   font-weight: 400;
 }
-
 
 .material-symbols-outlined.report-icon {
   color: red;
