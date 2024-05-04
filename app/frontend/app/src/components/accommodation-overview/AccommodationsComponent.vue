@@ -11,56 +11,56 @@
           <div class="accommodation-wrapper"
                @click="displayAccommodations('all')"
                :class="{ isSelected: this.selectedAccommodationType === 'all' }">
-            <img src="../assets/icons/landmark.png" class="accommodation-icon" alt="All">
+            <img src="../../assets/icons/landmark.png" class="accommodation-icon" alt="All">
             <span> {{ all }} </span>
           </div>
 
           <div class="accommodation-wrapper"
                @click="displayAccommodations('hotel')"
                :class="{ isSelected: this.selectedAccommodationType === 'hotel' }">
-            <img src="../assets/icons/building.png" class="accommodation-icon" alt="Hotel">
+            <img src="../../assets/icons/building.png" class="accommodation-icon" alt="Hotel">
             <span> {{ hotel }} </span>
           </div>
 
           <div class="accommodation-wrapper"
                @click="displayAccommodations('cabin')"
                :class="{ isSelected: this.selectedAccommodationType === 'cabin' }">
-            <img src="../assets/icons/cabin.png" class="accommodation-icon" alt="Cabin">
+            <img src="../../assets/icons/cabin.png" class="accommodation-icon" alt="Cabin">
             <span> {{ cabin }} </span>
           </div>
 
           <div class="accommodation-wrapper"
                @click="displayAccommodations('bungalow')"
                :class="{ isSelected: this.selectedAccommodationType === 'bungalow' }">
-            <img src="../assets/icons/bungalow.png" class="accommodation-icon" alt="Bungalow">
+            <img src="../../assets/icons/bungalow.png" class="accommodation-icon" alt="Bungalow">
             <span> {{ bungalow }} </span>
           </div>
 
           <div class="accommodation-wrapper"
                @click="displayAccommodations('chalet')"
                :class="{ isSelected: this.selectedAccommodationType === 'chalet' }">
-            <img src="../assets/icons/chalet.png" class="accommodation-icon" alt="Chalet">
+            <img src="../../assets/icons/chalet.png" class="accommodation-icon" alt="Chalet">
             <span> {{ chalet }} </span>
           </div>
 
           <div class="accommodation-wrapper"
                @click="displayAccommodations('resort')"
                :class="{ isSelected: this.selectedAccommodationType === 'resort' }">
-            <img src="../assets/icons/resort.png" class="accommodation-icon" alt="Resort">
+            <img src="../../assets/icons/resort.png" class="accommodation-icon" alt="Resort">
             <span> {{ resort }} </span>
           </div>
 
           <div class="accommodation-wrapper"
                @click="displayAccommodations('camping')"
                :class="{ isSelected: this.selectedAccommodationType === 'camping' }">
-            <img src="../assets/icons/camping.png" class="accommodation-icon" alt="Camping">
+            <img src="../../assets/icons/camping.png" class="accommodation-icon" alt="Camping">
             <span> {{ camping }} </span>
           </div>
 
           <div class="accommodation-wrapper"
                @click="displayAccommodations('cruise')"
                :class="{ isSelected: this.selectedAccommodationType === 'cruise' }">
-            <img src="../assets/icons/cruise.png" class="accommodation-icon" alt="Cruise">
+            <img src="../../assets/icons/cruise.png" class="accommodation-icon" alt="Cruise">
             <span> {{ cruise }} </span>
           </div>
 
@@ -79,12 +79,12 @@
           <div class="grid-square"
                @click="switchToGrid('square')"
                :class="{ isGridSelected: this.selectedGrid === 'square' }">
-            <img src="../assets/grid-large.svg" class="grid-square-icon" alt="Grid Large Icon">
+            <img src="../../assets/grid-large.svg" class="grid-square-icon" alt="Grid Large Icon">
           </div>
           <div class="grid-rows"
                @click="switchToGrid('rows')"
                :class="{ isGridSelected: this.selectedGrid === 'rows' }">
-            <img src="../../src/assets/rows.svg" class="grid-rows-icon" alt="Rows Icon">
+            <img src="../../assets/rows.svg" class="grid-rows-icon" alt="Rows Icon">
           </div>
         </div>
 

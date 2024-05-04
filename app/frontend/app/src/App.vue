@@ -32,17 +32,11 @@ export default {
   provide() {
     this.theSessionService = shallowReactive(
         new SessionService(CONFIG.BACKEND_URL + "/authentication", CONFIG.JWT_STORAGE_ITEM));
-    // this.theFetchInterceptor =
-    //     new FetchInterceptor(this.theSessionService, this.$router);
     return {
       accountsService: new AccountsAdaptor(CONFIG.BACKEND_URL+"/accounts"),
       accommodationsService: new AccommodationsAdaptor(CONFIG.BACKEND_URL+"/accommodations"),
       sessionService: this.theSessionService
     }
-  },
-
-  beforeUnmount() {
-    // this.theFetchInterceptor.unregister();
   },
 
   methods: {

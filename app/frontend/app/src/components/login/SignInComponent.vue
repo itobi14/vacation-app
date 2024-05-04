@@ -88,7 +88,7 @@ export default {
 
 .content::before {
   content: "";
-  background-image: url("../assets/background.jpg");
+  background-image: url("../../assets/background.jpg");
   background-size: cover;
   position: absolute;
   top: 0;

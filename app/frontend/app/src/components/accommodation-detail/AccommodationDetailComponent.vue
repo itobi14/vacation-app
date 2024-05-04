@@ -42,7 +42,7 @@
         <div class="book-container">
           <div class="title-container">
             <h2 class="title">Book your stay!</h2>
-            <img src=".././assets/ticket-1.svg" class="book-logo-container" alt="Logo">
+            <img src="../../assets/ticket-1.svg" class="book-logo-container" alt="Logo">
           </div>
           <div v-if="!datesSelected" class="date-title-wrapper">
             <span class="material-symbols-outlined explore">travel_explore</span>
@@ -95,7 +95,7 @@
 
 <script>
 
-import BookingConfirmComponent from "@/components/BookingConfirmComponent.vue";
+import BookingConfirmComponent from "@/components/accommodation-detail/BookingConfirmComponent.vue";
 
 export default {
   name: "AccommodationDetailComponent",
