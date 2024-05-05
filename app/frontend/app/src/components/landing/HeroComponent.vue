@@ -10,9 +10,9 @@
 
 <script>
 
-import BannerComponent from "@/components/hero/components/BannerComponent.vue";
-import ReviewsComponent from "@/components/hero/components/ReviewsComponent.vue";
-import InfoComponent from "@/components/hero/components/InfoComponent.vue";
+import BannerComponent from "@/components/landing/children/BannerComponent.vue";
+import ReviewsComponent from "@/components/landing/children/ReviewsComponent.vue";
+import InfoComponent from "@/components/landing/children/InfoComponent.vue";
 
 export default {
   name: "HeroComponent",

@@ -1,12 +1,13 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import HeroComponent from "@/components/hero/HeroComponent.vue";
-import SignInComponent from "@/components/SignInComponent.vue";
-import SignUpComponent from "@/components/SignUpComponent.vue";
-import AccommodationsComponent from "@/components/AccommodationsComponent.vue";
-import AccommodationDetailComponent from "@/components/AccommodationDetailComponent.vue";
-import AboutUsComponent from "@/components/AboutUsComponent.vue";
-import ProfileComponent from "@/components/ProfileComponent.vue";
-import UnauthorizedComponent from "@/components/UnauthorizedComponent.vue";
+import HeroComponent from "@/components/landing/HeroComponent.vue";
+import SignInComponent from "@/components/login/SignInComponent.vue";
+import SignUpComponent from "@/components/login/SignUpComponent.vue";
+import AccommodationsComponent from "@/components/accommodation-overview/AccommodationsComponent.vue";
+import AccommodationDetailComponent from "@/components/accommodation-detail/AccommodationDetailComponent.vue";
+import AboutUsComponent from "@/components/aboutus/AboutUsComponent.vue";
+import ProfileComponent from "@/components/profile/ProfileComponent.vue";
+import UnauthorizedComponent from "@/components/other/UnauthorizedComponent.vue";
+import NotFoundComponent from "@/components/other/NotFoundComponent.vue";
 
 const routes = [
     { path: '/', name: 'HOME', component: HeroComponent },
@@ -16,7 +17,8 @@ const routes = [
     { path: '/accommodations/:id', name: 'ACCOMMODATION-DETAIL', component: AccommodationDetailComponent },
     { path: '/about-us', name: 'ABOUT-US', component: AboutUsComponent },
     { path: '/profile', name: 'PROFILE', component: ProfileComponent },
-    { path: '/unauthorised', name: 'UNAUTHORIZED', redirect: '/', component: UnauthorizedComponent }
+    { path: '/unauthorised', name: 'UNAUTHORIZED', component: UnauthorizedComponent },
+    { path: '/:catchAll(.*)*', name: 'NOT-FOUND', component: NotFoundComponent }
 ]
 
 const router = createRouter({

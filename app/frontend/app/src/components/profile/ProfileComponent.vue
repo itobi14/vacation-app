@@ -62,6 +62,7 @@ export default {
 
     async fetchAccount() {
       const account = await this.accountsService.findById(this.id);
+      console.log("fetched account: ", account)
       if (account) {
         this.userName = account.fullName;
         this.profileImg = account.profileImg;

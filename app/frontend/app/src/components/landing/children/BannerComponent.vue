@@ -115,7 +115,8 @@ export default {
   justify-content: center;
   height: 100%;
   width: 85svw;
-  //background: var(--black);
+  //border-left: 1px solid var(--black);
+  //border-right: 1px solid var(--black);
 }
 
 .description-container {

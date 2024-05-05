@@ -4,50 +4,33 @@
 
     <div class="loginContainer">
 
-      <form v-on:submit.prevent="onSignUp">
+      <form v-on:submit.prevent="onSignIn">
 
-        <h1 class="title">Sign Up</h1>
+        <h1 class="title">Login</h1>
 
         <div class="inputContainer">
-
           <div class="inputWrapper">
-            <input type="text" name="firstName" v-model.trim="firstName" v-on:keydown.enter="$event.preventDefault()" required>
-            <label for="firstName">First name</label>
+            <input type="email" name="email" v-model.trim="accountEmail" v-on:keydown.enter="$event.preventDefault()" required>
+            <label for="email">Email</label>
           </div>
 
           <div class="inputWrapper">
-            <input type="text" name="lastName" v-model="lastName" required>
-            <label for="password">Last name</label>
-          </div>
-
-          <div class="inputWrapper">
-            <input type="email" name="email" v-model="email" required>
-            <label for="email">E-mail</label>
-          </div>
-
-          <div class="inputWrapper">
-            <input type="password" name="password" v-model="password" required>
+            <input type="password" name="password" v-model="accountPassword" required>
             <label for="password">Password</label>
           </div>
-
-          <div class="inputWrapper">
-            <input type="password" name="confirmPassword" v-model="confirmPassword" required>
-            <label for="confirmPassword">Confirm Password</label>
-          </div>
-
-          <div class="errorMessageWrapper" v-show="errorMessage">
-            <p class="errorMessage"> {{ errorMessage }} </p>
-            <span class="material-symbols-outlined report-icon">report</span>
-          </div>
-
         </div>
 
-        <button class="loginButton">Sign Up</button>
+        <div class="errorMessageWrapper" v-show="errorMessage">
+          <p class="errorMessage"> {{ errorMessage }} </p>
+          <span class="material-symbols-outlined report-icon">report</span>
+        </div>
+
+        <button class="loginButton">Login</button>
 
         <div class="wrapper">
-          <p class="info-text">If you already have an account, click
-            <router-link to="/sign-in">here</router-link>
-            to login</p>
+          <p class="info-text">Don't have an account yet? Click
+            <router-link to="/sign-up">here</router-link>
+            to sign up</p>
         </div>
 
       </form>
@@ -61,53 +44,29 @@
 <script>
 export default {
 
-  name: "SignUpComponent",
-  inject: ['accountsService', 'sessionService'],
+  name: "SignInComponent",
+  inject: ['sessionService'],
 
   data() {
     return {
-      firstName: null,
-      lastName: null,
-      email: null,
-      password: null,
-      confirmPassword: null,
+      accountEmail: null,
+      accountPassword: null,
       errorMessage: null,
     }
   },
 
   methods: {
 
-    async onSignUp() {
-
-      if (!this.confirmPasswordIsValid) {
-        this.errorMessage = "Passwords do not match!"
+    async onSignIn() {
+      this.errorMessage = null;
+      let account = await this.sessionService.asyncSignIn(this.accountEmail, this.accountPassword);
+      if (account === null) {
+        this.errorMessage = "Could not authenticate with provided credentials. Please try again.";
       } else {
-
-        try {
-
-          let newAccount = await this.accountsService.createAccount(this.firstName, this.lastName, this.email, this.password);
-          console.log("Account created successfully: ", newAccount);
-
-          if (newAccount) {
-            let account = await this.sessionService.asyncSignIn(this.email, this.password);
-            if (account) {
-              this.$router.push({ path: '/' })
-            }
-          }
-
-        } catch (error) {
-          console.error("Error creating account: ", error);
-        }
-
+        this.$router.push({ name: 'HOME' })
       }
     },
 
-  },
-
-  computed: {
-    confirmPasswordIsValid() {
-      return this.password === this.confirmPassword;
-    }
   },
 
 }
@@ -129,7 +88,7 @@ export default {
 
 .content::before {
   content: "";
-  background-image: url("../assets/background.jpg");
+  background-image: url("../../assets/background.jpg");
   background-size: cover;
   position: absolute;
   top: 0;
@@ -159,10 +118,10 @@ form {
 
 .title {
   position: relative;
-  font-size: 35px;
+  font-size: 1.8em;
   font-weight: 700;
-  width: 50%;
-  margin-bottom: 4rem;
+  width: 32%;
+  margin-bottom: 2rem;
   color: var(--black);
 }
 
@@ -187,7 +146,7 @@ form .inputWrapper {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 4em;
+  height: 3.5em;
   border-radius: 5px;
 }
 
@@ -199,12 +158,12 @@ form input {
   position: absolute;
   height: 100%;
   width: 100%;
-  padding: 1.5em 1em 0 1em;
+  padding: 1.5em 1.2em 0 1.2em;
   border: none;
   outline: none;
   background: #f5f5f5;
   border-radius: 3px;
-  font-size: 14px;
+  font-size: .75em;
   font-weight: 500;
   color: #222;
   z-index: 1;
@@ -212,11 +171,11 @@ form input {
 
 form label {
   position: absolute;
-  font-size: 0.75em;
-  font-weight: 600;
+  font-size: .6em;
+  font-weight: 500;
   color: #999;
   text-transform: uppercase;
-  width: 80%;
+  width: 85%;
   z-index: 2;
   pointer-events: none;
   animation: labelIn;
@@ -254,7 +213,7 @@ form input:focus + label, form input:valid + label {
 @keyframes labelOut {
 
   0% {
-    font-size: 10px;
+    font-size: .5em;
     top: 1em;
     width: 90%;
     transform: translateY(25%);
@@ -262,7 +221,7 @@ form input:focus + label, form input:valid + label {
   }
 
   100% {
-    font-size: 10px;
+    font-size: .5em;
     top: 1em;
     width: 92%;
     transform: translateY(0);
@@ -281,27 +240,29 @@ form input:focus + label, form input:valid + label {
   outline: none;
   border: none;
   color: var(--white);
+  opacity: 0.8;
   margin-top: 2rem;
   cursor: pointer;
   transition: 0.2s ease-in-out;
 }
 
 .loginButton:hover {
-
+  opacity: 1;
 }
 
 .errorMessageWrapper {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 300px;
+  width: 100%;
   border-radius: 5px;
   border: 2px solid red;
+  margin-top: 2rem;
   padding: 0.5rem 1rem;
 }
 
 .errorMessage {
-  font-size: 12px;
+  font-size: .8em;
   font-weight: 400;
 }
 
@@ -313,32 +274,17 @@ form input:focus + label, form input:valid + label {
 }
 
 .info-text {
-  font-size: 12px;
+  font-size: .75em;
   font-weight: 400;
-}
-
-.errorMessageWrapper {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  border-radius: 5px;
-  border: 2px solid red;
-  padding: 0.5rem 1rem;
-}
-
-.errorMessage {
-  font-size: 12px;
-  font-weight: 500;
 }
 
 .material-symbols-outlined.report-icon {
   color: red;
   font-variation-settings:
-      'FILL' 0,
-      'wght' 400,
-      'GRAD' 0,
-      'opsz' 24
+       'FILL' 0,
+       'wght' 400,
+       'GRAD' 0,
+       'opsz' 24
 }
 
 </style>

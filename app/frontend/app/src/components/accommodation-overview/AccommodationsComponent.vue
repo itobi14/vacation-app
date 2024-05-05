@@ -11,56 +11,56 @@
           <div class="accommodation-wrapper"
                @click="displayAccommodations('all')"
                :class="{ isSelected: this.selectedAccommodationType === 'all' }">
-            <img src="../assets/icons/landmark.png" class="accommodation-icon" alt="All">
+            <img src="../../assets/icons/landmark.png" class="accommodation-icon" alt="All">
             <span> {{ all }} </span>
           </div>
 
           <div class="accommodation-wrapper"
                @click="displayAccommodations('hotel')"
                :class="{ isSelected: this.selectedAccommodationType === 'hotel' }">
-            <img src="../assets/icons/building.png" class="accommodation-icon" alt="Hotel">
+            <img src="../../assets/icons/building.png" class="accommodation-icon" alt="Hotel">
             <span> {{ hotel }} </span>
           </div>
 
           <div class="accommodation-wrapper"
                @click="displayAccommodations('cabin')"
                :class="{ isSelected: this.selectedAccommodationType === 'cabin' }">
-            <img src="../assets/icons/cabin.png" class="accommodation-icon" alt="Cabin">
+            <img src="../../assets/icons/cabin.png" class="accommodation-icon" alt="Cabin">
             <span> {{ cabin }} </span>
           </div>
 
           <div class="accommodation-wrapper"
                @click="displayAccommodations('bungalow')"
                :class="{ isSelected: this.selectedAccommodationType === 'bungalow' }">
-            <img src="../assets/icons/bungalow.png" class="accommodation-icon" alt="Bungalow">
+            <img src="../../assets/icons/bungalow.png" class="accommodation-icon" alt="Bungalow">
             <span> {{ bungalow }} </span>
           </div>
 
           <div class="accommodation-wrapper"
                @click="displayAccommodations('chalet')"
                :class="{ isSelected: this.selectedAccommodationType === 'chalet' }">
-            <img src="../assets/icons/chalet.png" class="accommodation-icon" alt="Chalet">
+            <img src="../../assets/icons/chalet.png" class="accommodation-icon" alt="Chalet">
             <span> {{ chalet }} </span>
           </div>
 
           <div class="accommodation-wrapper"
                @click="displayAccommodations('resort')"
                :class="{ isSelected: this.selectedAccommodationType === 'resort' }">
-            <img src="../assets/icons/resort.png" class="accommodation-icon" alt="Resort">
+            <img src="../../assets/icons/resort.png" class="accommodation-icon" alt="Resort">
             <span> {{ resort }} </span>
           </div>
 
           <div class="accommodation-wrapper"
                @click="displayAccommodations('camping')"
                :class="{ isSelected: this.selectedAccommodationType === 'camping' }">
-            <img src="../assets/icons/camping.png" class="accommodation-icon" alt="Camping">
+            <img src="../../assets/icons/camping.png" class="accommodation-icon" alt="Camping">
             <span> {{ camping }} </span>
           </div>
 
           <div class="accommodation-wrapper"
                @click="displayAccommodations('cruise')"
                :class="{ isSelected: this.selectedAccommodationType === 'cruise' }">
-            <img src="../assets/icons/cruise.png" class="accommodation-icon" alt="Cruise">
+            <img src="../../assets/icons/cruise.png" class="accommodation-icon" alt="Cruise">
             <span> {{ cruise }} </span>
           </div>
 
@@ -79,12 +79,12 @@
           <div class="grid-square"
                @click="switchToGrid('square')"
                :class="{ isGridSelected: this.selectedGrid === 'square' }">
-            <img src="../assets/grid-large.svg" class="grid-square-icon" alt="Grid Large Icon">
+            <img src="../../assets/grid-large.svg" class="grid-square-icon" alt="Grid Large Icon">
           </div>
           <div class="grid-rows"
                @click="switchToGrid('rows')"
                :class="{ isGridSelected: this.selectedGrid === 'rows' }">
-            <img src="../../src/assets/rows.svg" class="grid-rows-icon" alt="Rows Icon">
+            <img src="../../assets/rows.svg" class="grid-rows-icon" alt="Rows Icon">
           </div>
         </div>
 
@@ -303,7 +303,6 @@ export default {
   flex-direction: column;
   height: 100%;
   width: 100%;
-  //background-color: #5daab5;
 }
 
 .accommodation-filter-bar {
@@ -313,7 +312,6 @@ export default {
   height: auto;
   width: 100%;
   padding: 1rem;
-  //background: lightcoral;
 }
 
 .accommodation-filter-container {
@@ -412,7 +410,6 @@ input[type="search"] {
   right: 0;
   display: flex;
   gap: 1rem;
-  //background: #b43e3c;
 }
 
 .grid-square,
@@ -451,7 +448,6 @@ input[type="search"] {
   height: auto;
   width: 100%;
   padding: 2rem 0;
-  //background-color: lightblue;
 }
 
 .header {
@@ -469,20 +465,23 @@ input[type="search"] {
 }
 
 .accommodation-name {
-  font-size: 18px;
+  font-size: 1em;
   font-weight: 600;
-  color: var(--black)
+  color: var(--black);
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 .accommodation-country-city {
-  font-size: 14px;
-  font-weight: 400;
+  font-size: .85em;
+  font-weight: 300;
   color: var(--black);
 }
 
 .accommodation-price {
   margin-top: 1rem;
-  font-size: 14px;
+  font-size: .85em;
   font-weight: 500;
   color: var(--black);
 }
@@ -510,34 +509,34 @@ input[type="search"] {
 /* SQUARE ------------------------------------------------------------------------------------------------------------------ */
 
 .accommodations-wrapper-square {
-  display: grid;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: auto;
   column-gap: 1rem;
   row-gap: 1rem;
-  grid-template-columns: repeat(5, 1fr);
 }
 
 .accommodation-square {
   display: flex;
   flex-direction: column;
   height: auto;
-  width: 100%;
+  width: 250px;
   padding: 1rem;
-  border-top: 2px solid #f5f5f5;
   transition: 0.2s ease-in-out;
   cursor: pointer;
-  //background-color: #7c5242;
 }
 
 .accommodation-square:hover {
   background-color: #F1F5F5;
-  border-top: 2px solid var(--white);
-  border-radius: 10px;
+  border-radius: 8px;
 }
 
 .accommodation-img-square {
-  height: 200px;
+  height: 150px;
   width: 100%;
-  border-radius: 10px;
+  border-radius: 8px;
   object-fit: cover;
 }
 
@@ -548,7 +547,6 @@ input[type="search"] {
   height: auto;
   width: 100%;
   margin-top: 1rem;
-  //background-color: #5daab5;
 }
 
 .country-city-wrapper {
@@ -558,8 +556,8 @@ input[type="search"] {
 
 .accommodation-description-square {
   margin-top: 1rem;
-  font-size: 14px;
-  font-weight: 400;
+  font-size: .85em;
+  font-weight: 300;
   color: #888888;
   height: auto;
   width: 100%;
@@ -575,7 +573,7 @@ input[type="search"] {
 .accommodations-wrapper-rows {
   display: grid;
   column-gap: 2rem;
-  row-gap: 1rem;
+  row-gap: 2rem;
   grid-template-columns: repeat(2, 1fr);
 }
 
@@ -583,7 +581,6 @@ input[type="search"] {
   display: flex;
   width: 100%;
   background: none;
-  border-top: 2px solid #f5f5f5;
   padding: 1rem;
   transition: 0.2s ease-in-out;
   cursor: pointer;
@@ -591,8 +588,7 @@ input[type="search"] {
 
 .accommodation-rows:hover {
   background-color: #F1F5F5;
-  border-top: 2px solid var(--white);
-  border-radius: 10px;
+  border-radius: 8px;
 }
 
 .wrapper-rows {
@@ -602,20 +598,19 @@ input[type="search"] {
   padding: 0 2rem;
   height: 100%;
   width: 65%;
-  //background-color: #b43e3c;
 }
 
 .accommodation-img-rows {
   height: 175px;
   width: 35%;
-  border-radius: 10px;
+  border-radius: 8px;
   object-fit: cover;
 }
 
 .accommodation-description-rows {
   margin-top: 1rem;
-  font-size: 14px;
-  font-weight: 400;
+  font-size: .85em;
+  font-weight: 300;
   color: #888888;
 }
 

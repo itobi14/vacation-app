@@ -98,7 +98,7 @@ export default {
       return this.isAuthenticated ? this.userProfileImgUrl : this.defaultProfileImgUrl;
     },
 
-    /* ROUTES ---------------------------------------------------------------------------------------------------- */
+    /* ROUTES -------------------------------------------------------------------------------------------------- */
 
     isAccommodationsRoute() {
       return /^\/accommodations/.test(this.$route.path);
@@ -127,7 +127,7 @@ export default {
   justify-content: center;
   z-index: 99;
   background: #fff;
-  height: 10svh;
+  height: 12svh;
   border-bottom: 1px solid #eee;
   transition: height 0.5s ease;
 }
@@ -137,7 +137,6 @@ export default {
   align-items: center;
   justify-content: space-between;
   width: 80svw;
-  //padding: 1rem 0;
 }
 
 .logo-container {
@@ -167,7 +166,7 @@ export default {
   padding: 0.4rem 1rem;
   color: var(--black);
   text-decoration: none;
-  font-size: 15px;
+  font-size: .85em;
   font-weight: 500;
   opacity: 0.5;
   transition: 0.1s ease-out;
