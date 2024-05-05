@@ -90,11 +90,9 @@ export default {
           let newAccount = await this.accountsService.createAccount(this.firstName, this.lastName, this.email, this.password);
           console.log("Account created successfully: ", newAccount);
 
-          if (newAccount) {
-            let account = await this.sessionService.asyncSignIn(this.email, this.password);
-            if (account) {
-              this.$router.push({ name: 'HOME' })
-            }
+          let account = await this.sessionService.asyncSignIn(this.email, this.password);
+          if (account) {
+            this.$router.push({ name: 'HOME' })
           }
 
         } catch (error) {

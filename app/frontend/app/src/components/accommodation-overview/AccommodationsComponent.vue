@@ -193,9 +193,6 @@ export default {
     accommodationImg() {
       return `accommodation-img-${this.selectedGrid}`;
     },
-    accommodationDescription() {
-      return `accommodation-description-${this.selectedGrid}`;
-    },
     isAuthenticated() {
       // console.log("isAuthenticated=",this.sessionService.isAuthenticated());
       return this.sessionService.isAuthenticated();
@@ -312,6 +309,7 @@ export default {
   justify-content: center;
   height: auto;
   width: 100%;
+  margin-top: 1rem;
   padding: 1rem;
 }
 
@@ -448,7 +446,7 @@ input[type="search"] {
 .accommodations {
   height: auto;
   width: 100%;
-  padding: 2rem 0;
+  padding: 1rem 0 2rem 0;
 }
 
 .header {

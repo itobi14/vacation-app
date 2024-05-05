@@ -499,7 +499,7 @@ export default {
 }
 
 .material-symbols-outlined.favorite {
-  color: var(--color-heart);
+  color: var(--color-black);
   margin-top: .4rem;
   transform: scale(1.2);
   cursor: pointer;
@@ -511,7 +511,7 @@ export default {
 }
 
 .material-symbols-outlined.favorite.filled {
-  color: var(--color-heart);
+  color: var(--color-black);
   margin-top: .4rem;
   transform: scale(1.2);
   cursor: pointer;

@@ -79,7 +79,7 @@ export default {
       if (url) {
         return (`static/${url}`);
       } else {
-        return ('static/placeholder.svg');
+        return ('static/profile-pic-placeholder.jpeg');
       }
     },
 
@@ -110,8 +110,8 @@ export default {
 }
 
 .profile-img-container {
-  height: 200px;
-  width: 200px;
+  height: 150px;
+  width: 150px;
 }
 
 .info-container {

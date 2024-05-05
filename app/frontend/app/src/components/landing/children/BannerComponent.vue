@@ -85,7 +85,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 90svh;
+  height: 100svh;
   width: 100%;
   background: var(--color-black);
 }
@@ -130,7 +130,7 @@ export default {
 }
 
 .hero-description-container {
-  opacity: .75;
+  opacity: .8;
 }
 
 .hero-description {
@@ -143,6 +143,7 @@ ul {
   display: flex;
   gap: 2rem;
   margin-top: 2rem;
+  opacity: .8;
   list-style: none;
 }
 
@@ -220,6 +221,25 @@ li {
      'wght' 400,
      'GRAD' 0,
      'opsz' 24
+}
+
+@media only screen and (min-width: 1400px) {
+
+  .hero-title {
+    font-size: 2em;
+    font-weight: 700;
+    width: 100%;
+  }
+
+  .description-container {
+    width: 32%;
+  }
+
+  .hero-description {
+    font-size: .85em;
+    font-weight: 300;
+  }
+
 }
 
 </style>

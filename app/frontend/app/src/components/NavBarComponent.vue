@@ -1,5 +1,6 @@
 <template>
 
+<!--  <nav :class="{ 'nav-bar': !isScrolled, 'nav-bar-scrolled': isScrolled }">-->
   <nav class="nav-bar">
 
     <div class="nav-bar-content">
@@ -26,7 +27,7 @@
         </router-link>
 
         <div v-if="isAuthenticated" @click="toggleDropdown" class="profile-container">
-          <img :src="this.profileImgUrl" class="profile-img" alt="Profile Image">
+          <img :src="getImgUrl(profileImg)" class="profile-img" alt="Profile Image">
 
           <!-- Dropdown menu -->
           <div class="dropdown-menu-container open" v-if="isDropdownOpen">
@@ -59,12 +60,33 @@ export default {
   data() {
     return {
       isDropdownOpen: false,
-      defaultProfileImgUrl: 'static/placeholder.svg',
-      userProfileImgUrl: 'static/profile-img.jpg',
+      isScrolled: false,
     }
   },
 
+  mounted() {
+    window.addEventListener('scroll', this.handleScroll);
+  },
+
+  beforeUnmount() {
+    window.removeEventListener('scroll', this.handleScroll);
+  },
+
   methods: {
+
+    handleScroll() {
+      if (window.scrollY > 5) {
+        if (!this.isScrolled) {
+          console.log("Now scrolling past 5px");
+          this.isScrolled = true;
+        }
+      } else {
+        if (this.isScrolled) {
+          console.log("Scrolled back above 5px");
+          this.isScrolled = false;
+        }
+      }
+    },
 
     toggleDropdown() {
       this.isDropdownOpen = !this.isDropdownOpen;
@@ -73,6 +95,14 @@ export default {
     onSignOut() {
       this.sessionService.signOut();
       this.$router.push({ name: 'HOME' });
+    },
+
+    getImgUrl(url) {
+      if (url) {
+        return (`static/${url}`);
+      } else {
+        return ('static/profile-pic-placeholder.jpeg');
+      }
     },
 
   },
@@ -88,8 +118,8 @@ export default {
       return this.sessionService.currentAccount.firstName + " " + this.sessionService.currentAccount.lastName;
     },
 
-    profileImgUrl() {
-      return this.isAuthenticated ? this.userProfileImgUrl : this.defaultProfileImgUrl;
+    profileImg() {
+      return this.sessionService._currentAccount.profileImg;
     },
 
     /* ROUTES -------------------------------------------------------------------------------------------------- */
@@ -120,10 +150,28 @@ export default {
   display: flex;
   justify-content: center;
   z-index: 99;
-  background: var(--color-white);
   height: 10svh;
+  width: 100%;
+  backdrop-filter: blur(0);
   border-bottom: 1px solid var(--color-primary-lighter);
+  transition: .2s ease-in-out;
 }
+
+/*
+.nav-bar-scrolled {
+  position: fixed;
+  top: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  z-index: 99;
+  height: 10svh;
+  width: 100%;
+  backdrop-filter: blur(5px);
+  border-bottom: 1px solid var(--color-primary-lighter);
+  transition: .2s ease-in-out;
+}
+ */
 
 .nav-bar-content {
   display: flex;
@@ -262,14 +310,25 @@ export default {
 
 /* SCREENS - LAPTOP ------------------------------------------------------------- */
 
-@media only screen and (max-width: 1400px) {
-
-  .nav-bar {
-    height: 12svh;
-  }
+@media only screen and (min-width: 1400px) {
 
   .nav-item {
-    font-size: .85em;
+    font-size: .8em;
+  }
+
+  .logo-container {
+    height: 40px;
+    width: 40px;
+  }
+
+  .profile-container {
+    height: 40px;
+    width: 40px;
+  }
+
+  .profile-img {
+    height: 100%;
+    width: 100%;
   }
 
 }
