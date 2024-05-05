@@ -8,7 +8,7 @@
 
         <div class="header">
           <h2 class="accommodation-name">{{ accommodation.name }}</h2>
-          <div v-if="isAuthenticated" class="favorite-container" @click="toggleFavorite(accommodation, accommodation.id)">
+          <div v-if="isAuthenticated" class="favorite-container" @click="toggleFavorite(accommodation.id)">
             <div v-if="isFavorite">
               <span class="material-symbols-outlined favorite filled">favorite</span>
             </div>
@@ -166,7 +166,7 @@ export default {
 
     },
 
-    async toggleFavorite(accommodation, accommodationId) {
+    async toggleFavorite(accommodationId) {
 
       if (this.isAuthenticated) {
         try {
@@ -175,9 +175,11 @@ export default {
           if (this.isFavorite) {
             await this.accountsService.removeFavorite(accountId, accommodationId);
             this.isFavorite = false;
+            alert('Accommodation ' + accommodationId + ' successfully removed from favorites');
           } else {
             await this.accountsService.addFavorite(accountId, accommodationId);
             this.isFavorite = true;
+            alert('Accommodation ' + accommodationId + ' successfully added to favorites');
           }
         } catch (error) {
           console.error('Error toggling favorite:', error);
@@ -244,7 +246,7 @@ export default {
 .content {
   display: flex;
   flex-direction: column;
-  width: 60svw;
+  width: 80svw;
   height: auto;
 }
 
@@ -257,11 +259,12 @@ export default {
 
 .main {
   display: flex;
+  justify-content: space-between;
   padding: 2rem 0;
 }
 
 .main-info-container {
-  width: 60%;
+  width: 50%;
   padding: 0 5rem 0 0;
 }
 

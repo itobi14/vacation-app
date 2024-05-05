@@ -95,13 +95,14 @@ export default {
 <style scoped>
 
 .content {
-  height: 100svh;
+  height: 90svh;
   width: 60svw;
   padding: 1rem;
 }
 
 .container {
   display: flex;
+  height: 100%;
 }
 
 .profile-container {
@@ -143,6 +144,7 @@ export default {
   width: 300px;
   border-radius: 10px;
   background-color: var(--color-primary-lighter);
+  overflow: auto;
 }
 
 .section-title {
@@ -156,8 +158,7 @@ export default {
 .favorites-wrapper {
   display: flex;
   flex-direction: column;
-  min-height: 350px;
-  max-height: 500px;
+  height: 90%;
   padding: 0 1rem 0 0;
   overflow-y: auto;
 }
