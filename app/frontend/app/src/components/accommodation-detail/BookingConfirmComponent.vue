@@ -17,56 +17,95 @@
 
         <div class="info-container">
           <p class="section-title">Trip info</p>
-
-          <div class="wrapper-trip">
-            <p class="text-trip-normal">Name: </p>
-            <p class="text-trip-bold">{{ accommodation.name }}</p>
+          <div class="wrapper-data">
+            <div class="wrapper">
+              <p class="text-normal">Name: </p>
+            </div>
+            <div class="wrapper">
+              <p class="text-bold">{{ accommodation.name }}</p>
+            </div>
           </div>
-          <div class="wrapper-trip">
-            <p class="text-trip-normal">City: </p>
-            <p class="text-trip-bold">{{ accommodation.city }}</p>
+          <div class="wrapper-data">
+            <div class="wrapper">
+              <p class="text-normal">City: </p>
+            </div>
+            <div class="wrapper">
+              <p class="text-bold">{{ accommodation.city }}</p>
+            </div>
           </div>
-          <div class="wrapper-trip">
-            <p class="text-trip-normal">Country: </p>
-            <p class="text-trip-bold">{{ accommodation.country }}</p>
+          <div class="wrapper-data">
+            <div class="wrapper">
+              <p class="text-normal">Country: </p>
+            </div>
+            <div class="wrapper">
+              <p class="text-bold">{{ accommodation.country }}</p>
+            </div>
           </div>
-          <div class="wrapper-trip">
-            <p class="text-trip-normal">Street: </p>
-            <p class="text-trip-bold">{{ accommodation.streetNameNr }}</p>
+          <div class="wrapper-data">
+            <div class="wrapper">
+              <p class="text-normal">Street: </p>
+            </div>
+            <div class="wrapper">
+              <p class="text-bold">{{ accommodation.streetNameNr }}</p>
+            </div>
           </div>
-          <div class="wrapper-trip">
-            <p class="text-trip-normal">Zip code: </p>
-            <p class="text-trip-bold">{{ accommodation.zipCode }}</p>
+          <div class="wrapper-data">
+            <div class="wrapper">
+              <p class="text-normal">Zip code: </p>
+            </div>
+            <div class="wrapper">
+              <p class="text-bold">{{ accommodation.zipCode }}</p>
+            </div>
           </div>
-
-
         </div>
 
         <div class="info-container">
           <p class="section-title">Dates</p>
-          <div class="wrapper">
-            <p class="text-normal">Check-in</p>
-            <p class="text-bold">{{ startDate }}</p>
+          <div class="wrapper-data">
+            <div class="wrapper">
+              <p class="text-normal">Check-in</p>
+            </div>
+            <div class="wrapper">
+              <p class="text-bold">{{ startDate }}</p>
+            </div>
           </div>
-          <div class="wrapper">
-            <p class="text-normal">Checkout</p>
-            <p class="text-bold">{{ endDate }}</p>
+          <div class="wrapper-data">
+            <div class="wrapper">
+              <p class="text-normal">Checkout</p>
+            </div>
+            <div class="wrapper">
+              <p class="text-bold">{{ endDate }}</p>
+            </div>
           </div>
         </div>
 
         <div class="info-container">
           <p class="section-title">Price details</p>
-          <div class="wrapper">
-            <p class="text-normal">Price per night</p>
-            <p class="text-bold">€{{ accommodation.price }}</p>
+          <div class="wrapper-data">
+            <div class="wrapper">
+              <p class="text-normal">Price per night</p>
+            </div>
+            <div class="wrapper">
+              <p class="text-bold">€{{ accommodation.price }}</p>
+            </div>
           </div>
-          <div class="wrapper">
-            <p class="text-normal">Number of nights</p>
-            <p class="text-bold">x{{ totalNights }}</p>
+          <div class="wrapper-data">
+            <div class="wrapper">
+              <p class="text-normal">Number of nights</p>
+            </div>
+            <div class="wrapper">
+              <p class="text-bold">x{{ totalNights }}</p>
+            </div>
           </div>
-          <div class="wrapper-total">
-            <p class="text-bold">Total</p>
-            <p class="text-bold">€{{ totalPrice }}</p>
+        </div>
+        <div class="info-container">
+          <div class="wrapper-data">
+            <div class="wrapper">
+              <p class="text-total">Total</p>
+            </div>
+            <div class="wrapper">
+              <p class="text-total">€{{ totalPrice }}</p>
+            </div>
           </div>
         </div>
         <div class="buttons-container">
@@ -148,7 +187,7 @@ export default {
 .booking-confirm-modal {
   height: auto;
   width: auto;
-  background: var(--white);
+  background: var(--color-white);
   padding: 2rem;
   border-radius: 10px;
   z-index: 999;
@@ -165,30 +204,32 @@ export default {
 }
 
 .title {
-  font-size: 24px;
+  font-size: 1.4em;
   font-weight: 600;
   text-align: center;
-  color: var(--black);
-}
-
-.info-container {
-  border-bottom: 1px solid #eee;
-  padding: 1rem 0;
+  color: var(--color-black);
 }
 
 .inform-container {
   display: flex;
   align-items: center;
-  gap: 12px;
+  width: 100%;
   padding: 1rem 2rem;
   margin-bottom: 1rem;
-  background: #e2eeef;
-  border: 2px solid #5daab5;
+  background: var(--color-primary-lighter);
+  border: 2px solid var(--color-primary-darker);
   border-radius: 5px;
 }
 
+.inform-text {
+  font-size: .8em;
+  font-weight: 400;
+  margin-left: 2rem;
+  color: var(--color-primary-darker);
+}
+
 .material-symbols-outlined.book {
-  color: #35818a;
+  color: var(--color-primary-darker);
   font-variation-settings:
       'FILL' 0,
       'wght' 500,
@@ -196,58 +237,42 @@ export default {
       'opsz' 20
 }
 
-.inform-text {
-  font-size: 14px;
-  font-weight: 400;
-  margin-left: 1rem;
-  color: #35818a;
+.info-container {
+  border-bottom: 1px solid var(--color-primary-lighter);
+  padding: 1rem 0;
 }
 
 .section-title {
-  font-size: 18px;
-  font-weight: 500;
-  color: #444;
+  font-size: .8em;
+  font-weight: 600;
+  color: var(--color-black);
   margin-bottom: 1rem;
 }
 
-.wrapper-trip {
+.wrapper-data {
   display: flex;
-}
-
-.text-trip-normal {
-  font-size: 13px;
-  font-weight: 400;
-  color: var(--black);
-  width: 100px;
-}
-
-.text-trip-bold {
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--black);
 }
 
 .wrapper {
-  display: flex;
-  justify-content: space-between;
-}
-
-.wrapper-total {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 3rem;
+  width: 50%;
 }
 
 .text-normal {
-  font-size: 16px;
+  font-size: .85em;
   font-weight: 400;
-  color: var(--black);
+  color: var(--color-black);
 }
 
 .text-bold {
-  font-size: 16px;
+  font-size: .85em;
+  font-weight: 500;
+  color: var(--color-black);
+}
+
+.text-total {
+  font-size: .85em;
   font-weight: 600;
-  color: var(--black);
+  color: var(--color-black);
 }
 
 .buttons-container {
@@ -259,25 +284,32 @@ export default {
 
 .confirm-button,
 .cancel-button {
-  font-size: 16px;
-  width: 100%;
-  padding: 1rem 5rem;
+  font-size: 1em;
+  width: 50%;
+  min-width: 220px;
+  padding: 1rem 0;
   cursor: pointer;
-  border-radius: 10px;
+  border-radius: 5px;
 }
 
 .confirm-button {
-  background: #5daab5;
-  color: var(--white);
+  background: var(--color-primary);
+  color: var(--color-white);
   font-weight: 600;
   border: none;
+  transition: .2s ease-in-out;
+  opacity: .85;
 }
 
 .cancel-button {
   background: none;
-  color: var(--black);
+  color: var(--color-black);
   font-weight: 500;
-  border: 1px solid #eee;
+  border: 2px solid #E2EEEF;
+}
+
+.confirm-button:hover {
+  opacity: 1;
 }
 
 </style>

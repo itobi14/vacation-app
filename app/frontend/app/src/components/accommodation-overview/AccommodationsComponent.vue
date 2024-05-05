@@ -100,21 +100,22 @@
             <div :class="wrapper">
               <div class="header">
                 <h2 class="accommodation-name">{{ accommodation.name }}</h2>
-                <div v-if="isAuthenticated" class="favorite-container">
-                  <div v-if="isFavorite">
-                    <span class="material-symbols-outlined favorite filled">favorite</span>
-                  </div>
-                  <div v-if="!isFavorite">
-                    <span class="material-symbols-outlined favorite">favorite</span>
-                  </div>
-                </div>
+<!--                <div v-if="isAuthenticated" class="favorite-container">-->
+<!--                  <div v-if="isFavorite">-->
+<!--                    <span class="material-symbols-outlined favorite filled">favorite</span>-->
+<!--                  </div>-->
+<!--                  <div v-if="!isFavorite">-->
+<!--                    <span class="material-symbols-outlined favorite">favorite</span>-->
+<!--                  </div>-->
+<!--                </div>-->
               </div>
-              <div class="country-city-wrapper">
+              <div class="info-wrapper">
                 <p class="accommodation-country-city">{{ accommodation.country }},&nbsp;&nbsp;</p>
                 <p class="accommodation-country-city">{{ accommodation.city }}</p>
               </div>
-              <p :class="accommodationDescription">{{ accommodation.description }}</p>
-              <p class="accommodation-price">&euro; {{ accommodation.price }} per night</p>
+              <div class="info-wrapper">
+                <p class="accommodation-price-bold">&euro; {{ accommodation.price }}</p><p class="accommodation-price">&nbsp;per night</p>
+              </div>
             </div>
           </div>
         </div>
@@ -340,9 +341,9 @@ export default {
 }
 
 span {
-  font-size: 14px;
+  font-size: .8em;
   font-weight: 600;
-  color: var(--black)
+  color: var(--color-black)
 }
 
 .isSelected {
@@ -368,10 +369,10 @@ span {
   position: relative;
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 1.2rem;
   height: 50px;
   width: 500px;
-  background: #F5F5F5;
+  background: var(--color-lightgrey);
   padding: 0 15px;
   border-radius: 500px;
 }
@@ -380,7 +381,7 @@ span {
   width: 100%;
   border: none;
   outline: none;
-  background: #F5F5F5;
+  background: var(--color-lightgrey);
 }
 
 input[type="search"]::-webkit-search-cancel-button {
@@ -388,12 +389,12 @@ input[type="search"]::-webkit-search-cancel-button {
 }
 
 input[type="search"] {
-  color: var(--black);
+  color: var(--color-black);
   font-weight: 500;
 }
 
 .material-symbols-outlined {
-  color: #aaa;
+  color: var(--color-darkgrey);
   margin-left: .5rem;
   transform: scale(1.5);
   font-variation-settings:
@@ -427,12 +428,12 @@ input[type="search"] {
 
 .grid-square:not(.isGridSelected):hover,
 .grid-rows:not(.isGridSelected):hover {
-  background: #f5f5f5;
+  background: var(--color-lightgrey);
   opacity: 1;
 }
 
 .isGridSelected {
-  background: #f5f5f5;
+  background: var(--color-lightgrey);
   opacity: 1;
 }
 
@@ -467,7 +468,7 @@ input[type="search"] {
 .accommodation-name {
   font-size: 1em;
   font-weight: 600;
-  color: var(--black);
+  color: var(--color-black);
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
@@ -475,19 +476,31 @@ input[type="search"] {
 
 .accommodation-country-city {
   font-size: .85em;
-  font-weight: 300;
-  color: var(--black);
+  font-weight: 400;
+  color: var(--color-black);
+}
+
+.accommodation-price-bold {
+  margin-top: 1rem;
+  font-size: .85em;
+  font-weight: 600;
+  color: var(--color-black);
 }
 
 .accommodation-price {
   margin-top: 1rem;
   font-size: .85em;
-  font-weight: 500;
-  color: var(--black);
+  font-weight: 400;
+  color: var(--color-black);
+}
+
+.info-wrapper {
+  display: flex;
+  align-items: center;
 }
 
 .material-symbols-outlined.favorite {
-  color: var(--black);
+  color: var(--color-black);
   transform: scale(1.5);
   font-variation-settings:
       'FILL' 0,
@@ -497,7 +510,7 @@ input[type="search"] {
 }
 
 .material-symbols-outlined.favorite.filled {
-  color: var(--black);
+  color: var(--color-black);
   transform: scale(1.5);
   font-variation-settings:
       'FILL' 1,
@@ -529,7 +542,7 @@ input[type="search"] {
 }
 
 .accommodation-square:hover {
-  background-color: #F1F5F5;
+  background-color: var(--color-lightgrey);
   border-radius: 8px;
 }
 
@@ -547,25 +560,6 @@ input[type="search"] {
   height: auto;
   width: 100%;
   margin-top: 1rem;
-}
-
-.country-city-wrapper {
-  display: flex;
-  align-items: center;
-}
-
-.accommodation-description-square {
-  margin-top: 1rem;
-  font-size: .85em;
-  font-weight: 300;
-  color: #888888;
-  height: auto;
-  width: 100%;
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-  line-height: 20px;
 }
 
 /* ROWS ------------------------------------------------------------------------------------------------------------------ */
@@ -587,7 +581,7 @@ input[type="search"] {
 }
 
 .accommodation-rows:hover {
-  background-color: #F1F5F5;
+  background-color: var(--color-lightgrey);
   border-radius: 8px;
 }
 
@@ -605,13 +599,6 @@ input[type="search"] {
   width: 35%;
   border-radius: 8px;
   object-fit: cover;
-}
-
-.accommodation-description-rows {
-  margin-top: 1rem;
-  font-size: .85em;
-  font-weight: 300;
-  color: #888888;
 }
 
 </style>

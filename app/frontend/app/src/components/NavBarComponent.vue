@@ -30,12 +30,6 @@
 
           <!-- Dropdown menu -->
           <div class="dropdown-menu-container open" v-if="isDropdownOpen">
-<!--            <div class="dropdown-profile-container">-->
-<!--              <div class="profile-container">-->
-<!--                <img :src="this.profileImgUrl" class="profile-img" alt="Profile Image">-->
-<!--              </div>-->
-<!--              <div class="user-name">{{ userName }}</div>-->
-<!--            </div>-->
             <div class="dropdown-menu">
               <router-link :to=" { name: 'PROFILE' }" class="dropdown-menu-item">
                 <span class="material-symbols-outlined">person</span>
@@ -126,10 +120,9 @@ export default {
   display: flex;
   justify-content: center;
   z-index: 99;
-  background: #fff;
-  height: 12svh;
-  border-bottom: 1px solid #eee;
-  transition: height 0.5s ease;
+  background: var(--color-white);
+  height: 10svh;
+  border-bottom: 1px solid var(--color-primary-lighter);
 }
 
 .nav-bar-content {
@@ -164,11 +157,11 @@ export default {
   align-items: center;
   justify-content: center;
   padding: 0.4rem 1rem;
-  color: var(--black);
+  color: var(--color-black);
   text-decoration: none;
-  font-size: .85em;
+  font-size: 1em;
   font-weight: 500;
-  opacity: 0.5;
+  opacity: .5;
   transition: 0.1s ease-out;
   cursor: pointer;
 }
@@ -180,18 +173,6 @@ export default {
 .isSelected {
   opacity: 1;
 }
-
-/*
-.isSelected::before {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  height: 7px;
-  width: 7px;
-  background: #5daab5;
-}
-*/
 
 /* PROFILE NAVBAR ------------------------------------------------------------------ */
 
@@ -220,8 +201,8 @@ export default {
   right: 0;
   height: auto;
   width: auto;
-  background: #fff;
-  border: 2px solid #f5f5f5;
+  background: var(--color-white);
+  border: 2px solid var(--color-primary-lighter);
   padding: 1rem;
   border-radius: 5px;
   opacity: 1;
@@ -236,36 +217,11 @@ export default {
   transform: translateY(0);
 }
 
-.user-name {
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--black);
-}
-
-.dropdown-profile-container {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  padding-bottom: 1rem;
-  border-bottom: 2px solid #e5e5e5;
-  cursor: auto;
-}
-
 .profile-img {
   height: 50px;
   width: 50px;
   border-radius: 50%;
   cursor: auto;
-}
-
-.user-name {
-  font-size: 14px;
-  font-weight: 500;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
-  max-width: 65%;
-  color: #222;
 }
 
 .dropdown-menu {
@@ -284,24 +240,38 @@ export default {
 }
 
 .dropdown-menu-item:hover {
-  background: #f5f5f5;
+  background: var(--color-lightgrey);
 }
 
 .dropdown-menu-item-text {
   font-size: 14px;
   font-weight: 500;
-  color: var(--black);
+  color: var(--color-black);
 }
 
 /* ICONS ------------------------------------------------------------------------ */
 
 .material-symbols-outlined {
-  color: var(--black);
+  color: var(--color-black);
   font-variation-settings:
       'FILL' 0,
       'wght' 500,
       'GRAD' 0,
       'opsz' 0
+}
+
+/* SCREENS - LAPTOP ------------------------------------------------------------- */
+
+@media only screen and (max-width: 1400px) {
+
+  .nav-bar {
+    height: 12svh;
+  }
+
+  .nav-item {
+    font-size: .85em;
+  }
+
 }
 
 </style>

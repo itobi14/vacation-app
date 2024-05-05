@@ -30,7 +30,10 @@
             <p class="accommodation-address">{{ accommodation.zipCode }}</p>
           </div>
 
-          <span class="accommodation-price-bold">&euro; {{ accommodation.price }} per night</span>
+          <div class="accommodation-price-container">
+            <span class="material-symbols-outlined euro">euro</span>
+            <p class="accommodation-price">{{ accommodation.price }} per night</p>
+          </div>
         </div>
 
         <div class="description-container">
@@ -242,7 +245,6 @@ export default {
   flex-direction: column;
   width: 60svw;
   height: auto;
-  //background: lightskyblue;
 }
 
 .accommodation-img {
@@ -254,8 +256,7 @@ export default {
 
 .main {
   display: flex;
-  //background: lightblue;
-  padding: 1rem 0;
+  padding: 2rem 0;
 }
 
 .main-info-container {
@@ -268,13 +269,12 @@ export default {
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  //background: #5daab5;
 }
 
 .accommodation-name {
-  font-size: 25px;
+  font-size: 1.4em;
   font-weight: 700;
-  color: var(--black);
+  color: var(--color-black);
 }
 
 .favorite-container {
@@ -283,18 +283,13 @@ export default {
   justify-content: center;
   height: 30px;
   width: 30px;
-  //background: #35818a;
-}
-
-.accommodation-country-city-wrapper {
-  display: flex;
-  align-items: center;
 }
 
 .material-symbols-outlined.location,
-.material-symbols-outlined.map {
-  color: var(--black);
-  margin-right: 10px;
+.material-symbols-outlined.map,
+.material-symbols-outlined.euro {
+  color: var(--color-black);
+  margin-right: 1rem;
   font-variation-settings:
       'FILL' 0,
       'wght' 500,
@@ -307,24 +302,42 @@ export default {
   display: flex;
   flex-direction: column;
   gap: .3rem;
-  padding-bottom: 2rem;
+  padding-bottom: 1rem;
 }
 
 .accommodation-country-city {
-  font-size: 16px;
+  font-size: 1em;
   font-weight: 400;
-  color: #222;
+  color: var(--color-black);
 }
 
-.accommodation-address-container {
+.accommodation-country-city-wrapper,
+.accommodation-address-container,
+.accommodation-price-container {
   display: flex;
   align-items: center;
 }
 
-.accommodation-address {
-  font-size: 14px;
+.accommodation-price-container {
+  margin-top: 2rem;
+}
+
+.accommodation-address,
+.accommodation-price {
+  font-size: 1em;
   font-weight: 400;
-  color: var(--black);
+  color: var(--color-black);
+}
+
+.description-container {
+  border-top: 1px solid var(--color-primary-lighter);
+  padding: 1rem 0;
+}
+
+.accommodation-description {
+  font-size: .85em;
+  font-weight: 400;
+  color: var(--color-black);
 }
 
 /* ------------------------------------------------------------------------------------------------------------------ */
@@ -335,7 +348,7 @@ export default {
   width: 40%;
   padding: 1rem;
   border-radius: 10px;
-  border: 1px solid #eee;
+  border: 1px solid var(--color-primary-lighter)
 }
 
 .title-container {
@@ -343,13 +356,13 @@ export default {
   align-items: center;
   justify-content: space-between;
   padding-bottom: 8px;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--color-primary-lighter);
 }
 
 .title {
-  font-size: 18px;
+  font-size: 1em;
   font-weight: 600;
-  color: var(--black);
+  color: var(--color-black);
 }
 
 .book-logo-container {
@@ -360,16 +373,15 @@ export default {
 .date-title-wrapper {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 10px;
+  padding: .65rem 1rem;
   margin-top: 1rem;
-  background: #e2eeef;
-  border: 2px solid #5daab5;
+  background: none;
+  border: 2px solid var(--color-primary);
   border-radius: 5px;
 }
 
 .material-symbols-outlined.explore {
-  color: #35818a;
+  color: var(--color-primary-darker);
   font-variation-settings:
       'FILL' 0,
       'wght' 500,
@@ -378,31 +390,18 @@ export default {
 }
 
 .date-title {
-  font-size: 14px;
+  font-size: .8em;
   font-weight: 400;
   width: 100%;
-  color: #35818a;
-}
-
-.accommodation-price-bold {
-  margin-top: 1rem;
-  font-size: 16px;
-  font-weight: 500;
-  color: var(--black);
-}
-
-.accommodation-price-regular {
-  font-size: 16px;
-  font-weight: 400;
-  color: #555;
-  margin-left: 6px;
+  margin-left: 1rem;
+  color: var(--color-primary-darker);
 }
 
 .date-wrapper {
   display: flex;
-  gap: 10px;
+  gap: 1rem;
   padding: 1rem 0;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--color-primary-lighter);
 }
 
 .date-container {
@@ -410,10 +409,10 @@ export default {
   align-items: center;
   justify-content: space-between;
   gap: 5px;
-  width: 200px;
+  width: 50%;
   padding: 10px;
   border-radius: 10px;
-  border: 1px solid #555;
+  border: 2px solid var(--color-primary-lighter);
 }
 
 .date-picker-wrapper {
@@ -425,6 +424,7 @@ export default {
 }
 
 .material-symbols-outlined {
+   color: var(--color-black);
    transform: scale(0.8);
    font-variation-settings:
        'FILL' 0,
@@ -436,7 +436,7 @@ export default {
 .check-text {
   font-size: 12px;
   font-weight: 600;
-  color: var(--black);
+  color: var(--color-black);
   text-transform: uppercase;
 }
 
@@ -444,7 +444,7 @@ export default {
   position: relative;
   border: none;
   outline: none;
-  color: #555;
+  color: var(--color-black);
   width: 100%;
 }
 
@@ -457,8 +457,8 @@ export default {
 }
 
 .book-button {
-  background: #5daab5;
-  color: var(--white);
+  background: var(--color-primary);
+  color: var(--color-white);
   font-size: 16px;
   font-weight: 600;
   margin-top: 1rem;
@@ -467,6 +467,12 @@ export default {
   border: none;
   outline: none;
   cursor: pointer;
+  opacity: .85;
+  transition: .2s ease-in-out;
+}
+
+.book-button:hover {
+  opacity: 1;
 }
 
 .book-button:disabled {
@@ -482,28 +488,17 @@ export default {
 }
 
 .total-price-text {
-  font-size: 16px;
+  font-size: 1em;
   font-weight: 600;
 }
 
 .total-price {
-  font-size: 16px;
+  font-size: 1em;
   font-weight: 600;
 }
 
-.description-container {
-  border-top: 2px solid #F5F5F5;
-  padding: 2rem 0;
-}
-
-.accommodation-description {
-  font-size: 14px;
-  font-weight: 400;
-  color: var(--black);
-}
-
 .material-symbols-outlined.favorite {
-  color: var(--black);
+  color: var(--color-heart);
   margin-top: .4rem;
   transform: scale(1.2);
   cursor: pointer;
@@ -515,7 +510,7 @@ export default {
 }
 
 .material-symbols-outlined.favorite.filled {
-  color: var(--black);
+  color: var(--color-heart);
   margin-top: .4rem;
   transform: scale(1.2);
   cursor: pointer;

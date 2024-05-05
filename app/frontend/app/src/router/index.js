@@ -4,7 +4,7 @@ import SignInComponent from "@/components/login/SignInComponent.vue";
 import SignUpComponent from "@/components/login/SignUpComponent.vue";
 import AccommodationsComponent from "@/components/accommodation-overview/AccommodationsComponent.vue";
 import AccommodationDetailComponent from "@/components/accommodation-detail/AccommodationDetailComponent.vue";
-import AboutUsComponent from "@/components/aboutus/AboutUsComponent.vue";
+import AboutUsComponent from "@/components/about-us/AboutUsComponent.vue";
 import ProfileComponent from "@/components/profile/ProfileComponent.vue";
 import UnauthorizedComponent from "@/components/other/UnauthorizedComponent.vue";
 import NotFoundComponent from "@/components/other/NotFoundComponent.vue";

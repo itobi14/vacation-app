@@ -91,7 +91,6 @@ export default {
   justify-content: center;
   height: 90svh;
   width: 100%;
-  //border-radius: 0 50px 0 50px;
   background: var(--black);
 }
 
@@ -104,7 +103,6 @@ export default {
   right: 0;
   bottom: 0;
   left: 0;
-  //border-radius: 0 50px 0 50px;
   opacity: 0.25;
 }
 
@@ -115,8 +113,6 @@ export default {
   justify-content: center;
   height: 100%;
   width: 85svw;
-  //border-left: 1px solid var(--black);
-  //border-right: 1px solid var(--black);
 }
 
 .description-container {
@@ -124,7 +120,6 @@ export default {
   display: flex;
   justify-content: center;
   flex-direction: column;
-  //background: lightgreen;
   width: 30%;
 }
 
@@ -137,18 +132,6 @@ export default {
   margin-bottom: 10px;
   color: var(--white);
 }
-
-/*
-.hero-title::before {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  right: 8%;
-  width: 10px;
-  height: 10px;
-  background: #5daab5;
-}
-*/
 
 .hero-description {
   color: var(--white);
@@ -197,22 +180,36 @@ li {
   backdrop-filter: blur(10px);
 }
 
-@media only screen and (min-width: 1400px) {
-
-
-
-
-
-}
-
 .expand-container {
   position: absolute;
-  bottom: 5%;
+  bottom: 3%;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
-  opacity: 75%;
+  opacity: 50%;
+  animation: arrow 4s infinite;
+}
+
+@keyframes arrow {
+  0% {
+    transform: translateY(0);
+  }
+  10% {
+    transform: translateY(10px);
+  }
+  20% {
+    transform: translateY(0);
+  }
+  30% {
+    transform: translateY(10px);
+  }
+  40% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(0);
+  }
 }
 
 .material-symbols-outlined {

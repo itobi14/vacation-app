@@ -16,10 +16,16 @@
 }
 
 :root {
-    --black: #222222;
-    --white: #FFFFFF;
-    --divider: #F5F5F5;
-    --heart: #FD385B;
+
+    --color-primary: #5DAAB5;
+    --color-primary-darker: #35818A;
+    --color-primary-lighter: #E2EEEF;
+
+    --color-black: #222222;
+    --color-white: #FFFFFF;
+    --color-lightgrey: #F1F5F5;
+    --color-darkgrey: #AAAAAA;
+    --color-heart: #EA3454;
 }
 
 .disabled {
