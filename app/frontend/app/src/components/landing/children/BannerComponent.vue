@@ -85,7 +85,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100svh;
+  height: 90svh;
   width: 100%;
   background: var(--color-black);
 }
@@ -166,7 +166,7 @@ li {
   height: 80px;
   width: 250px;
   border: none;
-  outline: 2px solid #ccc;
+  outline: 2px solid var(--color-lightgrey);
   border-radius: 10px;
   font-size: 1em;
   font-weight: 600;
@@ -238,6 +238,10 @@ li {
   .hero-description {
     font-size: .85em;
     font-weight: 300;
+  }
+
+  .go-to-accommodations-button {
+    height: 65px;
   }
 
 }
