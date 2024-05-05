@@ -80,7 +80,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #aaa;
+  background: var(--color-darkgrey);
   height: 90svh;
   width: 100svw;
   padding: 2rem 0;
@@ -113,7 +113,7 @@ form {
   width: 500px;
   padding: 3rem 5rem;
   border-radius: 35px;
-  background: var(--white);
+  background: var(--color-white);
 }
 
 .title {
@@ -122,7 +122,7 @@ form {
   font-weight: 700;
   width: 32%;
   margin-bottom: 2rem;
-  color: var(--black);
+  color: var(--color-black);
 }
 
 .title::before {
@@ -132,7 +132,7 @@ form {
   right: 0;
   width: 15px;
   height: 8px;
-  background: #5daab5;
+  background: var(--color-primary);
 }
 
 form .inputContainer {
@@ -161,11 +161,11 @@ form input {
   padding: 1.5em 1.2em 0 1.2em;
   border: none;
   outline: none;
-  background: #f5f5f5;
+  background: var(--color-lightgrey);
   border-radius: 3px;
   font-size: .75em;
   font-weight: 500;
-  color: #222;
+  color: var(--color-black);
   z-index: 1;
 }
 
@@ -173,7 +173,7 @@ form label {
   position: absolute;
   font-size: .6em;
   font-weight: 500;
-  color: #999;
+  color: var(--color-darkgrey);
   text-transform: uppercase;
   width: 85%;
   z-index: 2;
@@ -185,7 +185,7 @@ form label {
 }
 
 form input:focus {
-  outline: 2px solid #222;
+  outline: 2px solid var(--color-black);
   background: none;
 }
 
@@ -236,10 +236,10 @@ form input:focus + label, form input:valid + label {
   text-transform: uppercase;
   font-size: 1em;
   font-weight: 500;
-  background: #5daab5;
+  background: var(--color-primary);
   outline: none;
   border: none;
-  color: var(--white);
+  color: var(--color-white);
   opacity: 0.8;
   margin-top: 2rem;
   cursor: pointer;
@@ -276,6 +276,7 @@ form input:focus + label, form input:valid + label {
 .info-text {
   font-size: .75em;
   font-weight: 400;
+  color: var(--color-black)
 }
 
 .material-symbols-outlined.report-icon {

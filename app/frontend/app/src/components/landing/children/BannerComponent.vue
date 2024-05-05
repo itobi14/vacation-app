@@ -6,7 +6,9 @@
 
       <div class="description-container">
         <h1 class="hero-title">Find Your Perfect European Getaway</h1>
-        <p class="hero-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Abconsectetur consequatur exercitationem nemo quo.</p>
+        <div class="hero-description-container">
+          <p class="hero-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Abconsectetur consequatur exercitationem nemo quo.</p>
+        </div>
         <ul>
           <li>Hotel</li>
           <li>Lodge</li>
@@ -17,7 +19,7 @@
       </div>
 
       <div class="wrapper">
-        <button class="go-to-assortment" @click="goToAccommodations">Book now</button>
+        <button class="go-to-accommodations-button" @click="goToAccommodations">Book now</button>
       </div>
 
       <div class="expand-container">
@@ -37,12 +39,6 @@ import { animate, inView, stagger } from "motion";
 export default {
   name: "BannerComponent",
 
-  data() {
-    return {
-
-    }
-  },
-
   methods: {
     goToAccommodations() {
       this.$router.push('/accommodations');
@@ -52,7 +48,7 @@ export default {
   mounted() {
     inView('.hero-container', ({ target }) => {
 
-      const button = target.querySelector('.go-to-assortment');
+      const button = target.querySelector('.go-to-accommodations-button');
       const title = target.querySelector('.hero-title');
       const description = target.querySelector('.hero-description');
       const features = target.querySelectorAll('li');
@@ -91,7 +87,7 @@ export default {
   justify-content: center;
   height: 90svh;
   width: 100%;
-  background: var(--black);
+  background: var(--color-black);
 }
 
 .content:before {
@@ -125,17 +121,21 @@ export default {
 
 .hero-title {
   position: relative;
-  font-size: 40px;
+  font-size: 2.5em;
   font-weight: 700;
   line-height: 110%;
   width: 80%;
-  margin-bottom: 10px;
-  color: var(--white);
+  margin-bottom: 1rem;
+  color: var(--color-white);
+}
+
+.hero-description-container {
+  opacity: .75;
 }
 
 .hero-description {
-  color: var(--white);
-  font-size: 14px;
+  color: var(--color-white);
+  font-size: 1em;
   font-weight: 300;
 }
 
@@ -148,9 +148,9 @@ ul {
 
 li {
   display: inline;
-  color: #ccc;
-  font-size: 15px;
-  font-weight: 500;
+  color: var(--color-white);
+  font-size: .85em;
+  font-weight: 300;
 }
 
 .wrapper {
@@ -160,23 +160,23 @@ li {
   justify-content: center;
 }
 
-.go-to-assortment {
+.go-to-accommodations-button {
   background: none;
   height: 80px;
   width: 250px;
   border: none;
   outline: 2px solid #ccc;
   border-radius: 10px;
-  font-size: 20px;
+  font-size: 1em;
   font-weight: 600;
   margin-top: 5rem;
-  color: var(--white);
+  color: var(--color-white);
   backdrop-filter: blur(1px);
   transition: backdrop-filter 0.3s ease;
   cursor: pointer;
 }
 
-.go-to-assortment:hover {
+.go-to-accommodations-button:hover {
   backdrop-filter: blur(10px);
 }
 
@@ -213,7 +213,7 @@ li {
 }
 
 .material-symbols-outlined {
-  color: var(--white);
+  color: var(--color-white);
   transform: scale(1.5);
   font-variation-settings:
      'FILL' 0,

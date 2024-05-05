@@ -36,7 +36,7 @@ export class AccountsAdaptor {
         if (response.ok) {
             return await response.json();
         } else {
-            console.log(response)
+            // console.log(response)
             return null;
         }
     }

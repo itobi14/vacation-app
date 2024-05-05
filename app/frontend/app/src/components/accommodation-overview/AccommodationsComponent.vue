@@ -390,7 +390,7 @@ input[type="search"]::-webkit-search-cancel-button {
 
 input[type="search"] {
   color: var(--color-black);
-  font-weight: 500;
+  font-weight: 400;
 }
 
 .material-symbols-outlined {
@@ -537,7 +537,7 @@ input[type="search"] {
   height: auto;
   width: 250px;
   padding: 1rem;
-  transition: 0.2s ease-in-out;
+  //transition: 0.2s ease-in-out;
   cursor: pointer;
 }
 
@@ -576,7 +576,7 @@ input[type="search"] {
   width: 100%;
   background: none;
   padding: 1rem;
-  transition: 0.2s ease-in-out;
+  //transition: 0.2s ease-in-out;
   cursor: pointer;
 }
 

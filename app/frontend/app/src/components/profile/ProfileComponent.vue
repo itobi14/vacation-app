@@ -55,7 +55,6 @@ export default {
   async created() {
     await this.fetchAccount();
     await this.fetchFavorites();
-    // await this.fetchBookingHistory();
   },
 
   methods: {
@@ -76,13 +75,6 @@ export default {
       }
     },
 
-    // async fetchBookingHistory() {
-    //   const bookingHistory = await this.accountsService.findBookingHistory(this.id);
-    //   if (bookingHistory) {
-    //     this.bookingHistory = bookingHistory
-    //   }
-    // },
-
     getImgUrl(url) {
       if (url) {
         return (`static/${url}`);
@@ -97,10 +89,6 @@ export default {
 
   },
 
-  computed: {
-
-  },
-
 }
 </script>
 
@@ -110,7 +98,6 @@ export default {
   height: 100svh;
   width: 60svw;
   padding: 1rem;
-  //background: lightblue;
 }
 
 .container {
@@ -132,7 +119,7 @@ export default {
   flex-direction: column;
   align-items: center;
   width: 30%;
-  border-bottom: 2px solid var(--divider);
+  border-bottom: 2px solid var(--color-primary-lighter);
 }
 
 .profile-img {
@@ -146,29 +133,31 @@ export default {
   margin: 1rem 0;
   font-size: 20px;
   font-weight: 600;
-  color: var(--black);
+  color: var(--color-black);
 }
 
 /* FAVORITES ----------------------------------------------------------------------------------------------------- */
 
 .favorites-container {
   padding: 1rem;
-  width: 30%;
-  //background-color: #35818a;
+  width: 300px;
+  border-radius: 10px;
+  background-color: var(--color-primary-lighter);
 }
 
 .section-title {
-  font-size: 16px;
+  text-align: center;
+  font-size: 1.2em;
   font-weight: 600;
-  color: var(--black);
-  padding-bottom: 1rem;
+  color: var(--color-black);
+  margin-bottom: 1rem;
 }
 
 .favorites-wrapper {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  height: 80svh;
+  min-height: 350px;
+  max-height: 500px;
   padding: 0 1rem 0 0;
   overflow-y: auto;
 }
@@ -178,11 +167,11 @@ export default {
 }
 
 .favorites-wrapper::-webkit-scrollbar-thumb {
-  background-color: #D5D5D5;
+  background-color: var(--color-darkgrey);
 }
 
 .favorites-wrapper::-webkit-scrollbar-track {
-  background-color: var(--divider);
+  background-color: var(--color-lightgrey);
 }
 
 .accommodation {
@@ -190,20 +179,18 @@ export default {
   flex-direction: column;
   width: 100%;
   background: none;
-  border-top: 2px solid #f5f5f5;
   padding: 1rem;
   transition: 0.2s ease-in-out;
   cursor: pointer;
 }
 
 .accommodation:hover {
-  background-color: #F1F5F5;
-  border-top: 2px solid var(--white);
+  background-color: var(--color-lightgrey);
   border-radius: 10px;
 }
 
 .accommodation-img {
-  height: 200px;
+  height: 120px;
   width: 100%;
   border-radius: 10px;
   object-fit: cover;
@@ -224,22 +211,22 @@ export default {
   justify-content: space-between;
 }
 
-.country-city {
-  font-size: 14px;
-  font-weight: 400;
-  color: var(--black);
+.accommodation-name {
+  font-size: 1em;
+  font-weight: 600;
+  color: var(--color-black)
 }
 
-.accommodation-name {
-  font-size: 16px;
-  font-weight: 600;
-  color: var(--black)
+.country-city {
+  font-size: .8em;
+  font-weight: 400;
+  color: var(--color-black);
 }
 
 .accommodation-price {
-  font-size: 12px;
+  font-size: .8em;
   font-weight: 500;
-  color: var(--black);
+  color: var(--color-black);
 }
 
 </style>

@@ -83,8 +83,7 @@
 
   </div>
 
-  <!-- Booking confirm modal -->
-  <BookingConfirmComponent
+  <booking-confirm-component
       v-if="showBookingConfirmModal"
       :accommodation="accommodation"
       :startDate="startDate"
@@ -92,7 +91,7 @@
       :totalPrice="totalPrice"
       @close-modal="closeBookingConfirmModal"
       @confirm-booking="confirmBooking">
-  </BookingConfirmComponent>
+  </booking-confirm-component>
 
 </template>
 
@@ -102,7 +101,9 @@ import BookingConfirmComponent from "@/components/accommodation-detail/BookingCo
 
 export default {
   name: "AccommodationDetailComponent",
-  components: { BookingConfirmComponent },
+  components: {
+    'booking-confirm-component': BookingConfirmComponent
+  },
   inject: ['accountsService', 'accommodationsService', 'sessionService'],
 
   data() {

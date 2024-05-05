@@ -23,9 +23,7 @@ export class SessionService {
         return this._currentAccount;
     }
 
-    isAdmin() {
-        return this._currentAccount?.role?.toLowerCase().includes("admin");
-    }
+
     isAuthenticated() {
         return this._currentAccount != null;
     }

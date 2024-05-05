@@ -22,20 +22,6 @@ export default {
     'reviews-component': ReviewsComponent,
   },
 
-  data() {
-    return {
-
-    }
-  },
-
-  methods: {
-
-  },
-
-  mounted() {
-
-  },
-
 }
 </script>
 
