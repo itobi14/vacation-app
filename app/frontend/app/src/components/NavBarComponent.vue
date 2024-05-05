@@ -152,7 +152,6 @@ export default {
   z-index: 99;
   height: 10svh;
   width: 100%;
-  backdrop-filter: blur(0);
   border-bottom: 1px solid var(--color-primary-lighter);
   transition: .2s ease-in-out;
 }
@@ -329,6 +328,10 @@ export default {
   .profile-img {
     height: 100%;
     width: 100%;
+  }
+
+  .dropdown-menu-container {
+    z-index: 999;
   }
 
 }
