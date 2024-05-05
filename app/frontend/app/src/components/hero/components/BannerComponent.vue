@@ -20,6 +20,10 @@
         <button class="go-to-assortment" @click="goToAccommodations">Book now</button>
       </div>
 
+      <div class="expand-container">
+        <span class="material-symbols-outlined">expand_more</span>
+      </div>
+
     </div>
 
   </div>
@@ -198,6 +202,26 @@ li {
 
 
 
+}
+
+.expand-container {
+  position: absolute;
+  bottom: 5%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  opacity: 75%;
+}
+
+.material-symbols-outlined {
+  color: var(--white);
+  transform: scale(1.5);
+  font-variation-settings:
+     'FILL' 0,
+     'wght' 400,
+     'GRAD' 0,
+     'opsz' 24
 }
 
 </style>
